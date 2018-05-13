@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.SortedMap;
 
 /**
+ * Clase de utilidad con métodos usados ampliamente en la aplicación.
  *
  * @author hamfree
  */
@@ -70,9 +71,16 @@ public class Util {
     }
 
     /**
+     * Lee los caracteres introducidos por teclado por el usuario. En caso de
+     * pasar true al parámetro <code>usaConsola</code> intentará utilizar el
+     * objeto Console para capturar la entrada. NOTA: Usa la clase Scanner para
+     * recoger la entrada, por lo que la versión mínima de Java debe ser la 1.5.
      *
-     * @param usaConsola
-     * @return
+     * @param usaConsola boolean que si vale true hace que el método use el
+     * objeto Console para capturar la entrada del usuario.
+     * @return una cadena con lo introducido por el usuario hasta que pulsa
+     * la
+     * tecla INTRO.
      */
     public static String read(boolean usaConsola) {
         String dato = "";
@@ -84,7 +92,8 @@ public class Util {
             } else {
                 dato = con.readLine();
             }
-        }
+        } //TODO: ¡Falta implementar el método en caso de que no se quiera usar Console!
+
         return dato;
     }
 
