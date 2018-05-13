@@ -1,10 +1,15 @@
 package name.ruiz.juanfco.servicio;
 
-import name.ruiz.juanfco.importacsv.servicio.ImportaCSVimpl;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import name.ruiz.juanfco.importacsv.modelo.Poblacion;
+import name.ruiz.juanfco.importacsv.servicio.ImportaCSVimpl;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -17,6 +22,10 @@ import org.junit.Test;
  * @author hamfree
  */
 public class ImportaCSVimplTest {
+
+    static final Logger LOG = Logger.getLogger(ImportaCSVimpl.class.getName());
+    static final String RUTA = "C:\\des\\src\\OTROS\\Importacsv\\target\\classes\\testMunicipios.csv";
+    static final String FLOG = "./pruebas.log";
 
     public ImportaCSVimplTest() {
     }
@@ -31,6 +40,27 @@ public class ImportaCSVimplTest {
 
     @Before
     public void setUp() {
+        // creando manejador de archivo
+        FileHandler fh;
+        try {
+            fh = new FileHandler(FLOG, 10485760, 3, true);
+            fh.setLevel(Level.ALL); // level
+            fh.setFormatter(new SimpleFormatter()); //formatter
+
+            // agregar el manejador de archivo al LOG
+            LOG.addHandler(fh);
+
+            // el manejador de consola se agrega automaticamente, solo
+            // cambiamos el nivel de detalle a desplegar
+            LOG.getHandlers()[0].setLevel(Level.SEVERE);
+
+            // se establece el nivel predeterminado global
+            LOG.setLevel(Level.INFO);
+        } catch (IOException | SecurityException ex) {
+            String nc = ImportaCSVimplTest.class.getName();
+            Logger.getLogger(nc).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @After
@@ -42,8 +72,9 @@ public class ImportaCSVimplTest {
      */
     @Test
     public void testImporta() {
-        System.out.println("importa");
-        File fcsv = new File("F:\\des\\src\\OTROS\\Importacion Municipios\\testMunicipios.csv");
+        System.out.println("\nTEST importa, que debe funcionar");
+
+        File fcsv = new File(RUTA);
         ImportaCSVimpl instance = new ImportaCSVimpl();
 
         // Resultados esperados
@@ -76,7 +107,7 @@ public class ImportaCSVimplTest {
 
     @Test
     public void testImportaSinFichero() {
-        System.out.println("importa con fichero erroneo");
+        System.out.println("\nTEST importa con fichero erroneo");
         File fcsv = new File("F:\\ficheroQueNoExiste.csv");
         ImportaCSVimpl instance = new ImportaCSVimpl();
 
@@ -89,8 +120,8 @@ public class ImportaCSVimplTest {
 
     @Test
     public void testImportaConCodificacionErronea() {
-        System.out.println("importa con codificacion erronea");
-        File fcsv = new File("F:\\des\\src\\OTROS\\Importacion Municipios\\testMunicipios.csv");
+        System.out.println("\nTEST importa con codificacion erronea");
+        File fcsv = new File(RUTA);
         ImportaCSVimpl instance = new ImportaCSVimpl();
 
         List<Poblacion> result = instance.importa(fcsv, "fake-charset", ";", false);
@@ -102,8 +133,8 @@ public class ImportaCSVimplTest {
 
     @Test
     public void testImportaConDelimitadorErroneo() {
-        System.out.println("importa con delimitador erroneo");
-        File fcsv = new File("F:\\des\\src\\OTROS\\Importacion Municipios\\testMunicipios.csv");
+        System.out.println("\nTEST importa con delimitador erroneo");
+        File fcsv = new File(RUTA);
         ImportaCSVimpl instance = new ImportaCSVimpl();
 
         List<Poblacion> result = instance.importa(fcsv, "fake-charset", null, false);

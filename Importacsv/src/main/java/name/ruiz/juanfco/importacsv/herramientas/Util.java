@@ -47,12 +47,11 @@ public class Util {
      *
      * @param usaConsola booleano que si es true intentara usar Console.
      * @param args una lista de objetos a imprimir
-     * @throws Exception en caso de pasar parametros nulos.
      */
-    public static void imp(boolean usaConsola, Object... args) throws Exception {
+    public static void imp(boolean usaConsola, Object... args) {
         StringBuilder sb = new StringBuilder();
         if (args == null) {
-            throw new Exception("* Parametros nulos *");
+            return;
         } else {
             for (Object arg : args) {
                 sb.append(arg.toString());
@@ -74,9 +73,8 @@ public class Util {
      *
      * @param usaConsola
      * @return
-     * @throws java.lang.Exception
      */
-    public static String read(boolean usaConsola) throws Exception {
+    public static String read(boolean usaConsola) {
         String dato = "";
         if (usaConsola) {
             Console con = System.console();

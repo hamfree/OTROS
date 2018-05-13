@@ -25,7 +25,7 @@ public final class MatrizACadena {
      * primitivos u objetos; matrices de matrices son tambien validos, en cuyo
      * caso <code>aArray</code> se representa de forma anidada y recursiva
      * @param unaMatriz
-     * @return una cadena con la representación textual del contenido de una
+     * @return una cadena con la representaciÃ³n textual del contenido de una
      * matriz
      */
     public static String get(Object unaMatriz) {
