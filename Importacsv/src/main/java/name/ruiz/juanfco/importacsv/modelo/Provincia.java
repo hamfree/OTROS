@@ -11,18 +11,21 @@ import java.util.Objects;
  *
  * @author hamfree
  */
-public class Provincia {
+public class Provincia extends Lugar {
+
+    private static final long serialVersionUID = 1274335828345620524L;
     private String idprovincias;
     private String idccaa;
-    private String nombre;
+    //private String nombre;
 
     public Provincia() {
+        super();
     }
 
     public Provincia(String idprovincias, String idccaa, String nombre) {
+        super(nombre);
         this.idprovincias = idprovincias;
         this.idccaa = idccaa;
-        this.nombre = nombre;
     }
 
     public String getIdprovincias() {
@@ -41,20 +44,12 @@ public class Provincia {
         this.idccaa = idccaa;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 23 * hash + Objects.hashCode(this.idprovincias);
         hash = 23 * hash + Objects.hashCode(this.idccaa);
-        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + Objects.hashCode(this.getNombre());
         return hash;
     }
 
@@ -76,7 +71,7 @@ public class Provincia {
         if (!Objects.equals(this.idccaa, other.idccaa)) {
             return false;
         }
-        if (!Objects.equals(this.nombre, other.nombre)) {
+        if (!Objects.equals(this.getNombre(), other.getNombre())) {
             return false;
         }
         return true;
@@ -84,7 +79,7 @@ public class Provincia {
 
     @Override
     public String toString() {
-        return "Provincia{" + "idprovincias=" + idprovincias + ", idccaa=" + idccaa + ", nombre=" + nombre + '}';
+        return "Provincia{" + "idprovincias='" + idprovincias + "', idccaa='" + idccaa + "', nombre='" + getNombre() + "'}";
     }
 
 }

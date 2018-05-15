@@ -11,7 +11,9 @@ import java.util.Objects;
  *
  * @author hamfree
  */
-public class Poblacion {
+public class Poblacion extends Lugar {
+
+    private static final long serialVersionUID = 289616052986526914L;
 
     private String idPoblacion;
     private String idProvincia;
@@ -19,6 +21,7 @@ public class Poblacion {
     private String poblacion;
 
     public Poblacion() {
+        super();
     }
 
     public Poblacion(String idPoblacion, String idProvincia, String idCCAA, String poblacion) {

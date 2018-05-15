@@ -11,16 +11,20 @@ import java.util.Objects;
  *
  * @author hamfree
  */
-public class CCAA {
+public class CCAA extends Lugar {
+
+    private static final long serialVersionUID = 4345723544931154581L;
     private String idccaa;
-    private String nombre;
+    //private String nombre;
 
     public CCAA() {
+        super();
     }
 
     public CCAA(String idccaa, String nombre) {
+        super(nombre);
         this.idccaa = idccaa;
-        this.nombre = nombre;
+
     }
 
     public String getIdccaa() {
@@ -31,19 +35,11 @@ public class CCAA {
         this.idccaa = idccaa;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.idccaa);
-        hash = 89 * hash + Objects.hashCode(this.nombre);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.idccaa);
+        hash = 59 * hash + Objects.hashCode(this.getNombre());
         return hash;
     }
 
@@ -62,7 +58,7 @@ public class CCAA {
         if (!Objects.equals(this.idccaa, other.idccaa)) {
             return false;
         }
-        if (!Objects.equals(this.nombre, other.nombre)) {
+        if (!Objects.equals(this.getNombre(), other.getNombre())) {
             return false;
         }
         return true;
@@ -70,7 +66,8 @@ public class CCAA {
 
     @Override
     public String toString() {
-        return "CCAA{" + "idccaa=" + idccaa + ", nombre=" + nombre + '}';
+        return "CCAA{" + "idccaa='" + idccaa + "', nombre='" + getNombre() + "'}";
     }
+
 
 }

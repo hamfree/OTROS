@@ -1,41 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package name.ruiz.juanfco.importacsv.servicio;
 
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Logger;
-import name.ruiz.juanfco.importacsv.dao.DaoPoblacionesImpl;
+import name.ruiz.juanfco.importacsv.dao.DaoProvinciaImpl;
 import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
-import name.ruiz.juanfco.importacsv.modelo.Poblacion;
+import name.ruiz.juanfco.importacsv.modelo.Provincia;
 
 /**
  *
  * @author hamfree
  */
-public class PoblacionesServicioImpl implements PoblacionesServicio {
+public class ProvinciaServicioImpl implements ProvinciaServicio {
 
-    private DaoPoblacionesImpl dao;
+    private DaoProvinciaImpl dao;
     private Properties jdbc;
     private String jndi;
-    private static final Logger LOG = Logger.getLogger(PoblacionesServicioImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(CCAAServicioImpl.class.getName());
     private final String SL = System.getProperty("line.separator");
 
-    /**
-     *
-     */
-    public PoblacionesServicioImpl() {
-        dao = DaoPoblacionesImpl.getInstance();
+    public ProvinciaServicioImpl() {
+        dao = DaoProvinciaImpl.getDao();
     }
 
-    /**
-     *
-     * @param jdbc
-     * @throws ConfiguracionException
-     */
-    public PoblacionesServicioImpl(Properties jdbc) throws ConfiguracionException {
+    public ProvinciaServicioImpl(Properties jdbc) throws ConfiguracionException {
         ValidaParametros vp = new ValidaParametrosImpl();
 
         if (vp.validaJDBC(jdbc)) {
-            dao = DaoPoblacionesImpl.getInstance();
+            dao = DaoProvinciaImpl.getInstance();
             this.jdbc = jdbc;
             try {
                 dao.configura(this.jdbc, null);
@@ -49,15 +46,10 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
         }
     }
 
-    /**
-     *
-     * @param jndi
-     * @throws ConfiguracionException
-     */
-    public PoblacionesServicioImpl(String jndi) throws ConfiguracionException {
+    public ProvinciaServicioImpl(String jdni) throws ConfiguracionException {
         ValidaParametros vp = new ValidaParametrosImpl();
         if (vp.validaJNDI(jndi)) {
-            dao = DaoPoblacionesImpl.getInstance();
+            dao = DaoProvinciaImpl.getInstance();
             this.jndi = jndi;
             try {
                 dao.configura(null, this.jndi);
@@ -70,27 +62,17 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
         }
     }
 
-    /**
-     *
-     * @param idPoblacion
-     * @return
-     */
     @Override
-    public Poblacion busca(String idPoblacion) {
+    public Provincia busca(String idProvincia) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     *
-     * @param poblacion
-     * @return
-     */
     @Override
-    public boolean inserta(Poblacion poblacion) {
+    public boolean inserta(Provincia provincia) {
         StringBuilder sb = new StringBuilder();
-        boolean esInsertado = false;
+        boolean esInsertada = false;
         try {
-            esInsertado = dao.inserta(poblacion);
+            esInsertada = dao.inserta(provincia);
         } catch (SQLException ex) {
             sb.append("ERROR: ")
                     .append(ex.getLocalizedMessage())
@@ -99,35 +81,25 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
                     .append(ex.getErrorCode());
             LOG.severe(sb.toString());
         }
-        return esInsertado;
+        return esInsertada;
     }
 
-    /**
-     *
-     * @param idPoblacion
-     * @return
-     */
     @Override
-    public boolean elimina(String idPoblacion) {
+    public boolean elimina(String idProvincia) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     *
-     * @param poblacion
-     * @return
-     */
     @Override
-    public boolean modifica(Poblacion poblacion) {
+    public boolean modifica(Provincia provincia) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String getJndi() {
-        return jndi;
+    public DaoProvinciaImpl getDao() {
+        return dao;
     }
 
-    public void setJndi(String jndi) {
-        this.jndi = jndi;
+    public void setDao(DaoProvinciaImpl dao) {
+        this.dao = dao;
     }
 
     public Properties getJdbc() {
@@ -136,6 +108,14 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
 
     public void setJdbc(Properties jdbc) {
         this.jdbc = jdbc;
+    }
+
+    public String getJndi() {
+        return jndi;
+    }
+
+    public void setJndi(String jndi) {
+        this.jndi = jndi;
     }
 
 }

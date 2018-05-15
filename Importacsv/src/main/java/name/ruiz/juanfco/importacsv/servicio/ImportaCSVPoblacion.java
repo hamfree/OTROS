@@ -8,6 +8,6 @@ import name.ruiz.juanfco.importacsv.modelo.Poblacion;
  *
  * @author hamfree
  */
-public interface ImportaCSV {
+public interface ImportaCSVPoblacion {
     public List<Poblacion> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado);
 }

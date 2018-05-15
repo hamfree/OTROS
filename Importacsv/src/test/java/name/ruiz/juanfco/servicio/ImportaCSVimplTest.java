@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import name.ruiz.juanfco.importacsv.modelo.Poblacion;
-import name.ruiz.juanfco.importacsv.servicio.ImportaCSVimpl;
+import name.ruiz.juanfco.importacsv.servicio.ImportaPobImpl;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +23,7 @@ import org.junit.Test;
  */
 public class ImportaCSVimplTest {
 
-    static final Logger LOG = Logger.getLogger(ImportaCSVimpl.class.getName());
+    static final Logger LOG = Logger.getLogger(ImportaPobImpl.class.getName());
     static final String RUTA = "C:\\des\\src\\OTROS\\Importacsv\\target\\classes\\testMunicipios.csv";
     static final String FLOG = "./pruebas.log";
 
@@ -68,14 +68,14 @@ public class ImportaCSVimplTest {
     }
 
     /**
-     * Test of importa method, of class ImportaCSVimpl.
+     * Test of importa method, of class ImportaPobImpl.
      */
     @Test
     public void testImporta() {
         System.out.println("\nTEST importa, que debe funcionar");
 
         File fcsv = new File(RUTA);
-        ImportaCSVimpl instance = new ImportaCSVimpl();
+        ImportaPobImpl instance = new ImportaPobImpl();
 
         // Resultados esperados
         List<Poblacion> expResult = new ArrayList<>();
@@ -109,7 +109,7 @@ public class ImportaCSVimplTest {
     public void testImportaSinFichero() {
         System.out.println("\nTEST importa con fichero erroneo");
         File fcsv = new File("F:\\ficheroQueNoExiste.csv");
-        ImportaCSVimpl instance = new ImportaCSVimpl();
+        ImportaPobImpl instance = new ImportaPobImpl();
 
         List<Poblacion> result = instance.importa(fcsv, "Windows-1252", ";", false);
 
@@ -122,7 +122,7 @@ public class ImportaCSVimplTest {
     public void testImportaConCodificacionErronea() {
         System.out.println("\nTEST importa con codificacion erronea");
         File fcsv = new File(RUTA);
-        ImportaCSVimpl instance = new ImportaCSVimpl();
+        ImportaPobImpl instance = new ImportaPobImpl();
 
         List<Poblacion> result = instance.importa(fcsv, "fake-charset", ";", false);
 
@@ -135,7 +135,7 @@ public class ImportaCSVimplTest {
     public void testImportaConDelimitadorErroneo() {
         System.out.println("\nTEST importa con delimitador erroneo");
         File fcsv = new File(RUTA);
-        ImportaCSVimpl instance = new ImportaCSVimpl();
+        ImportaPobImpl instance = new ImportaPobImpl();
 
         List<Poblacion> result = instance.importa(fcsv, "fake-charset", null, false);
 

@@ -1,6 +1,7 @@
 package name.ruiz.juanfco.importacsv.herramientas;
 
 import java.io.Console;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.SortedMap;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Clase de utilidad con métodos usados ampliamente en la aplicación.
@@ -17,8 +22,8 @@ import java.util.SortedMap;
  */
 public class Util {
 
-    public final String SL = System.getProperty("line.separator");
-    public final String SF = System.getProperty("file.separator");
+    public static final String SL = System.getProperty("line.separator");
+    public static final String SF = System.getProperty("file.separator");
 
     // Metodos de utilidad
     /**
@@ -57,6 +62,36 @@ public class Util {
             for (Object arg : args) {
                 sb.append(arg.toString());
             }
+        }
+        if (usaConsola) {
+            Console con = System.console();
+            if (con == null) {
+                System.out.format("%s", sb.toString());
+            } else {
+                con.printf("%s", sb.toString());
+            }
+        } else {
+            System.out.format("%s", sb.toString());
+        }
+    }
+
+    /**
+     * Imprime los argumentos indicados en la salida estandar y despues un salto
+     * de linea. Puede usar el objeto Console si se pasa true al parametro
+     * usaConsola. En caso contrario usara el canal estandar de salida.
+     *
+     * @param usaConsola booleano que si es true intentara usar Console.
+     * @param args una lista de objetos a imprimir
+     */
+    public static void impsl(boolean usaConsola, Object... args) {
+        StringBuilder sb = new StringBuilder();
+        if (args == null) {
+            return;
+        } else {
+            for (Object arg : args) {
+                sb.append(arg.toString());
+            }
+            sb.append(SL);
         }
         if (usaConsola) {
             Console con = System.console();
@@ -153,4 +188,22 @@ public class Util {
         return al;
     }
 
+    public static void activaLog(Logger LOG, String patron, int limite, int contador, boolean seAgrega)
+            throws SecurityException, IOException {
+        // se crea el manejador de archivo para el log
+        FileHandler fh;
+        fh = new FileHandler(patron, limite, contador, seAgrega);
+        fh.setLevel(Level.ALL); // Nivel de trazado
+        fh.setFormatter(new SimpleFormatter()); // Formateador de mensajes
+
+        // agregamos el manejador de archivo a nuestro LOG
+        LOG.addHandler(fh);
+
+        // el manejador de consola se agrega automaticamente, solo
+        // cambiamos el nivel de detalle a desplegar
+        LOG.getHandlers()[0].setLevel(Level.SEVERE);
+
+        // se establece el nivel predeterminado global
+        LOG.setLevel(Level.INFO);
+    }
 }
