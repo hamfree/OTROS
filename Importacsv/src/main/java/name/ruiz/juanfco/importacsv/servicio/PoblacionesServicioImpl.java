@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Logger;
 import name.ruiz.juanfco.importacsv.dao.DaoPoblacionesImpl;
+import name.ruiz.juanfco.importacsv.dao.JdbcUtil;
+import name.ruiz.juanfco.importacsv.dao.JdbcUtilImpl;
 import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
 import name.ruiz.juanfco.importacsv.modelo.Poblacion;
 
@@ -13,11 +15,14 @@ import name.ruiz.juanfco.importacsv.modelo.Poblacion;
  */
 public class PoblacionesServicioImpl implements PoblacionesServicio {
 
-    private DaoPoblacionesImpl dao;
-    private Properties jdbc;
-    private String jndi;
     private static final Logger LOG = Logger.getLogger(PoblacionesServicioImpl.class.getName());
     private final String SL = System.getProperty("line.separator");
+
+    private DaoPoblacionesImpl dao;
+    private JdbcUtil jdbcutl;
+    private Properties jdbc;
+    private String jndi;
+
 
     /**
      *
@@ -36,9 +41,10 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
 
         if (vp.validaJDBC(jdbc)) {
             dao = DaoPoblacionesImpl.getInstance();
-            this.jdbc = jdbc;
+            setJdbc(jdbc);
             try {
-                dao.configura(this.jdbc, null);
+                jdbcutl = new JdbcUtilImpl();
+                jdbcutl.configura(getJdbc(), null);
             } catch (ConfiguracionException ex) {
                 LOG.severe("¡Parámetros JDBC nulos o incorrectos!");
                 throw new ConfiguracionException("¡Parámetros JDBC nulos o incorrectos!");
@@ -58,9 +64,10 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
         ValidaParametros vp = new ValidaParametrosImpl();
         if (vp.validaJNDI(jndi)) {
             dao = DaoPoblacionesImpl.getInstance();
-            this.jndi = jndi;
+            setJdbc(jdbc);
             try {
-                dao.configura(null, this.jndi);
+                jdbcutl = new JdbcUtilImpl();
+                jdbcutl.configura(null, getJndi());
             } catch (ConfiguracionException ex) {
                 LOG.severe("¡Parámetro JNDI nulo o incorrecto!");
                 throw new ConfiguracionException("¡Parámetro JNDI nulo o incorrecto!");
@@ -122,7 +129,7 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String getJndi() {
+    public final String getJndi() {
         return jndi;
     }
 
@@ -130,12 +137,20 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
         this.jndi = jndi;
     }
 
-    public Properties getJdbc() {
+    public final Properties getJdbc() {
         return jdbc;
     }
 
-    public void setJdbc(Properties jdbc) {
+    public final void setJdbc(Properties jdbc) {
         this.jdbc = jdbc;
+    }
+
+    public final JdbcUtil getJdbcutl() {
+        return jdbcutl;
+    }
+
+    public final void setJdbcutl(JdbcUtil jdbcutl) {
+        this.jdbcutl = jdbcutl;
     }
 
 }

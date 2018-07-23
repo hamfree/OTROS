@@ -60,7 +60,7 @@ public class DaoCCAAImplTest {
     @After
     public void tearDown() {
         try {
-            daoCCAA.cerrarConexion();
+            daoCCAA.getJdbcUtl().cerrarConexion();
         } catch (SQLException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,17 +76,18 @@ public class DaoCCAAImplTest {
         boolean expResult = true;
 
         try {
-            instance.configura(jdbc, jndi);
+            instance.getJdbcUtl().configura(jdbc, jndi);
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        boolean result = instance.estaConfigurado();
+        boolean result = instance.getJdbcUtl().estaConfigurado();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of conectar method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConectar() throws Exception {
@@ -95,19 +96,20 @@ public class DaoCCAAImplTest {
 
         //Primero configuramos
         try {
-            instance.configura(jdbc, jndi);
+            instance.getJdbcUtl().configura(jdbc, jndi);
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Y ahora el test
-        instance.conectar();
-        assertNotNull(instance.getCon());
-        assertNotNull(instance.getStmt());
+        instance.getJdbcUtl().abrirConexion();
+        assertNotNull(instance.getJdbcUtl().getCon());
+        assertNotNull(instance.getJdbcUtl().getStmt());
     }
 
     /**
      * Test of cerrarConexion method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testCerrarConexion() throws Exception {
@@ -116,19 +118,20 @@ public class DaoCCAAImplTest {
 
         //Primero configuramos y luego conectamos
         try {
-            instance.configura(jdbc, jndi);
-            instance.conectar();
+            instance.getJdbcUtl().configura(jdbc, jndi);
+            instance.getJdbcUtl().abrirConexion();
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Y ahora hacemos el test...
-        instance.cerrarConexion();
-        Assert.assertTrue("Debe estar cerrada", instance.getCon().isClosed());
+        instance.getJdbcUtl().cerrarConexion();
+        Assert.assertTrue("Debe estar cerrada", instance.getJdbcUtl().getCon().isClosed());
     }
 
     /**
      * Test of inserta method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testInserta() throws Exception {
@@ -137,8 +140,8 @@ public class DaoCCAAImplTest {
         //Primero configuramos y luego conectamos
         DaoCCAAImpl instance = daoCCAA;
         try {
-            instance.configura(jdbc, jndi);
-            instance.conectar();
+            instance.getJdbcUtl().configura(jdbc, jndi);
+            instance.getJdbcUtl().abrirConexion();
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,6 +154,7 @@ public class DaoCCAAImplTest {
 
     /**
      * Test of busca method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testBusca() throws Exception {
@@ -159,8 +163,8 @@ public class DaoCCAAImplTest {
         //Primero configuramos y luego conectamos
         DaoCCAAImpl instance = daoCCAA;
         try {
-            instance.configura(jdbc, jndi);
-            instance.conectar();
+            instance.getJdbcUtl().configura(jdbc, jndi);
+            instance.getJdbcUtl().abrirConexion();
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,6 +177,7 @@ public class DaoCCAAImplTest {
 
     /**
      * Test of actualiza method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testActualiza() throws Exception {
@@ -188,6 +193,7 @@ public class DaoCCAAImplTest {
 
     /**
      * Test of borra method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testBorra() throws Exception {
@@ -195,8 +201,8 @@ public class DaoCCAAImplTest {
         //Primero configuramos y luego conectamos
         DaoCCAAImpl instance = daoCCAA;
         try {
-            instance.configura(jdbc, jndi);
-            instance.conectar();
+            instance.getJdbcUtl().configura(jdbc, jndi);
+            instance.getJdbcUtl().abrirConexion();
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,6 +216,7 @@ public class DaoCCAAImplTest {
 
     /**
      * Test of consulta method, of class DaoCCAAImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConsulta() throws Exception {
@@ -217,8 +224,8 @@ public class DaoCCAAImplTest {
         //Primero configuramos y luego conectamos
         DaoCCAAImpl instance = daoCCAA;
         try {
-            instance.configura(jdbc, jndi);
-            instance.conectar();
+            instance.getJdbcUtl().configura(jdbc, jndi);
+            instance.getJdbcUtl().abrirConexion();
         } catch (ConfiguracionException ex) {
             Logger.getLogger(DaoCCAAImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }

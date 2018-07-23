@@ -1,20 +1,10 @@
 package name.ruiz.juanfco.importacsv.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
 import name.ruiz.juanfco.importacsv.modelo.CCAA;
 
 /**
@@ -30,10 +20,10 @@ public class DaoCCAAImpl implements DaoCCAA {
 
     // Singleton
     static DaoCCAAImpl dao = new DaoCCAAImpl();
-    private Connection con = null;
-    private Statement stmt = null;
-    private static Properties jdbc = null;
-    private static String jndi = null;
+
+    // Acceso a la BBDD con JDBC
+    private JdbcUtil jdbcutl;
+
     private final String SL = System.getProperty("line.separator");
 
     // Constructor privado
@@ -49,120 +39,12 @@ public class DaoCCAAImpl implements DaoCCAA {
         return dao;
     }
 
-    public Connection getCon() {
-        return con;
+    public JdbcUtil getJdbcUtl() {
+        return jdbcutl;
     }
 
-    public void setCon(Connection con) {
-        this.con = con;
-    }
-
-    public Statement getStmt() {
-        return stmt;
-    }
-
-    public void setStmt(Statement stmt) {
-        this.stmt = stmt;
-    }
-
-    public Properties getJdbc() {
-        return jdbc;
-    }
-
-    public void setJdbc(Properties jdbc) {
-        DaoCCAAImpl.jdbc = jdbc;
-    }
-
-    public String getJndi() {
-        return jndi;
-    }
-
-    public void setJndi(String jndi) {
-        DaoCCAAImpl.jndi = jndi;
-    }
-
-    public void configura(Properties jdbc, String jndi) throws ConfiguracionException {
-        //Las validaciones "fuertes" se hacen en el servicio
-        if (jndi != null) {
-            setJndi(jndi);
-        } else if (jdbc != null) {
-            setJdbc(jdbc);
-        } else {
-            LOG.severe("Parametros nulos de configuracion.");
-            throw new ConfiguracionException("Parametros nulos de configuracion.");
-        }
-    }
-
-    public boolean estaConfigurado() {
-        if (jdbc == null && jndi == null) {
-            return false;
-        } else if (jdbc == null && jndi.length() == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    private static javax.sql.DataSource obtenerDS() {
-        DataSource ds = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup(jndi);
-        } catch (NamingException e) {
-            sb.append("Error al obtener la fuente de datos. ")
-                    .append(e.getLocalizedMessage());
-            LOG.severe(sb.toString());
-        }
-        return ds;
-    }
-
-    private Connection obtenerConexion() throws SQLException {
-        StringBuilder sb = new StringBuilder();
-        try {
-            Class.forName(jdbc.getProperty("driver"));
-            con = DriverManager.getConnection(jdbc.getProperty("url"),
-                    jdbc.getProperty("usuario"), jdbc.getProperty("clave"));
-        } catch (ClassNotFoundException ex) {
-            // Estos errores son irrecuperables. Nos salimos del programa.
-            sb.append("Error en la conexion a la BBDD: ")
-                    .append(ex.getLocalizedMessage())
-                    .append("\n*NO* se puede continuar. Terminando el programa ...");
-            LOG.severe(sb.toString());
-            System.exit(-255);
-        } catch (SQLSyntaxErrorException ex) {
-            // Estos errores son irrecuperables. Nos salimos del programa.
-            sb.append("Error en la conexion a la BBDD: ")
-                    .append(ex.getLocalizedMessage())
-                    .append("\nCodigo de error del fabricante: ")
-                    .append(ex.getErrorCode())
-                    .append("\n*NO* se puede continuar. Terminando el programa ...");
-            LOG.severe(sb.toString());
-            System.exit(-255);
-        }
-        return con;
-    }
-
-    public void conectar() throws SQLException {
-        if (estaConfigurado()) {
-            if (jndi != null) {
-                con = obtenerDS().getConnection();
-            } else if (jdbc != null) {
-                con = obtenerConexion();
-            }
-            setStmt(getCon().createStatement());
-        } else {
-            LOG.severe("Debe configurar el DAO antes de usarlo.");
-            throw new SQLException("Debe configurar el DAO antes de usarlo.");
-        }
-    }
-
-    public void cerrarConexion() throws SQLException {
-        if (stmt != null) {
-            stmt.close();
-        }
-        if (con != null) {
-            con.close();
-        }
+    public void setJdbcUtl(JdbcUtil jdbcutl) {
+        this.jdbcutl = jdbcutl;
     }
 
     @Override
@@ -178,14 +60,14 @@ public class DaoCCAAImpl implements DaoCCAA {
                     .append(TABLA)
                     .append(" WHERE ")
                     .append(ID).append("='").append(idCCAA).append("'");
-            conectar();
-            ResultSet rs = stmt.executeQuery(sb.toString());
+            jdbcutl.abrirConexion();
+            ResultSet rs = jdbcutl.getStmt().executeQuery(sb.toString());
             if (rs.first()) {
                 ccaa = new CCAA();
                 ccaa.setIdccaa(rs.getString(1));
                 ccaa.setNombre(rs.getString(2));
             }
-            cerrarConexion();
+            jdbcutl.cerrarConexion();
         } catch (SQLException ex) {
             sb.setLength(0);
             sb.append("Error en DAO : ")
@@ -193,7 +75,7 @@ public class DaoCCAAImpl implements DaoCCAA {
             LOG.severe(sb.toString());
         } finally {
             try {
-                cerrarConexion();
+                jdbcutl.cerrarConexion();
             } catch (SQLException ex) {
                 sb.setLength(0);
                 sb.append("Error en DAO : ")
@@ -218,12 +100,12 @@ public class DaoCCAAImpl implements DaoCCAA {
                     .append("('").append(ccaa.getIdccaa()).append("',")
                     .append("'").append(ccaa.getNombre()).append("'")
                     .append(")");
-            conectar();
-            int res = stmt.executeUpdate(sb.toString());
+            jdbcutl.abrirConexion();
+            int res = jdbcutl.getStmt().executeUpdate(sb.toString());
             if (res == 0 || res == 1) {
                 esInsertada = true;
             }
-            cerrarConexion();
+            jdbcutl.cerrarConexion();
         } catch (SQLException ex) {
             esInsertada = false;
             sb.setLength(0);
@@ -235,7 +117,7 @@ public class DaoCCAAImpl implements DaoCCAA {
             LOG.severe(sb.toString());
         } finally {
             try {
-                cerrarConexion();
+                jdbcutl.cerrarConexion();
             } catch (SQLException ex) {
                 sb.setLength(0);
                 sb.append("Error en DAO : ")
@@ -268,8 +150,8 @@ public class DaoCCAAImpl implements DaoCCAA {
                         .append(ID)
                         .append("=")
                         .append("'").append(idCCAA).append("'");
-                conectar();
-                int res = stmt.executeUpdate(sb.toString());
+                jdbcutl.abrirConexion();
+                int res = jdbcutl.getStmt().executeUpdate(sb.toString());
                 if (res > 0) {
                     resultado = true;
                 }
@@ -280,7 +162,7 @@ public class DaoCCAAImpl implements DaoCCAA {
                 LOG.severe(sb.toString());
             } finally {
                 try {
-                    cerrarConexion();
+                    jdbcutl.cerrarConexion();
                 } catch (SQLException ex) {
                     sb.setLength(0);
                     sb.append("Error en DAO : ")
@@ -312,8 +194,8 @@ public class DaoCCAAImpl implements DaoCCAA {
                             .append(" AND ");
                 }
                 sb.append(" 1 = 1");
-                conectar();
-                ResultSet rs = stmt.executeQuery(sb.toString());
+                jdbcutl.abrirConexion();
+                ResultSet rs = jdbcutl.getStmt().executeQuery(sb.toString());
                 while (rs.next()) {
                     CCAA ccaa = new CCAA();
                     ccaa.setIdccaa(rs.getString(1));
@@ -323,7 +205,7 @@ public class DaoCCAAImpl implements DaoCCAA {
                     }
                     alCCAA.add(ccaa);
                 }
-                cerrarConexion();
+                jdbcutl.cerrarConexion();
             }
         } catch (SQLException ex) {
             sb.setLength(0);
@@ -332,7 +214,7 @@ public class DaoCCAAImpl implements DaoCCAA {
             LOG.severe(sb.toString());
         } finally {
             try {
-                cerrarConexion();
+                jdbcutl.cerrarConexion();
             } catch (SQLException ex) {
                 sb.setLength(0);
                 sb.append("Error en DAO : ")

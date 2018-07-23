@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Logger;
 import name.ruiz.juanfco.importacsv.dao.DaoCCAAImpl;
+import name.ruiz.juanfco.importacsv.dao.JdbcUtil;
+import name.ruiz.juanfco.importacsv.dao.JdbcUtilImpl;
 import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
 import name.ruiz.juanfco.importacsv.modelo.CCAA;
 
@@ -21,8 +23,10 @@ public class CCAAServicioImpl implements CCAAServicio {
     private DaoCCAAImpl dao;
     private Properties jdbc;
     private String jndi;
+    private JdbcUtil jdbcutl;
     private static final Logger LOG = Logger.getLogger(CCAAServicioImpl.class.getName());
     private final String SL = System.getProperty("line.separator");
+
 
     public CCAAServicioImpl() {
         dao = DaoCCAAImpl.getDao();
@@ -35,7 +39,8 @@ public class CCAAServicioImpl implements CCAAServicio {
             dao = DaoCCAAImpl.getInstance();
             this.jdbc = jdbc;
             try {
-                dao.configura(this.jdbc, null);
+                this.setJdbcutl(new JdbcUtilImpl());
+                this.getJdbcutl().configura(this.jdbc, null);
             } catch (ConfiguracionException ex) {
                 LOG.severe("¡Parámetros JDBC nulos o incorrectos!");
                 throw new ConfiguracionException("¡Parámetros JDBC nulos o incorrectos!");
@@ -52,7 +57,8 @@ public class CCAAServicioImpl implements CCAAServicio {
             dao = DaoCCAAImpl.getInstance();
             this.jndi = jndi;
             try {
-                dao.configura(null, this.jndi);
+                this.setJdbcutl(new JdbcUtilImpl());
+                this.getJdbcutl().configura(null, jndi);
             } catch (ConfiguracionException ex) {
                 LOG.severe("¡Parámetro JNDI nulo o incorrecto!");
                 throw new ConfiguracionException("¡Parámetro JNDI nulo o incorrecto!");
@@ -65,7 +71,7 @@ public class CCAAServicioImpl implements CCAAServicio {
 
     @Override
     public CCAA busca(String idCCAA) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         CCAA ccaa = null;
         try {
             if (idCCAA != null && idCCAA.length() > 0) {
@@ -156,5 +162,14 @@ public class CCAAServicioImpl implements CCAAServicio {
     public void setJndi(String jndi) {
         this.jndi = jndi;
     }
+
+    public final JdbcUtil getJdbcutl() {
+        return jdbcutl;
+    }
+
+    public final void setJdbcutl(JdbcUtil jdbcutl) {
+        this.jdbcutl = jdbcutl;
+    }
+
 
 }

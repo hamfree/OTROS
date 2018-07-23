@@ -7,12 +7,12 @@ package name.ruiz.juanfco.importacsv.servicio;
 
 import java.io.File;
 import java.util.List;
-import name.ruiz.juanfco.importacsv.modelo.Provincia;
+import name.ruiz.juanfco.importacsv.modelo.CCAA;
 
 /**
  *
  * @author hamfree
  */
-public interface ImportaCSVProvincia {
-    public List<Provincia> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado);
+public interface CCAAFicheroServicio {
+    public List<CCAA> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado);
 }

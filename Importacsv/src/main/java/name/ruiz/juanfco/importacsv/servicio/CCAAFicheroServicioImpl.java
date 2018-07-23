@@ -16,20 +16,21 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import name.ruiz.juanfco.importacsv.herramientas.Util;
-import name.ruiz.juanfco.importacsv.modelo.Provincia;
+import name.ruiz.juanfco.importacsv.modelo.CCAA;
 
 /**
  *
  * @author hamfree
  */
-public class ImportaProImpl implements ImportaCSVProvincia {
+public class CCAAFicheroServicioImpl implements CCAAFicheroServicio {
 
-    private static final Logger LOG = Logger.getLogger(ImportaProImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(CCAAFicheroServicioImpl.class.getName());
+
 
     @Override
-    public List<Provincia> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado) {
+    public List<CCAA> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado) {
         StringBuilder sb = new StringBuilder();
-        ArrayList<Provincia> alProvincias = null;
+        ArrayList<CCAA> alComAut = null;
         int contador = 0;
         boolean existeFichero;
         boolean sePuedeLeer;
@@ -108,7 +109,7 @@ public class ImportaProImpl implements ImportaCSVProvincia {
         }
 
         try {
-            alProvincias = new ArrayList<>();
+            alComAut = new ArrayList<>();
             Scanner scanner = new Scanner(fcsv, codificacion);
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
@@ -116,18 +117,16 @@ public class ImportaProImpl implements ImportaCSVProvincia {
                 Scanner scLinea = new Scanner(linea);
                 scLinea.useDelimiter(delimitador);
                 if (scLinea.hasNext()) {
-                    String idProv = scLinea.next();
                     String idCCAA = scLinea.next();
                     String nombre = scLinea.next();
 
                     if (entrecomillado) {
-                        idProv = idProv.replace("\"", "");
                         idCCAA = idCCAA.replace("\"", "");
                         nombre = nombre.replace("\"", "");
                     }
 
-                    Provincia prv = new Provincia(idProv, idCCAA, nombre);
-                    alProvincias.add(prv);
+                    CCAA ca = new CCAA(idCCAA, nombre);
+                    alComAut.add(ca);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -141,8 +140,8 @@ public class ImportaProImpl implements ImportaCSVProvincia {
                     .append(" del fichero CSV.")
                     .append(ex.getLocalizedMessage());
             Util.impsl(false, sb.toString());
-            return alProvincias;
+            return alComAut;
         }
-        return alProvincias;
+        return alComAut;
     }
 }

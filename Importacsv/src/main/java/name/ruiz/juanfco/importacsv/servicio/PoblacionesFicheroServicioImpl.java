@@ -17,9 +17,9 @@ import name.ruiz.juanfco.importacsv.modelo.Poblacion;
  *
  * @author hamfree
  */
-public class ImportaPobImpl implements ImportaCSVPoblacion {
+public class PoblacionesFicheroServicioImpl implements PoblacionesFicheroServicio {
 
-    static final Logger LOG = Logger.getLogger(ImportaPobImpl.class.getName());
+    static final Logger LOG = Logger.getLogger(PoblacionesFicheroServicioImpl.class.getName());
 
     @Override
     public List<Poblacion> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado) {
@@ -59,7 +59,7 @@ public class ImportaPobImpl implements ImportaCSVPoblacion {
                 return null;
             }
         } catch (SecurityException ex) {
-            Logger.getLogger(ImportaPobImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PoblacionesFicheroServicioImpl.class.getName()).log(Level.SEVERE, null, ex);
             Util.imp(false, ex.getLocalizedMessage());
         }
 
