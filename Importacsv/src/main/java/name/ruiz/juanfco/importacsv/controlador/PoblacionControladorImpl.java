@@ -26,6 +26,12 @@ import name.ruiz.juanfco.importacsv.servicio.PoblacionesFicheroServicio;
  */
 public class PoblacionControladorImpl implements PoblacionControlador {
 
+    private static final Logger LOG = Logger.getLogger(PoblacionControladorImpl.class.getName());
+
+    /**
+     *
+     * @param poblaciones
+     */
     @Override
     public void mostrarPoblaciones(List<Poblacion> poblaciones) {
         //TODO: Este método usará los métodos de la vista para mostrar las
@@ -36,11 +42,23 @@ public class PoblacionControladorImpl implements PoblacionControlador {
         }
     }
 
+    /**
+     *
+     * @param prop
+     * @param jdni
+     */
     @Override
     public void consultarPoblaciones(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La consulta  de poblaciones no está soportada aún.");
     }
 
+    /**
+     *
+     * @param poblaciones
+     * @param prop
+     * @param jdni
+     * @return
+     */
     @Override
     public boolean insertarPoblaciones(List<Poblacion> poblaciones, Properties prop, String jdni) {
         int poblacionesImportadas = 0;
@@ -86,16 +104,34 @@ public class PoblacionControladorImpl implements PoblacionControlador {
         return true;
     }
 
+    /**
+     *
+     * @param poblaciones
+     * @param prop
+     * @param jdni
+     * @return
+     */
     @Override
     public boolean modificarPoblaciones(List<Poblacion> poblaciones, Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La modificación  de poblaciones no está soportada aún.");
     }
 
+    /**
+     *
+     * @param prop
+     * @param jdni
+     * @return
+     */
     @Override
     public boolean borrarPoblaciones(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La eliminación de poblaciones no está soportada aún.");
     }
 
+    /**
+     *
+     * @param prop
+     * @return
+     */
     @Override
     public List<Poblacion> importarPoblacionesDelCSV(Properties prop) {
         Path path = Paths.get(prop.getProperty("fichero"));

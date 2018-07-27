@@ -6,6 +6,7 @@
 package name.ruiz.juanfco.importacsv.modelo;
 
 /**
+ * Lista de las distintas operaciones que podemos realizar sobre la BBDD.
  *
  * @author hamfree
  */

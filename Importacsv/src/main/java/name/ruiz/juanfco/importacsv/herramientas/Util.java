@@ -21,7 +21,7 @@ import java.util.logging.SimpleFormatter;
  * @author hamfree
  */
 public class Util {
-
+    private static final Logger LOG = Logger.getLogger(Util.class.getName());
     public static final String SL = System.getProperty("line.separator");
     public static final String SF = System.getProperty("file.separator");
 
@@ -188,6 +188,16 @@ public class Util {
         return al;
     }
 
+    /**
+     *
+     * @param LOG
+     * @param patron
+     * @param limite
+     * @param contador
+     * @param seAgrega
+     * @throws SecurityException
+     * @throws IOException
+     */
     public static void activaLog(Logger LOG, String patron, int limite, int contador, boolean seAgrega)
             throws SecurityException, IOException {
         // se crea el manejador de archivo para el log

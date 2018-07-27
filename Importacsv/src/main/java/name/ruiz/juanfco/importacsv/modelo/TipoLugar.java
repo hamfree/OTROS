@@ -6,6 +6,7 @@
 package name.ruiz.juanfco.importacsv.modelo;
 
 /**
+ * Indica los tres tipos de lugares que tenemos en el modelo.
  *
  * @author hamfree
  */

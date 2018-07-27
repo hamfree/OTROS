@@ -21,6 +21,14 @@ public class PoblacionesFicheroServicioImpl implements PoblacionesFicheroServici
 
     static final Logger LOG = Logger.getLogger(PoblacionesFicheroServicioImpl.class.getName());
 
+    /**
+     *
+     * @param fcsv
+     * @param codificacion
+     * @param delimitador
+     * @param entrecomillado
+     * @return
+     */
     @Override
     public List<Poblacion> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado) {
         StringBuilder sb = new StringBuilder();

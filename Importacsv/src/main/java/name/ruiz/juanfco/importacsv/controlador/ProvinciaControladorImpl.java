@@ -27,6 +27,8 @@ import name.ruiz.juanfco.importacsv.servicio.ProvinciaFicheroServicio;
  */
 public class ProvinciaControladorImpl implements ProvinciaControlador {
 
+    private static final Logger LOG = Logger.getLogger(ProvinciaControladorImpl.class.getName());
+
     @Override
     public List<Provincia> importarProvinciaDelCSV(Properties prop) {
         Path path = Paths.get(prop.getProperty("fichero"));
@@ -46,7 +48,7 @@ public class ProvinciaControladorImpl implements ProvinciaControlador {
 
     @Override
     public void consultarProvincia(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La consulta  de provincias no está soportada aún.");
     }
 
     @Override
@@ -97,12 +99,12 @@ public class ProvinciaControladorImpl implements ProvinciaControlador {
 
     @Override
     public boolean modificarProvincia(List<Provincia> provincias, Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La modificación de provincias no está soportada aún.");
     }
 
     @Override
     public boolean borrarProvincia(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: El borrado de provincias no está soportada aún.");
     }
 
 }

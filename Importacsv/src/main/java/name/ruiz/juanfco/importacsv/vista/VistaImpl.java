@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.Set;
  */
 public class VistaImpl implements Vista {
 
+    private static final Logger LOG = Logger.getLogger(VistaImpl.class.getName());
     private final String S = "|";
     private final String T = "\"";
     private final String CO = "'";
@@ -26,6 +28,11 @@ public class VistaImpl implements Vista {
     private final String SL = System.getProperty("line.separator");
     private final String TAB = "    ";
 
+    /**
+     *
+     * @param msj
+     * @return
+     */
     @Override
     public StringBuffer exploraObjeto(Object msj) {
         StringBuffer sb = new StringBuffer();
@@ -48,6 +55,12 @@ public class VistaImpl implements Vista {
         return sb;
     }
 
+    /**
+     *
+     * @param lista
+     * @param nivel
+     * @return
+     */
     @Override
     public StringBuffer exploraLista(List<?> lista, int nivel) {
         StringBuffer sb = new StringBuffer();
@@ -96,6 +109,12 @@ public class VistaImpl implements Vista {
         return sb;
     }
 
+    /**
+     *
+     * @param mapa
+     * @param nivel
+     * @return
+     */
     @Override
     public StringBuffer exploraMapa(Map<Object, Object> mapa, int nivel) {
         StringBuffer sb = new StringBuffer();
@@ -143,11 +162,22 @@ public class VistaImpl implements Vista {
         return sb;
     }
 
+    /**
+     *
+     * @param msj
+     * @return
+     */
     @Override
     public StringBuffer exploraObjetos(Object... msj) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *
+     * @param matriz
+     * @param nivel
+     * @return
+     */
     @Override
     public StringBuffer exploraVector(Object[] matriz, int nivel) {
         StringBuffer sb = new StringBuffer();
@@ -199,6 +229,13 @@ public class VistaImpl implements Vista {
         return sb;
     }
 
+    /**
+     *
+     * @param o
+     * @param sb
+     * @param nivel
+     * @return
+     */
     private StringBuffer procesaObjeto(Object o, StringBuffer sb, int nivel) {
         if (nivel >= 0) {
             for (int tab = 0; tab <= nivel; tab++) {
