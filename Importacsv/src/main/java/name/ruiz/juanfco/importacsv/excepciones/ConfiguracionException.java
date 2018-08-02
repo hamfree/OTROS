@@ -1,5 +1,7 @@
 package name.ruiz.juanfco.importacsv.excepciones;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author hamfree
@@ -7,6 +9,7 @@ package name.ruiz.juanfco.importacsv.excepciones;
 public class ConfiguracionException extends Exception {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger LOG = Logger.getLogger(ConfiguracionException.class.getName());
 
     public ConfiguracionException() {
     }

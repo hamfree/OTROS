@@ -26,7 +26,14 @@ public class CCAAFicheroServicioImpl implements CCAAFicheroServicio {
 
     private static final Logger LOG = Logger.getLogger(CCAAFicheroServicioImpl.class.getName());
 
-
+    /**
+     *
+     * @param fcsv
+     * @param codificacion
+     * @param delimitador
+     * @param entrecomillado
+     * @return
+     */
     @Override
     public List<CCAA> importa(File fcsv, String codificacion, String delimitador, boolean entrecomillado) {
         StringBuilder sb = new StringBuilder();

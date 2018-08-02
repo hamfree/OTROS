@@ -20,18 +20,25 @@ import name.ruiz.juanfco.importacsv.modelo.CCAA;
  */
 public class CCAAServicioImpl implements CCAAServicio {
 
+    private static final Logger LOG = Logger.getLogger(CCAAServicioImpl.class.getName());
+    private final String SL = System.getProperty("line.separator");
     private DaoCCAAImpl dao;
     private Properties jdbc;
     private String jndi;
     private JdbcUtil jdbcutl;
-    private static final Logger LOG = Logger.getLogger(CCAAServicioImpl.class.getName());
-    private final String SL = System.getProperty("line.separator");
 
-
+    /**
+     *
+     */
     public CCAAServicioImpl() {
         dao = DaoCCAAImpl.getDao();
     }
 
+    /**
+     *
+     * @param jdbc
+     * @throws ConfiguracionException
+     */
     public CCAAServicioImpl(Properties jdbc) throws ConfiguracionException {
         ValidaParametros vp = new ValidaParametrosImpl();
 
@@ -51,6 +58,11 @@ public class CCAAServicioImpl implements CCAAServicio {
         }
     }
 
+    /**
+     *
+     * @param jndi
+     * @throws ConfiguracionException
+     */
     public CCAAServicioImpl(String jndi) throws ConfiguracionException {
         ValidaParametros vp = new ValidaParametrosImpl();
         if (vp.validaJNDI(jndi)) {
@@ -68,7 +80,11 @@ public class CCAAServicioImpl implements CCAAServicio {
         }
     }
 
-
+    /**
+     *
+     * @param idCCAA
+     * @return
+     */
     @Override
     public CCAA busca(String idCCAA) {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +104,11 @@ public class CCAAServicioImpl implements CCAAServicio {
         return ccaa;
     }
 
+    /**
+     *
+     * @param ccaa
+     * @return
+     */
     @Override
     public boolean inserta(CCAA ccaa) {
         StringBuilder sb = new StringBuilder();
@@ -105,6 +126,11 @@ public class CCAAServicioImpl implements CCAAServicio {
         return esInsertado;
     }
 
+    /**
+     *
+     * @param idCCAA
+     * @return
+     */
     @Override
     public boolean elimina(String idCCAA) {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +148,11 @@ public class CCAAServicioImpl implements CCAAServicio {
         return esEliminado;
     }
 
+    /**
+     *
+     * @param ccaa
+     * @return
+     */
     @Override
     public boolean modifica(CCAA ccaa) {
         StringBuilder sb = new StringBuilder();
@@ -170,6 +201,5 @@ public class CCAAServicioImpl implements CCAAServicio {
     public final void setJdbcutl(JdbcUtil jdbcutl) {
         this.jdbcutl = jdbcutl;
     }
-
 
 }

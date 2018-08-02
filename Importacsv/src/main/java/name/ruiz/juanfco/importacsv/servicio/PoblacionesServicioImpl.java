@@ -84,7 +84,7 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
      */
     @Override
     public Poblacion busca(String idPoblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La búsqueda de una población no está soportada aún.");
     }
 
     /**
@@ -116,7 +116,7 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
      */
     @Override
     public boolean elimina(String idPoblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La eliminación de una población no está soportada aún.");
     }
 
     /**
@@ -126,7 +126,7 @@ public class PoblacionesServicioImpl implements PoblacionesServicio {
      */
     @Override
     public boolean modifica(Poblacion poblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La modificación de una población no está soportada aún.");
     }
 
     public final String getJndi() {

@@ -1,6 +1,7 @@
 package name.ruiz.juanfco.importacsv.herramientas;
 
 import java.lang.reflect.Array;
+import java.util.logging.Logger;
 
 /**
  * Metodo de conveniencia para producir un texto simple representacion de una
@@ -20,8 +21,15 @@ import java.lang.reflect.Array;
  */
 public final class MatrizACadena {
 
+    // Privado
+    private static final String CAR_INICIAL = "[";
+    private static final String CAR_FINAL = "]";
+    private static final String SEPARADOR = ", ";
+    private static final String NULO = "null";
+    private static final Logger LOG = Logger.getLogger(MatrizACadena.class.getName());
+
     /**
-     * <code>unObjeto</code> es una psoible matriz posiblemente-nula cuyos
+     * <code>unObjeto</code> es una posible matriz posiblemente-nula cuyos
      * elementos son primitivos u objetos; matrices de matrices son también
      * válidas, en cuyo caso <code>aArray</code> se representa de forma anidada
      * y recursiva.
@@ -54,11 +62,6 @@ public final class MatrizACadena {
         return resultado.toString();
     }
 
-    // Privado
-    private static final String CAR_INICIAL = "[";
-    private static final String CAR_FINAL = "]";
-    private static final String SEPARADOR = ", ";
-    private static final String NULO = "null";
 
     /**
      * Comprueba que el objeto que se le pasa es del tipo array. Si no lo es

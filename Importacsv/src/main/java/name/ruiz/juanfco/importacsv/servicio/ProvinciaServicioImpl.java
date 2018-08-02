@@ -20,7 +20,7 @@ import name.ruiz.juanfco.importacsv.modelo.Provincia;
  */
 public class ProvinciaServicioImpl implements ProvinciaServicio {
 
-    private static final Logger LOG = Logger.getLogger(CCAAServicioImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProvinciaServicioImpl.class.getName());
     private final String SL = System.getProperty("line.separator");
     private DaoProvinciaImpl dao;
     private JdbcUtil jdbcutl;
@@ -68,11 +68,21 @@ public class ProvinciaServicioImpl implements ProvinciaServicio {
         }
     }
 
+    /**
+     *
+     * @param idProvincia
+     * @return
+     */
     @Override
     public Provincia busca(String idProvincia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La consulta  de provincias no está soportada aún.");
     }
 
+    /**
+     *
+     * @param provincia
+     * @return
+     */
     @Override
     public boolean inserta(Provincia provincia) {
         StringBuilder sb = new StringBuilder();
@@ -90,14 +100,24 @@ public class ProvinciaServicioImpl implements ProvinciaServicio {
         return esInsertada;
     }
 
+    /**
+     *
+     * @param idProvincia
+     * @return
+     */
     @Override
     public boolean elimina(String idProvincia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La eliminación  de provincias no está soportada aún.");
     }
 
+    /**
+     *
+     * @param provincia
+     * @return
+     */
     @Override
     public boolean modifica(Provincia provincia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" ERROR: La modificación  de provincias no está soportada aún.");
     }
 
     public DaoProvinciaImpl getDao() {

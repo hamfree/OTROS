@@ -13,10 +13,11 @@ import name.ruiz.juanfco.importacsv.modelo.CCAA;
  */
 public class DaoCCAAImpl implements DaoCCAA {
 
+    private static final Logger LOG = Logger.getLogger(DaoCCAAImpl.class.getName());
     private final static String TABLA = "ccaa";
     private final static String ID = "idccaa";
     private final static String IDNOM = "nombre";
-    private static final Logger LOG = Logger.getLogger(DaoCCAAImpl.class.getName());
+
 
     // Singleton
     static DaoCCAAImpl dao = new DaoCCAAImpl();

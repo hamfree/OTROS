@@ -27,6 +27,8 @@ import name.ruiz.juanfco.importacsv.servicio.CCAAFicheroServicio;
  */
 public class CCAAControladorImpl implements CCAAControlador {
 
+    private static final Logger LOG = Logger.getLogger(CCAAControladorImpl.class.getName());
+
     @Override
     public List<CCAA> importarCCAADelCSV(Properties prop) {
         Path path = Paths.get(prop.getProperty("fichero"));
@@ -46,7 +48,7 @@ public class CCAAControladorImpl implements CCAAControlador {
 
     @Override
     public void consultarCCAA(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La consulta  de comunidades autónomas no está soportada aún.");
     }
 
     @Override
@@ -97,12 +99,12 @@ public class CCAAControladorImpl implements CCAAControlador {
 
     @Override
     public boolean modificarCCAA(List<CCAA> comunidadesAutonomas, Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La modificación  de comunidades autónomas no está soportada aún.");
     }
 
     @Override
     public boolean borrarCCAA(Properties prop, String jdni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(" ERROR: La eliminación de comunidades autónomas no está soportada aún.");
     }
 
 }
