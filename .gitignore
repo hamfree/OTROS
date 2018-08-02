@@ -30,3 +30,16 @@ dist/
 nbdist/
 .nb-gradle/
 nbactions.xml
+/Importacsv/target/
+/Importacsv/nbproject/
+/Importacion Municipios/nbproject/private/
+Importacsv/.classpath
+Importacsv/.project
+Importacsv/ccaa.log.0
+Importacsv/municipio.log.**
+Importacsv/pruebas.log.0
+Importacsv/pruebas.log.0.1
+Importacsv/pruebas.log.0.2
+Importacsv/pruebas.log.0.3
+Importacsv/.settings/org.eclipse.core.resources.prefs
+Importacsv/.settings/

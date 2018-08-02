@@ -31,9 +31,9 @@ public final class Constantes {
      * </pre>
      */
     //caracteres
-    public static final String NUEVA_LINEA = System.getProperty("line.separator");
-    public static final String SEPARADOR_FICHEROS = System.getProperty("file.separator");
-    public static final String SEPARADOR_RUTA = System.getProperty("path.separator");
+    public static final String SL = System.getProperty("line.separator");
+    public static final String SF = System.getProperty("file.separator");
+    public static final String SR = System.getProperty("path.separator");
 
     public static final String CADENA_VACIA = "";
     public static final String ESPACIO = " ";
@@ -45,4 +45,13 @@ public final class Constantes {
     public static final int NEGATIVO = -1;
     public static final String SIGNO_MAS = "+";
     public static final String SIGNO_MENOS = "-";
+
+    //valores clave del fichero de propiedades
+    public static final String DRIVER = "driver";
+    public static final String URL = "url";
+    public static final String USUARIO = "usuario";
+    public static final String CLAVE = "clave";
+    public static final String TIPO = "tipo";
+    public static final String OPERACION = "operacion";
+    public static final String FICHERO = "fichero";
 }

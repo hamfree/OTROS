@@ -19,6 +19,7 @@ import name.ruiz.juanfco.importacsv.controlador.PoblacionControladorImpl;
 import name.ruiz.juanfco.importacsv.controlador.ProvinciaControlador;
 import name.ruiz.juanfco.importacsv.controlador.ProvinciaControladorImpl;
 import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
+import name.ruiz.juanfco.importacsv.herramientas.Constantes;
 import name.ruiz.juanfco.importacsv.modelo.CCAA;
 import name.ruiz.juanfco.importacsv.modelo.Operacion;
 import name.ruiz.juanfco.importacsv.modelo.Poblacion;
@@ -71,7 +72,7 @@ public class Aplicacion {
         p = obtenConfiguracion(rutaProperties);
         if (p != null) {
             muestraConfiguracion(p);
-            String operacion = p.getProperty("operacion");
+            String operacion = p.getProperty(Constantes.OPERACION);
 
             for (Operacion op : Operacion.values()) {
                 if (operacion.equalsIgnoreCase(op.toString())) {
@@ -92,7 +93,7 @@ public class Aplicacion {
                 throw new ConfiguracionException(sb.toString());
             }
 
-            String tipo = p.getProperty("tipo");
+            String tipo = p.getProperty(Constantes.TIPO);
             if (tipo.equalsIgnoreCase(TipoLugar.CCAA.toString())) {
                 CCAAControlador ccaaCtl = new CCAAControladorImpl();
                 comunidadesAutonomas = ccaaCtl.importarCCAADelCSV(p);
@@ -100,7 +101,7 @@ public class Aplicacion {
                     sb.append("Se han importado ")
                             .append(comunidadesAutonomas.size())
                             .append(" comunidades autonomas del fichero '")
-                            .append(p.getProperty("fichero"));
+                            .append(p.getProperty(Constantes.FICHERO));
                     System.out.println(sb.toString());
                     ccaaCtl.mostrarCCAA(comunidadesAutonomas);
 
@@ -128,7 +129,7 @@ public class Aplicacion {
                     sb.append("Se han importado ")
                             .append(poblaciones.size())
                             .append(" poblaciones del fichero '")
-                            .append(p.getProperty("fichero"));
+                            .append(p.getProperty(Constantes.FICHERO));
                     System.out.println(sb.toString());
                     poblacionCtrl.mostrarPoblaciones(poblaciones);
                     if (!poblacionCtrl.insertarPoblaciones(poblaciones, p, tipo)) {
@@ -149,7 +150,7 @@ public class Aplicacion {
                     sb.append("Se han importado ")
                             .append(provincias.size())
                             .append(" provincias del fichero '")
-                            .append(p.getProperty("fichero"));
+                            .append(p.getProperty(Constantes.FICHERO));
                     System.out.println(sb.toString());
                     provinciaCtrl.mostrarProvincia(provincias);
                     if (!provinciaCtrl.insertarProvincia(provincias, p, null)) {
@@ -164,7 +165,7 @@ public class Aplicacion {
                 }
             } else {
                 sb.append("Tipo no reconocido: '")
-                        .append(p.getProperty("tipo"))
+                        .append(p.getProperty(Constantes.TIPO))
                         .append("'. Tipos permitidos : ");
                 for (TipoLugar tp : TipoLugar.values()) {
                     sb.append(tp)
