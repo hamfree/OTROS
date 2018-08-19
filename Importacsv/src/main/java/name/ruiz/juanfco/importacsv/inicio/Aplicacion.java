@@ -113,84 +113,12 @@ public class Aplicacion {
                 throw new ConfiguracionException(sb.toString());
             }
 
-<<<<<<< HEAD
-            String tipo = p.getProperty(Constantes.TIPO);
-            if (tipo.equalsIgnoreCase(TipoLugar.CCAA.toString())) {
-                CCAAControlador ccaaCtl = new CCAAControladorImpl();
-                comunidadesAutonomas = ccaaCtl.importarCCAADelCSV(p);
-                if (comunidadesAutonomas != null && comunidadesAutonomas.size() > 0) {
-                    sb.append("Se han importado ")
-                            .append(comunidadesAutonomas.size())
-                            .append(" comunidades autonomas del fichero '")
-                            .append(p.getProperty(Constantes.FICHERO));
-                    System.out.println(sb.toString());
-                    ccaaCtl.mostrarCCAA(comunidadesAutonomas);
-
-                    if (operacion.equalsIgnoreCase(Operacion.INSERTAR.toString())) {
-                        if (!ccaaCtl.insertarCCAA(comunidadesAutonomas, p, null)) {
-                            errores++;
-                            System.out.println("Importacion en la BD: Con errores.");
-                        } else {
-                            System.out.println("Importacion en la BD: OK");
-                        }
-                    } else if (operacion.equalsIgnoreCase(Operacion.CONSULTAR.toString())) {
-                        ccaaCtl.consultarCCAA(p, null);
-                    } else if (operacion.equalsIgnoreCase(Operacion.BORRAR.toString())) {
-                        ccaaCtl.borrarCCAA(p, null);
-                    }
-
-                } else {
-                    System.out.println("*NO* se importaron comunidades autonomas del fichero: ERROR");
-                    errores++;
-                }
-            } else if (tipo.equalsIgnoreCase(TipoLugar.POBLACION.toString())) {
-                PoblacionControlador poblacionCtrl = new PoblacionControladorImpl();
-                poblaciones = poblacionCtrl.importarPoblacionesDelCSV(p);
-                if (poblaciones != null && poblaciones.size() > 0) {
-                    sb.append("Se han importado ")
-                            .append(poblaciones.size())
-                            .append(" poblaciones del fichero '")
-                            .append(p.getProperty(Constantes.FICHERO));
-                    System.out.println(sb.toString());
-                    poblacionCtrl.mostrarPoblaciones(poblaciones);
-                    if (!poblacionCtrl.insertarPoblaciones(poblaciones, p, tipo)) {
-                        errores++;
-                        System.out.println("Importacion en la BD: Con errores.");
-                    } else {
-                        System.out.println("Importacion en la BD: OK");
-                    }
-                } else {
-                    System.out.println("*NO* se importaron poblaciones del fichero: ERROR");
-                    errores++;
-                }
-            } else if (tipo.equalsIgnoreCase(TipoLugar.PROVINCIA.toString())) {
-                ProvinciaControlador provinciaCtrl = new ProvinciaControladorImpl();
-
-                provincias = provinciaCtrl.importarProvinciaDelCSV(p);
-                if (provincias != null && provincias.size() > 0) {
-                    sb.append("Se han importado ")
-                            .append(provincias.size())
-                            .append(" provincias del fichero '")
-                            .append(p.getProperty(Constantes.FICHERO));
-                    System.out.println(sb.toString());
-                    provinciaCtrl.mostrarProvincia(provincias);
-                    if (!provinciaCtrl.insertarProvincia(provincias, p, null)) {
-                        errores++;
-                        System.out.println("Importacion en la BD: Con errores.");
-                    } else {
-                        System.out.println("Importacion en la BD: OK");
-                    }
-                } else {
-                    System.out.println("*NO* se importaron provincias del fichero: ERROR");
-                    errores++;
-=======
             String tipo = p.getProperty("tipo");
 
             for (TipoLugar tp : TipoLugar.values()) {
                 if (tipo.equalsIgnoreCase(tp.toString())) {
                     esTipoValido = true;
                     break;
->>>>>>> a1bce98c38ed5dcb7f79cf926ff2de767b4b7ee2
                 }
             }
 
