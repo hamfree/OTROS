@@ -31,3 +31,4 @@ nbdist/
 .nb-gradle/
 nbactions.xml
 /Importacsv/target/
+/aCharsetDetector 2/target/
