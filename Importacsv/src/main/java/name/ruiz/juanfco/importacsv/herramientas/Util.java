@@ -138,7 +138,7 @@ public class Util {
      * @param dato Cadena con el parametro a comprobar
      * @return true si el parametro es un Integer, false en caso contrario
      */
-    public boolean isInteger(String dato) {
+    public boolean stringDataIsInteger(String dato) {
         if (!isNullOrEmpty(dato)) {
             try {
                 int tmp = Integer.parseInt(dato);
@@ -156,7 +156,7 @@ public class Util {
      * @param dato Cadena con el parametro a comprobar
      * @return true si el parametro es un Double, false en caso contrario
      */
-    public boolean isDouble(String dato) {
+    public boolean stringDataisDouble(String dato) {
         if (!isNullOrEmpty(dato)) {
             try {
                 double tmp = Double.parseDouble(dato);
@@ -166,6 +166,70 @@ public class Util {
         }
         return false;
     }
+
+    public boolean isPrimitiveType(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isPrimitive();
+        }
+        return false;
+    }
+
+    public boolean isArray(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isArray();
+        }
+        return false;
+    }
+
+    public boolean isEnum(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isEnum();
+        }
+        return false;
+    }
+
+    public boolean isByte(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Byte.class);
+        }
+        return false;
+    }
+
+    public boolean isChar(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Character.class);
+        }
+        return false;
+    }
+
+    public boolean isShort(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Short.class);
+        }
+        return false;
+    }
+
+    public boolean isInteger(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Integer.class);
+        }
+        return false;
+    }
+
+    public boolean isLong(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Long.class);
+        }
+        return false;
+    }
+
+    public boolean isDouble(Object obj) {
+        if (!isNullOrEmpty(obj)) {
+            return obj.getClass().isAssignableFrom(Double.class);
+        }
+        return false;
+    }
+
 
     /**
      * Obtiene una lista con todos los conjuntos de caracteres que puede manejar

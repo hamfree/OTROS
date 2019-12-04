@@ -19,6 +19,7 @@ import name.ruiz.juanfco.importacsv.controlador.PoblacionControladorImpl;
 import name.ruiz.juanfco.importacsv.controlador.ProvinciaControlador;
 import name.ruiz.juanfco.importacsv.controlador.ProvinciaControladorImpl;
 import name.ruiz.juanfco.importacsv.excepciones.ConfiguracionException;
+import name.ruiz.juanfco.importacsv.herramientas.Constantes;
 import name.ruiz.juanfco.importacsv.modelo.CCAA;
 import name.ruiz.juanfco.importacsv.modelo.Operacion;
 import name.ruiz.juanfco.importacsv.modelo.Poblacion;
@@ -91,7 +92,7 @@ public class Aplicacion {
         p = obtenConfiguracion(rutaProperties);
         if (p != null) {
             muestraConfiguracion(p);
-            String operacion = p.getProperty("operacion");
+            String operacion = p.getProperty(Constantes.OPERACION);
 
             for (Operacion op : Operacion.values()) {
                 if (operacion.equalsIgnoreCase(op.toString())) {
@@ -123,7 +124,7 @@ public class Aplicacion {
 
             if (!esTipoValido) {
                 sb.append("Tipo no reconocido: '")
-                        .append(p.getProperty("tipo"))
+                        .append(p.getProperty(Constantes.TIPO))
                         .append("'. Tipos permitidos : ");
                 for (TipoLugar tp : TipoLugar.values()) {
                     sb.append(tp)
