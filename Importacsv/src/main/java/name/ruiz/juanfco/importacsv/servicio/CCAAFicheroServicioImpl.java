@@ -58,13 +58,17 @@ public class CCAAFicheroServicioImpl implements CCAAFicheroServicio {
         }
 
         try {
+        	sb = new StringBuilder();
             existeFichero = fcsv.exists();
             if (existeFichero) {
+            	sb.append("El fichero ''{0}'' existe");
                 sePuedeLeer = fcsv.canRead();
-                LOG.log(Level.INFO, "El fichero ''{0}'' existe y se puede leer.", fcsv.getName());
+                if (sePuedeLeer) {
+                	sb.append(" y se puede leer.");
+                }
+                LOG.log(Level.INFO, sb.toString(), fcsv.getName());
                 Util.impsl(false, sb.toString());
             } else {
-                sb = new StringBuilder();
                 sb.append("El fichero ").append(fcsv.getName())
                         .append("' no se encuentra en '")
                         .append(fcsv.getPath()).append("'.");
@@ -115,13 +119,16 @@ public class CCAAFicheroServicioImpl implements CCAAFicheroServicio {
             }
         }
 
+        Scanner scanner = null;
+        Scanner scLinea = null;
+        
         try {
             alComAut = new ArrayList<>();
-            Scanner scanner = new Scanner(fcsv, codificacion);
+            scanner = new Scanner(fcsv, codificacion);
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
                 contador++;
-                Scanner scLinea = new Scanner(linea);
+                scLinea = new Scanner(linea);
                 scLinea.useDelimiter(delimitador);
                 if (scLinea.hasNext()) {
                     String idCCAA = scLinea.next();
@@ -148,7 +155,14 @@ public class CCAAFicheroServicioImpl implements CCAAFicheroServicio {
                     .append(ex.getLocalizedMessage());
             Util.impsl(false, sb.toString());
             return alComAut;
-        }
+        } finally {
+        	if (scanner != null) {
+        		scanner.close();
+        	}
+        	if (scLinea != null) {
+        		scLinea.close();
+        	}
+		}
         return alComAut;
     }
 }

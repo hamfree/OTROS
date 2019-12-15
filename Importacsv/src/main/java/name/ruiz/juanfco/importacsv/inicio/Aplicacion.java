@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,7 +155,7 @@ public class Aplicacion {
         final String SL = System.getProperty("line.separator");
         sb.append("Configuracion que se aplicara en la importacion").append(SL)
                 .append("-----------------------------------------------").append(SL);
-        for (Map.Entry ent : p.entrySet()) {
+        for (Entry<Object, Object> ent : p.entrySet()) {
             String clave = (String) ent.getKey();
             String valor = (String) ent.getValue();
             sb.append(clave).append(" = ").append(valor).append(SL);

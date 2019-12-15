@@ -24,6 +24,7 @@ public class Util {
     private static final Logger LOG = Logger.getLogger(Util.class.getName());
     public static final String SL = System.getProperty("line.separator");
     public static final String SF = System.getProperty("file.separator");
+	private static Scanner sc;
 
     // Metodos de utilidad
     /**
@@ -37,10 +38,10 @@ public class Util {
         } else if (obj instanceof String) {
             return obj.toString().length() == 0;
         } else if (obj.getClass().isArray()) {
-            List l = Arrays.asList(obj);
+            List<Object> l = Arrays.asList(obj);
             return l.isEmpty();
         } else if (obj.getClass().isAssignableFrom(Collection.class)) {
-            Collection col = (Collection) obj;
+            Collection<?> col = (Collection<?>) obj;
             return col.isEmpty();
         }
         return false;
@@ -122,7 +123,7 @@ public class Util {
         if (usaConsola) {
             Console con = System.console();
             if (con == null) {
-                Scanner sc = new Scanner(System.in);
+                sc = new Scanner(System.in);
                 dato = sc.nextLine();
             } else {
                 dato = con.readLine();
@@ -141,7 +142,7 @@ public class Util {
     public boolean stringDataIsInteger(String dato) {
         if (!isNullOrEmpty(dato)) {
             try {
-                int tmp = Integer.parseInt(dato);
+                Integer.parseInt(dato);
                 return true;
             } catch (NumberFormatException ex) {
                 return false;
@@ -159,7 +160,7 @@ public class Util {
     public boolean stringDataisDouble(String dato) {
         if (!isNullOrEmpty(dato)) {
             try {
-                double tmp = Double.parseDouble(dato);
+                Double.parseDouble(dato);
             } catch (NumberFormatException ex) {
                 return false;
             }
