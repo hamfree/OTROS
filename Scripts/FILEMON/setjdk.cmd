@@ -17,14 +17,14 @@
 @rem *    - Servidor NodeJS                                                             *
 @rem *    - Git                                                                         *
 @rem *    - npm (gestor de paquetes de NodeJs)                                          *
-@rem *    - Lenguaje de programación 'Python'                                           *
-@rem *    - Lenguaje de programación 'Perl'                                             *
+@rem *    - Lenguaje de programacion 'Python'                                           *
+@rem *    - Lenguaje de programacion 'Perl'                                             *
 @rem *    - Maven                                                                       *
 @rem *    - Gradle                                                                      *
 @rem *    - Servidor J2EE Glassfish                                                     *
 @rem *    - Servidor J2EE Payara                                                        *
 @rem *    - Contenedor de servlets/JSP Tomcat                                           *
-@rem *    - Lenguaje de programación Java (versiones 1.8, 11 y 13)                      *
+@rem *    - Lenguaje de programacion Java (versiones 1.8, 11 y 13)                      *
 @rem ************************************************************************************
 
 @echo off
@@ -56,6 +56,9 @@ set PATHSYS=%PATHSYS%;C:\Program Files\MySQL\MySQL Server 8.0\bin
 @rem Variables para herramientas del entorno de desarrollo
 set PATHDES=C:\des\bin
 
+@rem Variable necesaria para la ejecución de Tomcat
+set CATALINA_HOME=C:\des\bin\tomcat
+
 @rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
 set OPENSSL=%PATHDES%\openssl\bin
 set NODE=%PATHDES%\nodejs
@@ -80,7 +83,7 @@ cls
 echo.
 echo SETJDK.CMD - Permite al usuario seleccionar un JDK para usar de los instalados en el sistema
 echo.
-echo   Seleccione una version de Java indicando su número en el menú
+echo   Seleccione una version de Java indicando su numero en el menu
 echo.
 echo.
 echo      1. JDK 1.8
@@ -89,7 +92,7 @@ echo      3. JDK 13
 echo      0. SALIR
 echo.
 echo.
-@rem Recogida del valor del usuario y envío a las distintas opciones
+@rem Recogida del valor del usuario y envio a las distintas opciones
 set /p var=
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
@@ -101,7 +104,7 @@ goto :Menu
 :Error
 cls 
 echo ERROR: La opcion elegida no es valida. Debe indicar un valor entre 0 y 3
-echo Presiona una tecla para volver al menú
+echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
@@ -113,8 +116,8 @@ echo Estableciendo JAVA_HOME
 set JAVA_HOME=C:\des\bin\jdk8
 echo Estableciendo PATH 
 set PATHDES=%JAVA_HOME%\bin;%PATHDES%
-echo Versión de java que se activará: %jdkactivado%
-echo Presiona una tecla para volver al menú
+echo Version de java que se activara: %jdkactivado%
+echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
@@ -126,8 +129,8 @@ echo Estableciendo JAVA_HOME
 set JAVA_HOME=C:\des\bin\jdk11
 echo Estableciendo PATH 
 set PATHDES=%JAVA_HOME%\bin;%PATHDES%
-echo Versión de java que se activará: %jdkactivado%
-echo Presiona una tecla para volver al menú
+echo Version de java que se activara: %jdkactivado%
+echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
@@ -139,8 +142,8 @@ echo Estableciendo JAVA_HOME
 set JAVA_HOME=C:\des\bin\jdk13
 echo Estableciendo PATH 
 set PATHDES=%JAVA_HOME%\bin;%PATHDES%
-echo Versión de java que se activará: %jdkactivado%
-echo Presiona una tecla para volver al menú
+echo Version de java que se activara: %jdkactivado%
+echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
@@ -157,4 +160,22 @@ echo %PATH%
 echo.
 
 :EquipoNoValido
+@rem Eliminamos variables de entorno usadas internamente en el script
+set WINDOWSAPPS=
+set POWERSHELL=
+set PATHSYS=
+set PATHDES=
+set OPENSSL=
+set NODE=
+set GIT=
+set NPM=
+set PYTHON=
+set PERL=
+set MVN_HOME=
+set GRADLE_HOME=
+set GLASSFISH=
+set TOMCAT=
+set PAYARA=
+set jdkactivado=
+set var=
 echo.
