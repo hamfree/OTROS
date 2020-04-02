@@ -105,3 +105,8 @@ local.properties
 .worksheet
 
 **/nbproject/private/
+
+
+# 2020/04/02
+pathDespues.txt
+pathOriginal.txt
