@@ -78,16 +78,6 @@ set ORACLE_HOME=D:\Oracle\Soft
 set OPENSSL_HOME=%PATHDES%\openssl
 
 
-@rem Componemos el path de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%ANT_HOME%\bin
-set PATHDES=%PATHDES%;%MVN_HOME%\bin
-set PATHDES=%PATHDES%;%GRADLE_HOME%\bin
-set PATHDES=%PATHDES%;%GRAILS_HOME%\bin
-set PATHDES=%PATHDES%;%GIT_HOME%\bin
-set PATHDES=%PATHDES%;%NODE_HOME%\bin
-set PATHDES=%PATHDES%;%NPM%
-set PATHDES=%PATHDES%;%ORACLE_HOME%\bin
-set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
 
 
 @rem Eliminamos el contenido actual de JAVA_HOME
@@ -170,6 +160,18 @@ goto :Menu
 
 @rem A la salida reiniciamos el PATH del sistema....
 :salida
+
+@rem Componemos el path de las herramientas de desarrollo.
+set PATHDES=%PATHDES%;%ANT_HOME%\bin
+set PATHDES=%PATHDES%;%MVN_HOME%\bin
+set PATHDES=%PATHDES%;%GRADLE_HOME%\bin
+set PATHDES=%PATHDES%;%GRAILS_HOME%\bin
+set PATHDES=%PATHDES%;%GIT_HOME%\bin
+set PATHDES=%PATHDES%;%NODE_HOME%\bin
+set PATHDES=%PATHDES%;%NPM%
+set PATHDES=%PATHDES%;%ORACLE_HOME%\bin
+set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
+
 
 set PATH=
 set PATH=%PATHSYS%;%PATHDES%
