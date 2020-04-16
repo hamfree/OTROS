@@ -17,13 +17,7 @@
 @rem *    son:                                                                          *
 @rem *    - Ant                                                                         *
 @rem *    - Maven                                                                       *
-@rem *    - Gradle                                                                      *
-@rem *    - Grails                                                                      *
-@rem *    - Groovy                                                                      *
 @rem *    - Git                                                                         *
-@rem *    - Servidor NodeJS                                                             *
-@rem *    - npm (gestor de paquetes de NodeJs)                                          *
-@rem *    - Servidor Oracle                                                             *
 @rem *    - Lenguaje de programación Java (versiones 1.8, 11 y 14)                      *
 @rem ************************************************************************************
 
@@ -49,7 +43,7 @@ set PATHSYS=%PATHSYS%;%SYSTEMROOT%\System32\OpenSSH
 set PATHSYS=%PATHSYS%;%WNDAPPS%
 set PATHSYS=%PATHSYS%;%WPS%
 set PATHSYS=%PATHSYS%;%ORACLE_HOME%\bin
-set PATHSYS=%PATHSYS%;F:\des\bin\mysql\bin
+set PATHSYS=%PATHSYS%;D:\des\bin\mysql\bin
 set PATHSYS=%PATHSYS%;C:\Program Files\Ffmpeg
 set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
 set PATHSYS=%PATHSYS%;C:\Program Files\PuTTY
@@ -59,22 +53,16 @@ set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
 
 
 @rem Variables para herramientas del entorno de desarrollo
-set PATHDES=C:\des\bin
+set PATHDES=D:\des\bin
 
 
 @rem Configurando variables de entorno para las herramientas de desarrollo
 set JAVA_HOME=%PATHDES%\jdk8
 set ANT_HOME=%PATHDES%\ant
 set MVN_HOME=%PATHDES%\mvn
-set GRADLE_HOME=%PATHDES%\gradle
-set GRAILS_HOME=%PATHDES%\grails
-set GROOVY_HOME=%PATHDES%\groovy
-set GIT_HOME=C:\Program Files\Git
+set GIT_HOME=%PATHDES%\Git
 set GIT_SSH=C:\Program Files\PuTTY\plink.exe
-set NODE_HOME=%PATHDES%\nodejs
-set NPM=%USERPROFILE%\AppData\Roaming\npm
 set SVN_SSH=C:\Program Files\PuTTY\plink.exe
-set ORACLE_HOME=D:\Oracle\Soft
 set OPENSSL_HOME=%PATHDES%\openssl
 
 
@@ -120,9 +108,9 @@ set jdkactivado=JDK 1.8
 echo Estableciendo JAVA_HOME 
 set JAVA_HOME=%PATHDES%\jdk8
 echo Estableciendo PATH 
-set PATHDES=%PATHDES%;%JAVA_HOME%\bin;
+set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 echo Version de java que se activara
-java -version
+%JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
@@ -135,7 +123,7 @@ set JAVA_HOME=%PATHDES%\jdk11
 echo Estableciendo PATH 
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin;
 echo Version de java que se activara
-java -version
+%JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
@@ -148,7 +136,7 @@ set JAVA_HOME=%PATHDES%\jdk14
 echo Estableciendo PATH 
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin;
 echo Version de java que se activara
-java -version
+%JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
@@ -164,12 +152,7 @@ goto :Menu
 @rem Componemos el path de las herramientas de desarrollo.
 set PATHDES=%PATHDES%;%ANT_HOME%\bin
 set PATHDES=%PATHDES%;%MVN_HOME%\bin
-set PATHDES=%PATHDES%;%GRADLE_HOME%\bin
-set PATHDES=%PATHDES%;%GRAILS_HOME%\bin
 set PATHDES=%PATHDES%;%GIT_HOME%\bin
-set PATHDES=%PATHDES%;%NODE_HOME%\bin
-set PATHDES=%PATHDES%;%NPM%
-set PATHDES=%PATHDES%;%ORACLE_HOME%\bin
 set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
 
 
