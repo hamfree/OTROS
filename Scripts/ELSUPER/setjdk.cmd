@@ -24,7 +24,7 @@
 @rem *    - Servidor NodeJS                                                             *
 @rem *    - npm (gestor de paquetes de NodeJs)                                          *
 @rem *    - Servidor Oracle                                                             *
-@rem *    - Lenguaje de programación Java (versiones 1.8, 11 y 13)                      *
+@rem *    - Lenguaje de programación Java (versiones 1.8, 11 y 14)                      *
 @rem ************************************************************************************
 
 @echo off
@@ -106,7 +106,7 @@ echo   Seleccione una version de Java indicando su numero en el menu
 echo.
 echo      1. JDK 1.8
 echo      2. JDK 11
-echo      3. JDK 13
+echo      3. JDK 14
 echo      0. SALIR
 echo.
 echo      Version seleccionada actual: %jdkactivado%
@@ -118,7 +118,7 @@ echo.
 set /p var=	
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
-if %var%==3 goto :jdk13
+if %var%==3 goto :jdk14
 if %var%==0 goto :salida
 if %var% GTR 3 echo Error
 goto :Menu
@@ -150,11 +150,11 @@ echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
 
-:jdk13
+:jdk14
 cls 
-set jdkactivado=JDK 13
+set jdkactivado=JDK 14
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%PATHDES%\jdk13
+set JAVA_HOME=%PATHDES%\jdk14
 echo Estableciendo PATH 
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin;
 echo Version de java que se activara
