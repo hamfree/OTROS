@@ -19,6 +19,8 @@
 @rem *    - Servidor J2EE Tomee                                                         *
 @rem *    - Contenedor de servlets/JSP Tomcat                                           *
 @rem *    - Lenguaje de programacion Java (versiones 1.8, 11)                           *
+@rem *    - Directorio con scripts                                                      *
+@rem *    - Directorio con utilidades                                                   *
 @rem *                                                                                  *
 @rem *    Historia:                                                                     *
 @rem *    - 2020/04/02 - Se agregan las rutas del software de Intel y Nvidia.           *
@@ -75,9 +77,11 @@ set GIT=%PATHDES%\git\bin
 set PYTHON=%PATHDES%\python;%PATHDES%\python\Scripts
 set TOMCAT=%PATHDES%\tomcat\bin
 set TOMEE=%PATHDES%\tomee\bin
+set SCRIPT=%PATHDES%\scripts
+set UTIL=%PATHDES%\utiles
 
 @rem Componemos el path de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%TOMCAT%;%TOMEE%;%PYTHON%;%GIT%
+set PATHDES=%PATHDES%;%TOMCAT%;%TOMEE%;%PYTHON%;%GIT%;%SCRIPT%;%UTIL%
 
 @rem Eliminamos el contenido actual de JAVA_HOME
 set JAVA_HOME=
