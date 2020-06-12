@@ -25,6 +25,9 @@
 @rem *    Historia:                                                                     *
 @rem *    - 2020/04/02 - Se agregan las rutas del software de Intel y Nvidia.           *
 @rem *      Se cambian las rutas de desarrollo.                                         *
+@rem *    - 2020/06/01 - Se agrega la ruta de la utilidad Maven.                        *
+@rem *      Se eliminan algunas rutas de aplicaciones no instaladas.                    *
+@rem *    - 2020/06/11 - Se agrega la opcion de activar la version 14 del JDK.          *
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -48,11 +51,6 @@ set PATHSYS=%PATHSYS%;%WINDOWSAPPS%
 set PATHSYS=%PATHSYS%;%POWERSHELL%
 
 @rem El resto de rutas de otras aplicaciones incluidas en el path del sistema
-set PATHSYS=%PATHSYS%;C:\Program Files\PuTTY
-set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
-set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
-set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
-set PATHSYS=%PATHSYS%;C:\Program Files\MySQL\MySQL Server 8.0\bin
 set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\DAL
 set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\IPT
 set PATHSYS=%PATHSYS%;C:\Program Files\Intel\iCLS Client\
@@ -63,7 +61,9 @@ set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engin
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engine Components\DAL
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\iCLS Client\
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\NVIDIA Corporation\PhysX\Common
-
+set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
+set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
+set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
 
 @rem Variables para herramientas del entorno de desarrollo
 set PATHDES=C:\des\bin
@@ -72,8 +72,9 @@ set PATHDES=C:\des\bin
 set CATALINA_HOME=C:\des\bin\tomcat
 
 @rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
-set OPENSSL=%PATHDES%\openssl\bin
 set GIT=%PATHDES%\git\bin
+set MVN=%PATHDES%\mvn\bin
+set OPENSSL=%PATHDES%\openssl\bin
 set PYTHON=%PATHDES%\python;%PATHDES%\python\Scripts
 set TOMCAT=%PATHDES%\tomcat\bin
 set TOMEE=%PATHDES%\tomee\bin
@@ -81,7 +82,7 @@ set SCRIPT=%PATHDES%\scripts
 set UTIL=%PATHDES%\utiles
 
 @rem Componemos el path de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%TOMCAT%;%TOMEE%;%PYTHON%;%GIT%;%SCRIPT%;%UTIL%
+set PATHDES=%PATHDES%;%GIT%;%MVN%;%OPENSSL%;%PYTHON%;%TOMCAT%;%TOMEE%;%SCRIPT%;%UTIL%
 
 @rem Eliminamos el contenido actual de JAVA_HOME
 set JAVA_HOME=
@@ -96,6 +97,7 @@ echo.
 echo.
 echo      1. JDK 1.8
 echo      2. JDK 11
+echo      3. JDK 14
 echo      0. SALIR
 echo.
 echo.
@@ -103,8 +105,9 @@ echo.
 set /p var=
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
+if %var%==3 goto :jdk14
 if %var%==0 goto :salida
-if %var% GTR 2 goto :Error
+if %var% GTR 3 goto :Error
 goto :Menu
 
 :Error
@@ -140,6 +143,20 @@ echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
+@rem Entorno de desarrollo JDK 14
+:jdk14
+cls 
+set jdkactivado=JDK 14
+echo Estableciendo JAVA_HOME 
+set JAVA_HOME=C:\des\bin\jdk14
+echo Estableciendo PATH 
+set PATHDES=%JAVA_HOME%\bin;%PATHDES%
+echo Version de java que se activara: %jdkactivado%
+echo Presiona una tecla para volver al menu
+pause > Nul
+goto :Menu
+
+
 @rem A la salida reiniciamos el PATH del sistema....
 :salida
 
@@ -160,6 +177,7 @@ set PATHSYS=
 set PATHDES=
 set OPENSSL=
 set GIT=
+set MVN=
 set PYTHON=
 set TOMCAT=
 set TOMEE=
