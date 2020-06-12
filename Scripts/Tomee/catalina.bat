@@ -21,12 +21,12 @@ rem   utilidad de mantenimiento "tomcatXw.exe", donde "X" es la version
 rem   mayor de Tomcat que esta ejecutando.
 rem   
 rem   CATALINA_HOME   Puede apuntar al directorio "build" de Catalina.
-rem   
+rem
 rem   CATALINA_BASE   (Opcional) El directorio Base para resolver porciones 
 rem                   dinamicas de la instalacion de Catalina. Si no esta 
 rem                   presente, resuelve al mismo directorio al que apunta 
 rem                   CATALINA_HOME.
-rem   
+rem
 rem   CATALINA_OPTS   (Opcional) Opciones del tiempo de ejecucion de Java 
 rem                   usadas cuando se ejecuta el comando "start", "run" o 
 rem                   "debug".
@@ -67,7 +67,6 @@ rem
 rem   JPDA_TRANSPORT  (Opcional) El transporte JPDA usado cuando se ejecute 
 rem                   el comando "jpda start". El valor por defecto es 
 rem                   "dt_socket".
-rem 
 rem   JPDA_ADDRESS    (Opcional) Las opciones de tiempo de ejecucion de Java
 rem                   usadas cuando se ejecute el comando "jpda start". El 
 rem                   valor por defecto es localhost:8000.
@@ -244,6 +243,11 @@ goto doneEndorsed
 if not exist "%CATALINA_HOME%\endorsed" goto doneEndorsed
 set ENDORSED_PROP=java.endorsed.dirs
 :doneEndorsed
+
+rem Agrega el agente java de OpenEJB
+if not exist "%CATALINA_HOME%\lib\openejb-javaagent.jar" goto noOpenEJBJavaagent
+set JAVA_OPTS="-javaagent:%CATALINA_HOME%\lib\openejb-javaagent.jar" %JAVA_OPTS%
+:noOpenEJBJavaagent
 
 rem ----- Ejecuta el Comando Requerido  ---------------------------------------
 

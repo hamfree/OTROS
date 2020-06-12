@@ -101,6 +101,10 @@ echo      3. JDK 14
 echo      0. SALIR
 echo.
 echo.
+echo      Equipo: %COMPUTERNAME%
+echo      Version seleccionada actual: %jdkactivado%
+echo      JAVA_HOME: %JAVA_HOME%
+echo.
 @rem Recogida del valor del usuario y envio a las distintas opciones
 set /p var=
 if %var%==1 goto :jdk8
@@ -164,6 +168,7 @@ set PATH=
 set PATH=%PATHSYS%;%PATHDES%
 
 cls
+echo Equipo: %computername%
 echo Version de Java activada: %jdkactivado%
 echo PATH actual: 
 echo %PATH%

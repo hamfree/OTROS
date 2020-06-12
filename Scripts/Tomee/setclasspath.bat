@@ -11,15 +11,15 @@ rem En el modo de depuracion necesitamos un KDJ real (JAVA_HOME)
 if ""%1"" == ""debug"" goto needJavaHome
 
 rem De lo contrario, JRE o JDK estan bien
-if not "%JRE_HOME%" == "" goto gotJreHome
-if not "%JAVA_HOME%" == "" goto gotJavaHome
+if DEFINED JRE_HOME goto gotJreHome
+if DEFINED JAVA_HOME goto gotJavaHome
 echo Ni la variable de entorno JAVA_HOME ni JRE_HOME estan definidas
 echo Se necesita al menos una de estas variables de entorno para ejecutar este programa
 goto exit
 
 :needJavaHome
 rem Comprueba si tenemos un JDK utilizable
-if "%JAVA_HOME%" == "" goto noJavaHome
+if NOT DEFINED JAVA_HOME goto noJavaHome
 if not exist "%JAVA_HOME%\bin\java.exe" goto noJavaHome
 if not exist "%JAVA_HOME%\bin\jdb.exe" goto noJavaHome
 if not exist "%JAVA_HOME%\bin\javac.exe" goto noJavaHome
@@ -58,7 +58,7 @@ set "JAVA_ENDORSED_DIRS=%CATALINA_HOME%\endorsed"
 :gotEndorseddir
 
 rem No anule _RUNJAVA si el usuario lo ha configurado previamente
-if not "%_RUNJAVA%" == "" goto gotRunJava
+if DEFINED _RUNJAVA goto gotRunJava
 rem Establece el comando estandar para invocar Java.
 rem Tambien tenga en cuenta las comillas ya que JRE_HOME puede contener espacios.
 set _RUNJAVA="%JRE_HOME%\bin\java.exe"
@@ -66,7 +66,7 @@ set _RUNJAVA="%JRE_HOME%\bin\java.exe"
 
 rem No anule _RUNJDB si el usuario lo ha configurado previamente
 rem Tambien tenga en cuenta las comillas ya que JAVA_HOME puede contener espacios.
-if not "%_RUNJDB%" == "" goto gotRunJdb
+if DEFINED _RUNJDB goto gotRunJdb
 set _RUNJDB="%JAVA_HOME%\bin\jdb.exe"
 :gotRunJdb
 

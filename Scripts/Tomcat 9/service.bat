@@ -25,7 +25,7 @@ cd ..
 set "CATALINA_HOME=%cd%"
 :gotHome
 if exist "%CATALINA_HOME%\bin\tomcat9.exe" goto okHome
-echo El fichero tomcat9.exe no fue encotrado...
+echo El fichero tomcat9.exe no fue encontrado...
 echo La variable de entorno CATALINA_HOME no está definida correctamente.
 echo Se necesita esta variable de entorno para ejecutar este programa
 goto end
@@ -102,10 +102,10 @@ goto end
 if /i %SERVICE_CMD% == install goto doInstall
 if /i %SERVICE_CMD% == remove goto doRemove
 if /i %SERVICE_CMD% == uninstall goto doRemove
-echo Unknown parameter "%SERVICE_CMD%"
+echo Parametro desconocido "%SERVICE_CMD%"
 :displayUsage
 echo.
-echo Usage: service.bat install/remove [service_name] [/user username]
+echo Uso: service.bat install/remove [nombre_servicio] [/user nombreusuario]
 goto end
 
 :doRemove

@@ -1,6 +1,6 @@
 @rem ************************************************************************************
 @rem *                                                                                  *
-@rem *    Script para elegir version del JDK, personalizado para el portatil ELSUPER    *
+@rem *    Script para elegir version del JDK, personalizado para el pc ELSUPER          *
 @rem *    Configura el PATH del sistema colocando por orden de importancia las rutas    *
 @rem *    a las aplicaciones del sistema operativo, agregando luego las rutas de las    *
 @rem *    siguientes aplicaciones:                                                      *
@@ -12,7 +12,7 @@
 @rem *    Despues de agregar todas las rutas del sistema y aplicaciones antes           *
 @rem *    indicadas, se construyen las rutas para las herramientas de desarrollo        *
 @rem *    y servidores de aplicaciones, que se encuentran todos instalados bajo         *
-@rem *    la ruta "C:\des\bin". Las aplicaciones cuyas rutas se agregan al path         *
+@rem *    la ruta "D:\des\bin". Las aplicaciones cuyas rutas se agregan al path         *
 @rem *    son:                                                                          *
 @rem *    - Ant                                                                         *
 @rem *    - Code                                                                        *
@@ -41,6 +41,9 @@ set PATHSYS=%SYSTEMROOT%\system32
 @rem Variable PATHDES para componer las rutas de las herramientas desarrollo
 set PATHDES=D:\des\bin
 
+@rem Variable necesaria para la ejecución de Tomcat
+set CATALINA_HOME=D:\des\bin\tomcat
+
 @rem Eliminamos el contenido actual de JAVA_HOME
 set JAVA_HOME=
 
@@ -60,6 +63,7 @@ echo      2. JDK 11
 echo      3. JDK 14
 echo      0. SALIR
 echo.
+echo      Equipo: %computername%
 echo      Version seleccionada actual: %jdkactivado%
 echo      JAVA_HOME: %java_home%
 echo.
@@ -151,8 +155,11 @@ set MYSQL_HOME=%PATHDES%\mysql
 set OPENSSL_HOME=%PATHDES%\openssl
 set PYTHON_HOME=%PATHDES%\python
 set SCRIPTS_HOME=%PATHDES%\scripts
-set UTILES_HOME=%PATHDES%\utiles
 set SVN_SSH=C:\Program Files\PuTTY\plink.exe
+set TOMCAT=%PATHDES%\tomcat\bin
+set TOMEE=%PATHDES%\tomee\bin
+set UTILES_HOME=%PATHDES%\utiles
+
 
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
 echo Agregando ruta de Ant al PATH...
@@ -171,8 +178,13 @@ echo Agregando ruta de OpenSSL al PATH...
 set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
 echo Agregando ruta de Python al PATH...
 set PATHDES=%PATHDES%;%PYTHON_HOME%
-echo Agregando rutas de scripts y utilidades al PATH...
+echo Agregando rutas de scripts al PATH...
 set PATHDES=%PATHDES%;%SCRIPTS_HOME%
+echo Agregando ruta del servidor TOMCAT al PATH...
+set PATHDES=%PATHDES%;%TOMCAT%
+echo Agregando ruta del servidor TOMEE al PATH...
+set PATHDES=%PATHDES%;%TOMEE%
+echo Agregando ruta de utilidades al PATH...
 set PATHDES=%PATHDES%;%UTILES_HOME%
 
 echo.
@@ -183,30 +195,30 @@ set PATH=
 set PATH=%PATHSYS%;%PATHDES%
 
 cls
+echo Equipo: %computername%
 echo Version de Java activada: %jdkactivado%
 echo JAVA_HOME: %JAVA_HOME%
 echo PATH actual: 
-echo %SYSTEMROOT%
-echo %SYSTEMROOT%\System32\Wbem
-echo %SYSTEMROOT%\System32\WindowsPowerShell\v1.0
-echo %SYSTEMROOT%\System32\OpenSSH
-echo %WNDAPPS%
-echo %WPS%
-echo C:\Program Files\Calibre2
-echo C:\Program Files ^(x86^)\GnuPG\bin
-echo C:\Program Files\PuTTY
-echo C:\Program Files ^(x86^)\ZeroTier\One
-echo D:\des\bin
-echo %ANT_HOME%\bin
-echo %CODE_HOME%
-echo %GIT_HOME%\bin
-echo %JAVA_HOME%\bin
-echo %MVN_HOME%\bin
-echo %MYSQL_HOME%\bin
-echo %OPENSSL_HOME%\bin
-echo %PYTHON_HOME%
-echo %SCRIPTS_HOME%
-echo %UTILES_HOME%
+echo %PATH%
 
 :EquipoNoValido
+echo.
+@rem Eliminamos variables de entorno usadas internamente en el script
+set WNDAPPS=
+set WPS=
+set PATHSYS=
+set PATHDES=
+set ANT_HOME=
+set CODE_HOME=
+set GIT_HOME=
+set MVN_HOME=
+set MYSQL_HOME=
+set OPENSSL_HOME=
+set PYTHON_HOME=
+set SCRIPTS_HOME=
+set TOMCAT=
+set TOMEE=
+set UTILES_HOME=
+set jdkactivado=
+set var=
 echo.
