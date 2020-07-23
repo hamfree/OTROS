@@ -137,7 +137,7 @@ public class PoblacionControladorImpl implements PoblacionControlador {
         Path path = Paths.get(prop.getProperty("fichero"));
         File ficheroCsv = path.toFile();
         PoblacionesFicheroServicio importador = new PoblacionesFicheroServicioImpl();
-        List<Poblacion> alPoblaciones = importador.importa(ficheroCsv, "Windows-1252", ";", false);
+        List<Poblacion> alPoblaciones = importador.importa(ficheroCsv, "Windows-1252", ";", true);
         return alPoblaciones;
     }
 

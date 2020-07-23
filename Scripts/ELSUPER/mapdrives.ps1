@@ -1,3 +1,4 @@
+Write-Host "Inicio : $((Get-Date).ToString())"
 $i=3
 while($True){
     $error.clear()
@@ -7,12 +8,11 @@ while($True){
         try {
             New-SmbMapping -LocalPath $MappedDrive.LocalPath -RemotePath $MappedDrive.RemotePath -Persistent $True
         } catch {
-            Write-Host "There was an error mapping $MappedDrive.RemotePath to $MappedDrive.LocalPath"
+            Write-Host "Hubo un error mapeando $MappedDrive.RemotePath a $MappedDrive.LocalPath"
         }
     }
     $i = $i - 1
     if($error.Count -eq 0 -Or $i -eq 0) {break}
 
     Start-Sleep -Seconds 30
-
 }

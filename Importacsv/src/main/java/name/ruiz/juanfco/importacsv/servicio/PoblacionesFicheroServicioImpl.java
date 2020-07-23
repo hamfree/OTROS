@@ -146,7 +146,7 @@ public class PoblacionesFicheroServicioImpl implements PoblacionesFicheroServici
             LOG.severe(ex.getLocalizedMessage());
             sb.append("Excepcion en la linea número ")
                     .append(contador)
-                    .append("del fichero CSV.")
+                    .append(" del fichero CSV.")
                     .append(ex.getLocalizedMessage());
             Util.imp(false, sb.toString());
             return alPoblaciones;

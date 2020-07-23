@@ -36,27 +36,35 @@ public class Aplicacion {
     private String rutaConfiguracion;
     private static final Logger LOG = Logger.getLogger(Aplicacion.class.getName());
 
-    public static void main(String[] args) throws ConfiguracionException {
+    public static void main(String[] args) {
         int codigoSalida;
         StringBuilder sb = new StringBuilder();
-        if (args != null && args.length > 0) {
-            Aplicacion app = new Aplicacion(args[0]);
-            codigoSalida = app.ejecutaProceso(app.getRutaConfiguracion());
-        } else {
-            codigoSalida = 1;
-            sb.append("Error: se requiere la ruta a un fichero de propiedades ")
-                    .append("con la ")
-                    .append("configuracion de conexion a la BBDD y el fichero CSV");
+        try {
+            if (args != null && args.length > 0) {
+
+                Aplicacion app = new Aplicacion(args[0]);
+                codigoSalida = app.ejecutaProceso(app.getRutaConfiguracion());
+
+            } else {
+                codigoSalida = 1;
+                sb.append("Error: se requiere la ruta a un fichero de propiedades ")
+                        .append("con la ")
+                        .append("configuracion de conexion a la BBDD y el fichero CSV");
+                System.out.println(sb.toString());
+            }
+            String error = codigoSalida > 1 ? " errores" : " error";
+            sb.setLength(0);
+            sb.append("La aplicación termina con ")
+                    .append(codigoSalida)
+                    .append(error)
+                    .append(".");
             System.out.println(sb.toString());
+            System.exit(codigoSalida);
+        } catch (ConfiguracionException ex) {
+            Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getLocalizedMessage());
+            System.exit(2);
         }
-        String error = codigoSalida > 1 ? " errores" : " error";
-        sb.setLength(0);
-        sb.append("La aplicación termina con ")
-                .append(codigoSalida)
-                .append(error)
-                .append(".");
-        System.out.println(sb.toString());
-        System.exit(codigoSalida);
     }
 
     public Aplicacion() {
@@ -92,6 +100,7 @@ public class Aplicacion {
 
         p = obtenConfiguracion(rutaProperties);
         if (p != null) {
+            // Hay que incluir un metodo que valide la configuracion -> validaConfiguracion()
             muestraConfiguracion(p);
             String operacion = p.getProperty(Constantes.OPERACION);
 
@@ -312,7 +321,7 @@ public class Aplicacion {
      * @param rutaProperties
      * @return
      */
-    private Properties obtenConfiguracion(String rutaProperties) {
+    private Properties obtenConfiguracion(String rutaProperties) throws ConfiguracionException {
         Properties p = null;
         if (rutaProperties != null && rutaProperties.length() > 0) {
             InputStream is = null;
@@ -324,13 +333,10 @@ public class Aplicacion {
                 p.load(is);
                 is.close();
 
-            } catch (FileNotFoundException ex) {
+            } catch ( IOException ex) {
                 Logger.getLogger(Aplicacion.class
                         .getName()).log(Level.SEVERE, null, ex);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Aplicacion.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                throw new ConfiguracionException(ex);
             } finally {
                 try {
                     if (is != null) {

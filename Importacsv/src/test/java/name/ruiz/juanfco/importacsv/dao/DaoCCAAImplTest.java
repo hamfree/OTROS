@@ -48,9 +48,9 @@ public class DaoCCAAImplTest {
         jdbc.setProperty("usuario", "dummy");
         jdbc.setProperty("clave", "dummy");
         // En el equipo "ELSUPER"
-        //jdbc.setProperty("fichero", "F:\\des\\src\\OTROS\\Importacsv\\target\\classes\\18codmun.csv");
+        jdbc.setProperty("fichero", "F:\\des\\src\\OTROS\\Importacsv\\target\\classes\\18codmun.csv");
         // En el equipo "FILEMON"
-        jdbc.setProperty("fichero", "D:\\des\\src\\OTROS\\Importacsv\\target\\classes\\18codmun.csv");
+        //jdbc.setProperty("fichero", "D:\\des\\src\\OTROS\\Importacsv\\target\\classes\\18codmun.csv");
         jndi = null;
         daoCCAA = DaoCCAAImpl.getInstance();
 
