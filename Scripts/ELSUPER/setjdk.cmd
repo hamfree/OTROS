@@ -17,7 +17,7 @@
 @rem *    - Ant                                                                         *
 @rem *    - Code                                                                        *
 @rem *    - Git                                                                         *
-@rem *    - JDK's (versiones 1.8, 11 y 14)                                              *
+@rem *    - JDK's (versiones 11 y 15)                                                   *
 @rem *    - Maven                                                                       *
 @rem *    - OpenSSL                                                                     *
 @rem *    - Python                                                                      *
@@ -58,9 +58,8 @@ echo ********************************************************************
 echo.
 echo   Seleccione una version de Java indicando su numero en el menu
 echo.
-echo      1. JDK 1.8
-echo      2. JDK 11
-echo      3. JDK 14
+echo      1. JDK 11
+echo      2. JDK 15
 echo      0. SALIR
 echo.
 echo      Equipo: %computername%
@@ -71,25 +70,13 @@ echo ********************************************************************
 echo.
 @rem Recogida del valor del usuario y envio a las distintas opciones
 set /p var=	
-if %var%==1 goto :jdk8
-if %var%==2 goto :jdk11
-if %var%==3 goto :jdk14
+if %var%==1 goto :jdk11
+if %var%==2 goto :jdk15
 if %var%==0 goto :salida
-if %var% GTR 3 echo Error
+if %var% GTR 2 echo Error
 goto :Menu
 
 @rem Aqui estan las distintas opciones del menu
-:jdk8
-cls 
-set jdkactivado=JDK 1.8
-echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%PATHDES%\jdk8
-echo Version de java que se activara
-%JAVA_HOME%\bin\java -version
-echo Presione una tecla para volver al menu
-pause>Nul
-goto :Menu
-
 :jdk11
 cls 
 set jdkactivado=JDK 11
@@ -101,11 +88,11 @@ echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
 
-:jdk14
+:jdk15
 cls 
-set jdkactivado=JDK 14
+set jdkactivado=JDK 15
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%PATHDES%\jdk14
+set JAVA_HOME=%PATHDES%\jdk15
 echo Version de java que se activara
 %JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
@@ -148,7 +135,7 @@ set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
 @rem Configurando variables de entorno para cada una de las herramientas de desarrollo
 set ANT_HOME=%PATHDES%\ant
 set CODE_HOME=%PATHDES%\code
-set GIT_HOME=%PATHDES%\Git
+set GIT_HOME=%PATHDES%\git
 set GIT_SSH=C:\Program Files\PuTTY\plink.exe
 set MVN_HOME=%PATHDES%\mvn
 set MYSQL_HOME=%PATHDES%\mysql
