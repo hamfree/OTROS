@@ -4,33 +4,90 @@ rem ----------------------------------------------------------------------------
 rem Script de Instalacion/Desinstalacion de Servicio NT
 rem
 rem Opciones
-rem install                Instala el servicio usando Tomcat9 como nombre de servicio.
-rem                        El servicio es instalado usando valores por defecto.
-rem remove                 Elimina el servicio del Sistema.
+rem install                 Instala el servicio usando valores por defecto.
+rem remove                  Elimina el servicio del sistema.
 rem
-rem name        (opcional) Si el segundo argumento está presente será considerado 
-rem                        el nombre del nuevo servicio
+rem service_name (opcional) El nombre a usar para el servicio. Si no es especificado, 
+rem                         se usa Tomcat9 como nombre del servicio.
+rem 
+rem --rename     (opcional) Renombra tomcat9.exe y tomcat9w.exe para que coincida
+rem                         con el nombre del servicio alternativo.
+rem 
+rem username     (opcional) El nombre del usuario del SO a utilizar para 
+rem                         instalar/eliminar el servicio (no el nombre del usuario del
+rem                         SO con el que el servicio se ejecutara). Si no se 
+rem                         especifica, se utiliza el usuario actual.
 rem ------------------------------------------------------------------------------------
 
 setlocal
 
 set "SELF=%~dp0%service.bat"
-rem Adivina CATALINA_HOME si no está definida
+
+set DEFAULT_SERVICE_NAME=Tomcat9
+set SERVICE_NAME=%DEFAULT_SERVICE_NAME%
+
+
 set "CURRENT_DIR=%cd%"
+
+rem Analiza los argumentos
+if "x%1x" == "xx" goto displayUsage
+set SERVICE_CMD=%1
+shift
+if "x%1x" == "xx" goto checkEnv
+:checkUser
+if "x%1x" == "x/userx" goto runAsUser
+if "x%1x" == "x--userx" goto runAsUser
+set SERVICE_NAME=%1
+shift
+if "x%1x" == "xx" goto checkEnv
+if "x%1x" == "x--renamex" (
+    set RENAME=%1
+    shift
+)
+if "x%1x" == "xx" goto checkEnv
+goto checkUser
+:runAsUser
+shift
+if "x%1x" == "xx" goto displayUsage
+set SERVICE_USER=%1
+shift
+runas /env /savecred /user:%SERVICE_USER% "%COMSPEC% /K \"%SELF%\" %SERVICE_CMD% %SERVICE_NAME%"
+exit /b 0
+
+rem Comprueba el entorno
+:checkEnv
+
+rem Averigua CATALINA_HOME si no esta definida
 if not "%CATALINA_HOME%" == "" goto gotHome
 set "CATALINA_HOME=%cd%"
-if exist "%CATALINA_HOME%\bin\tomcat9.exe" goto okHome
+if exist "%CATALINA_HOME%\bin\%DEFAULT_SERVICE_NAME%.exe" goto gotHome
+if exist "%CATALINA_HOME%\bin\%SERVICE_NAME%.exe" goto gotHome
 rem Se cambia al directorio de más arriba
 cd ..
 set "CATALINA_HOME=%cd%"
 :gotHome
-if exist "%CATALINA_HOME%\bin\tomcat9.exe" goto okHome
-echo El fichero tomcat9.exe no fue encontrado...
-echo La variable de entorno CATALINA_HOME no está definida correctamente.
-echo Se necesita esta variable de entorno para ejecutar este programa
-goto end
+if exist "%CATALINA_HOME%\bin\%DEFAULT_SERVICE_NAME%.exe" (
+    set "EXECUTABLE=%CATALINA_HOME%\bin\%DEFAULT_SERVICE_NAME%.exe"
+    goto okHome
+)
+if exist "%CATALINA_HOME%\bin\%SERVICE_NAME%.exe" (
+    set "EXECUTABLE=%CATALINA_HOME%\bin\%SERVICE_NAME%.exe"
+    goto okHome
+)
+if "%DEFAULT_SERVICE_NAME%"== "%SERVICE_NAME%" (
+    echo El fichero %DEFAULT_SERVICE_NAME%.exe no fue encontrado...
+) else (
+    echo Ni el fichero %DEFAULT_SERVICE_NAME%.exe ni el fichero %SERVICE_NAME%.exe fueron encontrados...
+)
+echo O la variable de entorno  CATALINA_HOME no se ha definido correctamente o
+echo se ha usado un nombre de servicio incorrecto.
+echo Tanto la variable de entorno CATALINA_HOME  como el nombre de servicio correcto
+echo son requeridos para ejecutar este programa.
+exit /b 1
 :okHome
-rem Nos aseguramos de que las variables de entorno de requesitos previos estén establecidas
+cd "%CURRENT_DIR%"
+
+rem Nos aseguramos de que las variables de entorno de requisitos previos estén establecidas
 if not "%JAVA_HOME%" == "" goto gotJdkHome
 if not "%JRE_HOME%" == "" goto gotJreHome
 echo Ni la variable de entorno JAVA_HOME ni JRE_HOME están definidas
@@ -61,14 +118,9 @@ if not "%CATALINA_BASE%" == "" goto gotBase
 set "CATALINA_BASE=%CATALINA_HOME%"
 :gotBase
 
-set "EXECUTABLE=%CATALINA_HOME%\bin\tomcat9.exe"
-
-rem Se establece el nombre de servicio predeterminado
-set SERVICE_NAME=Tomcat9
-set DISPLAYNAME=Apache Tomcat 9.0 %SERVICE_NAME%
 
 rem Java 9 ya no admite la propiedad del sistema java.endorsed.dirs. 
-rem Solo trate de usarlo si 
+rem Solo trate de usarlo si JAVA_ENDORSED_DIRS fue establecida o
 rem existe CATALINA_HOME/endorsed.
 set ENDORSED_PROP=ignore.endorsed.dirs
 if "%JAVA_ENDORSED_DIRS%" == "" goto noEndorsedVar
@@ -79,34 +131,15 @@ if not exist "%CATALINA_HOME%\endorsed" goto doneEndorsed
 set ENDORSED_PROP=java.endorsed.dirs
 :doneEndorsed
 
-if "x%1x" == "xx" goto displayUsage
-set SERVICE_CMD=%1
-shift
-if "x%1x" == "xx" goto checkServiceCmd
-:checkUser
-if "x%1x" == "x/userx" goto runAsUser
-if "x%1x" == "x--userx" goto runAsUser
-set SERVICE_NAME=%1
-set DISPLAYNAME=Apache Tomcat 9.0 %1
-shift
-if "x%1x" == "xx" goto checkServiceCmd
-goto checkUser
-:runAsUser
-shift
-if "x%1x" == "xx" goto displayUsage
-set SERVICE_USER=%1
-shift
-runas /env /savecred /user:%SERVICE_USER% "%COMSPEC% /K \"%SELF%\" %SERVICE_CMD% %SERVICE_NAME%"
-goto end
-:checkServiceCmd
+rem Procesa el comando solicitado
 if /i %SERVICE_CMD% == install goto doInstall
 if /i %SERVICE_CMD% == remove goto doRemove
 if /i %SERVICE_CMD% == uninstall goto doRemove
 echo Parametro desconocido "%SERVICE_CMD%"
 :displayUsage
 echo.
-echo Uso: service.bat install/remove [nombre_servicio] [/user nombreusuario]
-goto end
+echo Uso: service.bat install/remove [nombre_servicio [--rename]] [--user nombreusuario]
+exit /b 1
 
 :doRemove
 rem Elimina el servicio
@@ -120,7 +153,11 @@ echo Falló la eliminación del servicio '%SERVICE_NAME%'
 goto end
 :removed
 echo El servicio '%SERVICE_NAME%' ha sido eliminado
-goto end
+if exist "%CATALINA_HOME%\bin\%SERVICE_NAME%.exe" (
+    rename "%SERVICE_NAME%.exe" "%DEFAULT_SERVICE_NAME%.exe"
+    rename "%SERVICE_NAME%w.exe" "%DEFAULT_SERVICE_NAME%w.exe"
+)
+exit /b 0
 
 :doInstall
 rem Instala el servicio
@@ -148,9 +185,17 @@ if "%SERVICE_STARTUP_MODE%" == "" set SERVICE_STARTUP_MODE=manual
 if "%JvmMs%" == "" set JvmMs=128
 if "%JvmMx%" == "" set JvmMx=256
 
+if exist "%CATALINA_HOME%\bin\%DEFAULT_SERVICE_NAME%.exe" (
+    if "x%RENAME%x" == "x--renamex" (
+        rename "%DEFAULT_SERVICE_NAME%.exe" "%SERVICE_NAME%.exe"
+        rename "%DEFAULT_SERVICE_NAME%w.exe" "%SERVICE_NAME%w.exe"
+        set "EXECUTABLE=%CATALINA_HOME%\bin\%SERVICE_NAME%.exe"
+    )
+)
+
 "%EXECUTABLE%" //IS//%SERVICE_NAME% ^
-    --Description "Apache Tomcat 9.0.10 Server - http://tomcat.apache.org/" ^
-    --DisplayName "%DISPLAYNAME%" ^
+    --Description "Apache Tomcat 9.0.39 Server - https://tomcat.apache.org/" ^
+    --DisplayName "Apache Tomcat 9.0 %SERVICE_NAME%" ^
     --Install "%EXECUTABLE%" ^
     --LogPath "%CATALINA_BASE%\logs" ^
     --StdOutput auto ^
@@ -172,9 +217,7 @@ if "%JvmMx%" == "" set JvmMx=256
     --JvmMx "%JvmMx%"
 if not errorlevel 1 goto installed
 echo Falló la instalación del servicio '%SERVICE_NAME%'
-goto end
+exit /b 1
 :installed
 echo El servicio '%SERVICE_NAME%' ha sido instalado.
-
-:end
-cd "%CURRENT_DIR%"
+exit /b 0
