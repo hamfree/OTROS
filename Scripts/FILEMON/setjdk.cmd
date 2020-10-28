@@ -28,6 +28,7 @@
 @rem *    - 2020/06/01 - Se agrega la ruta de la utilidad Maven.                        *
 @rem *      Se eliminan algunas rutas de aplicaciones no instaladas.                    *
 @rem *    - 2020/06/11 - Se agrega la opcion de activar la version 14 del JDK.          *
+@rem *    - 2020/10/28 - Se elimina la opción del JDK 8 y se cambia JDK14 por JDK15     *
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -95,9 +96,8 @@ echo.
 echo   Seleccione una version de Java indicando su numero en el menu
 echo.
 echo.
-echo      1. JDK 1.8
-echo      2. JDK 11
-echo      3. JDK 14
+echo      1. JDK 11
+echo      2. JDK 15
 echo      0. SALIR
 echo.
 echo.
@@ -107,29 +107,15 @@ echo      JAVA_HOME: %JAVA_HOME%
 echo.
 @rem Recogida del valor del usuario y envio a las distintas opciones
 set /p var=
-if %var%==1 goto :jdk8
-if %var%==2 goto :jdk11
-if %var%==3 goto :jdk14
+if %var%==1 goto :jdk11
+if %var%==2 goto :jdk15
 if %var%==0 goto :salida
-if %var% GTR 3 goto :Error
+if %var% GTR 2 goto :Error
 goto :Menu
 
 :Error
 cls 
 echo ERROR: La opcion elegida no es valida. Debe indicar un valor entre 0 y 2
-echo Presiona una tecla para volver al menu
-pause > Nul
-goto :Menu
-
-@rem Entorno de desarrollo JDK 8
-:jdk8
-cls 
-set jdkactivado=JDK 1.8
-echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk8
-echo Estableciendo PATH 
-set PATHDES=%JAVA_HOME%\bin;%PATHDES%
-echo Version de java que se activara: %jdkactivado%
 echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
@@ -147,12 +133,12 @@ echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
-@rem Entorno de desarrollo JDK 14
+@rem Entorno de desarrollo JDK 15
 :jdk14
 cls 
-set jdkactivado=JDK 14
+set jdkactivado=JDK 15
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk14
+set JAVA_HOME=C:\des\bin\jdk15
 echo Estableciendo PATH 
 set PATHDES=%JAVA_HOME%\bin;%PATHDES%
 echo Version de java que se activara: %jdkactivado%
