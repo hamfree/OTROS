@@ -134,7 +134,7 @@ pause > Nul
 goto :Menu
 
 @rem Entorno de desarrollo JDK 15
-:jdk14
+:jdk15
 cls 
 set jdkactivado=JDK 15
 echo Estableciendo JAVA_HOME 
