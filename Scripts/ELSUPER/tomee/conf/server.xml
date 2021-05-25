@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="8005" shutdown="SHUTDOWN">
+    <!-- TomEE plugin for Tomcat -->
+    <Listener className="org.apache.tomee.catalina.ServerListener" />
+    <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+    <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener" />
+    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+    <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+    <GlobalNamingResources>
+        <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" 
+                  maxIdle="30" maxTotal="100" 
+                  maxWaitMillis="10000" name="jdbc/seguridad" 
+                  username="tomcat" password="welcome" 
+                  type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/tomcat?serverTimezone=UTC" />
+    </GlobalNamingResources>
+    <Service name="localhost">
+        <Connector address="127.0.0.1" port="8080" 
+                   maxPostSize="-1" disableUploadTimeout="false" 
+                   connectionTimeout="20000" protocol="org.apache.coyote.http11.Http11Nio2Protocol" 
+                   redirectPort="8443" URIEncoding="UTF-8" />
+        <Connector address="127.0.0.1" port="8443" 
+                   protocol="org.apache.coyote.http11.Http11Nio2Protocol" 
+                   maxThreads="150" SSLEnabled="true" 
+                   URIEncoding="UTF-8" defaultSSLHostConfigName="localhost">
+            <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
+            <SSLHostConfig hostName="localhost">
+                <Certificate certificateKeystoreFile="conf/ssl/tomcat.jks" certificateKeystoreType="JKS" 
+                             certificateKeystorePassword="tomcat" type="RSA" 
+                             xpoweredBy="false" server="Apache TomEE" />
+            </SSLHostConfig>
+        </Connector>
+        <Engine defaultHost="localhost" name="localhost">
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+                <Realm className="org.apache.catalina.realm.DataSourceRealm" dataSourceName="jdbc/seguridad" 
+                       roleNameCol="role_name" userCredCol="user_pass" 
+                       userNameCol="user_name" userRoleTable="user_roles" 
+                       userTable="users">
+                </Realm>
+            </Realm>
+            <Host name="localhost" appBase="webapps" 
+                  autoDeploy="true" unpackWARs="true">
+                <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" 
+                       pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" 
+                       suffix=".txt" />
+            </Host>
+        </Engine>
+    </Service>
+</Server>

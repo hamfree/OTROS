@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -18,7 +17,6 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 -->
-
 <!--
  | This is the toolchains file for Maven. It can be specified at two levels:
  |
@@ -41,10 +39,8 @@ under the License.
  | The sections in this sample file are intended to give you a running start at
  | getting the most out of your Maven installation.
  |-->
-<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
-
-  <!-- 
+<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
+	<!-- 
    | With toolchains you can refer to installations on your system. This 
    | way you don't have to hardcode paths in your pom.xml. 
    | 
@@ -67,37 +63,42 @@ under the License.
    |
    | General example
 
-  <toolchain>
-    <type/>
-    <provides> 
-      <version>1.0</version> 
-    </provides> 
-    <configuration/>
-  </toolchain>
-   
-   | JDK examples
-
-  <toolchain>
-    <type>jdk</type>
-    <provides>
-      <version>1.5</version>
-      <vendor>sun</vendor>
-    </provides>
-    <configuration>
-      <jdkHome>/path/to/jdk/1.5</jdkHome>
-    </configuration>
-  </toolchain>
-  <toolchain>
-    <type>jdk</type>
-    <provides>
-      <version>1.6</version>
-      <vendor>sun</vendor>
-    </provides>
-    <configuration>
-      <jdkHome>/path/to/jdk/1.6</jdkHome>
-    </configuration>
-  </toolchain>
-   
   -->
-
+	<toolchain>
+		<type/>
+		<provides>
+			<version>1.0</version>
+		</provides>
+		<configuration/>
+	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>1.8</version>
+			<vendor>oracle</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>e:/des/bin/jdk8</jdkHome>
+		</configuration>
+	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>11</version>
+			<vendor>oracle</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>e:/des/bin/jdk11</jdkHome>
+		</configuration>
+	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>16</version>
+			<vendor>oracle</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>e:/des/bin/jdk16</jdkHome>
+		</configuration>
+	</toolchain>
 </toolchains>
