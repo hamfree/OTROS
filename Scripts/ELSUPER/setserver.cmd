@@ -16,9 +16,11 @@ if not %COMPUTERNAME%==ELSUPER (
 )
 
 
+@rem El disco de desarrollo en ELSUPER tiene la unidad E:
+set DRIVE=E:
 
 @rem Variables para herramientas del entorno de desarrollo
-set PATHDES=D:\des\bin
+set PATHDES=%DRIVE%\des\bin
 
 @rem Variable necesaria para la ejecución de Tomcat
 
@@ -83,4 +85,5 @@ echo.
 @rem Eliminamos variables de entorno usadas internamente en el script
 set var=
 set PATHDES=
+set DRIVE=
 echo.

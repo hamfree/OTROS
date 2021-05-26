@@ -11,11 +11,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
-		<compiler.plugin>3.3</compiler.plugin>
-		<jar.plugin>2.6</jar.plugin>
+		<compiler.plugin>3.8.0</compiler.plugin>
+		<jar.plugin>3.0.2</jar.plugin>
 		<shade.plugin>2.3</shade.plugin>
-		<dependency.plugin>2.10</dependency.plugin>
-		<launch4j.plugin>1.7.5</launch4j.plugin>
+		<dependency.plugin>3.1.2</dependency.plugin>
+		<launch4j.plugin>2.1.1</launch4j.plugin>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
 	<build>

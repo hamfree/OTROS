@@ -35,14 +35,17 @@ if not %COMPUTERNAME%==ELSUPER (
     goto EquipoNoValido
 )
 
+@rem El disco de desarrollo en ELSUPER tiene la unidad E:
+set DRIVE=E:
+
 @rem En el path del sistema usamos PATHSYS para agregar las rutas mas importantes primero
 set PATHSYS=%SYSTEMROOT%\system32
 
 @rem Variable PATHDES para componer las rutas de las herramientas desarrollo
-set PATHDES=D:\des\bin
+set PATHDES=%DRIVE%\des\bin
 
 @rem Variable necesaria para la ejecución de Tomcat
-set CATALINA_HOME=D:\des\bin\tomcat
+set CATALINA_HOME=%DRIVE%\des\bin\tomcat
 
 @rem Eliminamos el contenido actual de JAVA_HOME
 set JAVA_HOME=
@@ -204,6 +207,7 @@ echo %PATH%
 :EquipoNoValido
 echo.
 @rem Eliminamos variables de entorno usadas internamente en el script
+set DRIVE=
 set WNDAPPS=
 set WPS=
 set PATHSYS=
