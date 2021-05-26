@@ -17,7 +17,7 @@
 @rem *    - Ant                                                                         *
 @rem *    - Code                                                                        *
 @rem *    - Git                                                                         *
-@rem *    - JDK's (versiones 11 y 15)                                                   *
+@rem *    - JDK's (versiones 8, 11 y 16)                                                *
 @rem *    - Maven                                                                       *
 @rem *    - OpenSSL                                                                     *
 @rem *    - Python                                                                      *
@@ -58,8 +58,9 @@ echo ********************************************************************
 echo.
 echo   Seleccione una version de Java indicando su numero en el menu
 echo.
-echo      1. JDK 11
-echo      2. JDK 15
+echo      1. JDK 8
+echo      2. JDK 11
+echo      3. JDK 16
 echo      0. SALIR
 echo.
 echo      Equipo: %computername%
@@ -70,13 +71,25 @@ echo ********************************************************************
 echo.
 @rem Recogida del valor del usuario y envio a las distintas opciones
 set /p var=	
-if %var%==1 goto :jdk11
-if %var%==2 goto :jdk15
+if %var%==1 goto :jdk8
+if %var%==2 goto :jdk11
+if %var%==3 goto :jdk16
 if %var%==0 goto :salida
-if %var% GTR 2 echo Error
+if %var% GTR 3 echo Error
 goto :Menu
 
 @rem Aqui estan las distintas opciones del menu
+:jdk8
+cls 
+set jdkactivado=JDK 8
+echo Estableciendo JAVA_HOME 
+set JAVA_HOME=%PATHDES%\jdk8
+echo Version de java que se activara
+%JAVA_HOME%\bin\java -version
+echo Presione una tecla para volver al menu
+pause>Nul
+goto :Menu
+
 :jdk11
 cls 
 set jdkactivado=JDK 11
@@ -88,11 +101,11 @@ echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
 
-:jdk15
+:jdk16
 cls 
-set jdkactivado=JDK 15
+set jdkactivado=JDK 16
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%PATHDES%\jdk15
+set JAVA_HOME=%PATHDES%\jdk16
 echo Version de java que se activara
 %JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
@@ -155,7 +168,7 @@ echo Agregando ruta de Microsoft Code al PATH...
 set PATHDES=%PATHDES%;%CODE_HOME%
 echo Agregando ruta de Git al PATH...
 set PATHDES=%PATHDES%;%GIT_HOME%\bin
-echo Agregando ruta del JDK al PATH...
+echo Agregando ruta del JDK (%jdkactivado%) al PATH...
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 echo Agregando ruta de Maven al PATH...
 set PATHDES=%PATHDES%;%MVN_HOME%\bin
