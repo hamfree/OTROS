@@ -2,8 +2,8 @@
 @rem *                                                                                  *
 @rem *    Script para elegir la version del servidor aplicaciones a ejecutar,           *
 @rem *    personalizado para el portatil FILEMON:                                       *
-@rem *    - Contenedor de servlets/JSP TOMCAT                                           *
-@rem *    - Servidor J2EE TOMEE                                                         *
+@rem *    - Contenedor de servlets/JSP TOMCAT (En C:\des\bin\tomcat)                    *
+@rem *    - Servidor J2EE TOMEE (En C:\des\bin\tomee)                                   *
 @rem *                                                                                  *
 @rem ************************************************************************************
 

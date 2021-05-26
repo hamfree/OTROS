@@ -1,0 +1,25 @@
+Configuración de Maven
+======================
+
+* En el portátil FILEMON:
+  Para que Maven "haga caso" completamente de la configuración y luego no duplique el repositorio 
+  hay que copiar los ficheros de configuración:
+  - settings.xml
+  - toolchains.xml
+
+  En los directorios:
+  - C:\des\bin\mvn\conf
+  - C:\des\data\m2 <- Aquí es donde quiero que se almacene el repositorio local de Maven
+  - C:\Users\hamfree\.m2\ <- Directorio donde, por defecto, Maven guarda el repositorio local.
+
+* en el ordenador personal ELSUPER:
+  Copiar los ficheros de configuración:
+  - settings.xml
+  - toolchains.xml
+
+  En los directorios:
+  - E:\des\bin\mvn\conf
+  - E:\des\data\m2 <- Aquí es donde quiero que se almacene el repositorio local de Maven
+  - C:\Users\hamfree\.m2\ <- Directorio donde, por defecto, Maven guarda el repositorio local.
+
+

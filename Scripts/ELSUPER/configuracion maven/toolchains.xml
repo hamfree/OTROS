@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" 
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
-  <!--
-    Configuración toolcains Maven ordenador personal ELSUPER
-  -->
-  <toolchain>
-    <type/>
-    <provides>
-      <version>1.0</version>
-    </provides>
-    <configuration/>
-  </toolchain>
+<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
+>>>>>>> 84080ee483c56620212bb671ec709c4d973bc2bd
   <toolchain>
     <type>jdk</type>
     <provides>
@@ -20,7 +9,7 @@
       <vendor>oracle</vendor>
     </provides>
     <configuration>
-      <jdkHome>e:/des/bin/jdk8</jdkHome>
+      <jdkHome>e:\des\bin\jdk8</jdkHome>
     </configuration>
   </toolchain>
   <toolchain>
@@ -30,7 +19,7 @@
       <vendor>oracle</vendor>
     </provides>
     <configuration>
-      <jdkHome>e:/des/bin/jdk11</jdkHome>
+      <jdkHome>e:\des\bin\jdk11</jdkHome>
     </configuration>
   </toolchain>
   <toolchain>
@@ -40,7 +29,7 @@
       <vendor>oracle</vendor>
     </provides>
     <configuration>
-      <jdkHome>e:/des/bin/jdk16</jdkHome>
+      <jdkHome>e:\des\bin\jdk16</jdkHome>
     </configuration>
   </toolchain>
 </toolchains>
