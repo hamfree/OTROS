@@ -42,6 +42,10 @@ if not %COMPUTERNAME%==FILEMON (
     goto EquipoNoValido
 )
 
+@rem El disco de desarrollo en FILEMON es la unidad C:
+set DRIVE=C:
+
+
 :Menu
 cls
 echo.
@@ -81,7 +85,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 8
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk8
+set JAVA_HOME=%DRIVE%\des\bin\jdk8
 echo Estableciendo PATH 
 echo Version de java que se activara:
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -94,7 +98,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 11
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk11
+set JAVA_HOME=%DRIVE%\des\bin\jdk11
 echo Estableciendo PATH 
 echo Version de java que se activara:
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -107,7 +111,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 16
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk16
+set JAVA_HOME=%DRIVE%\des\bin\jdk16
 echo Estableciendo PATH 
 echo Version de java que se activara: 
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -118,33 +122,13 @@ goto :Menu
 @rem A la salida reiniciamos el PATH del sistema....
 :salida
 
-@rem Variables para herramientas del entorno de desarrollo
-set PATHDES=C:\des\bin
-
-@rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
-set GIT=%PATHDES%\git\bin
-set MVN=%PATHDES%\mvn\bin
-set OPENSSL=%PATHDES%\openssl\bin
-set PYTHON=%PATHDES%\python;%PATHDES%\python\Scripts
-set TOMCAT=%PATHDES%\tomcat\bin
-set TOMEE=%PATHDES%\tomee\bin
-set SCRIPT=%PATHDES%\scripts
-set UTIL=%PATHDES%\utiles
-
-@rem Variable necesaria para la ejecucion de Tomcat
-set CATALINA_HOME=C:\des\bin\tomcat
-
-@rem Componemos el path de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%GIT%;%MVN%;%OPENSSL%;%PYTHON%;%TOMCAT%;%TOMEE%;%SCRIPT%;%UTIL%
-
-@rem Agregamos la ruta a los ejecutables del entorno de Java elegido
-set PATHDES=%JAVA_HOME%\bin;%PATHDES%
-
+cls
 @rem Las apps de windows instaladas por el usuario y sus scripts de powershell
 set WINDOWSAPPS=%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
 set POWERSHELL=%USERPROFILE%\Documents\WindowsPowerShell\Scripts
 
 @rem En el path del sistema las rutas mas importantes primero
+echo Agregando rutas estandar de Windows...
 set PATHSYS=%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\system32\Wbem
 set PATHSYS=%PATHSYS%;%SystemRoot%\system32\WindowsPowerShell\v1.0
 set PATHSYS=%PATHSYS%;%SystemRoot%\system32\OpenSSH
@@ -152,19 +136,53 @@ set PATHSYS=%PATHSYS%;%WINDOWSAPPS%
 set PATHSYS=%PATHSYS%;%POWERSHELL%
 
 @rem El resto de rutas de otras aplicaciones incluidas en el path del sistema
+echo Agregando Calibre...
 set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\DAL
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\IPT
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\iCLS Client\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\WiFi\bin\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Common Files\Intel\WirelessCommon\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engine Components\IPT
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engine Components\DAL
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\iCLS Client\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\NVIDIA Corporation\PhysX\Common
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
+echo Agregando GnuPG...
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
+
+
+@rem Variables para herramientas del entorno de desarrollo
+set PATHDES=%DRIVE%\des\bin
+
+@rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
+set ANT=%PATHDES%\ant\bin
+set GIT=%PATHDES%\git\bin
+set MVN=%PATHDES%\mvn\bin
+set MYSQL=%PATHDES%\mysql\bin
+set OPENSSL=%PATHDES%\openssl\bin
+set TOMEE=%PATHDES%\tomee\bin
+set SCRIPT=%PATHDES%\scripts
+set UTIL=%PATHDES%\utiles
+
+@rem Variable necesaria para la ejecucion de Tomee
+set CATALINA_HOME=C:\des\bin\tomee
+
+@rem Componemos el path PATHDES de las herramientas de desarrollo.
+echo Agregando %ANT% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%ANT%
+echo Agregando %GIT% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%GIT%
+echo Agregando %MVN% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%MVN%
+echo Agregando %MYSQL% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%MYSQL%
+echo Agregando %OPENSSL% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%OPENSSL%
+echo Agregando %TOMEE% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%TOMEE%
+echo Agregando %SCRIPT% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%SCRIPT%
+echo Agregando %UTIL% al PATH de desarrollo...
+set PATHDES=%PATHDES%;%UTIL%
+
+@rem Agregamos la ruta a los ejecutables del entorno de Java elegido
+set PATHDES=%JAVA_HOME%\bin;%PATHDES%
+
+
+echo.
+echo Pulse una tecla para componer el PATH del sistema...
+pause>Nul
 
 @rem Componemos la variable del sistema PATH
 set PATH=
@@ -180,6 +198,8 @@ echo.
 
 :EquipoNoValido
 @rem Eliminamos variables de entorno usadas internamente en el script
+set ANT=
+set DRIVE=
 set WINDOWSAPPS=
 set POWERSHELL=
 set PATHSYS=
@@ -187,8 +207,6 @@ set PATHDES=
 set OPENSSL=
 set GIT=
 set MVN=
-set PYTHON=
-set TOMCAT=
 set TOMEE=
 set jdkactivado=
 set var=

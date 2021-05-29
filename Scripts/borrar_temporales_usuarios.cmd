@@ -1,5 +1,5 @@
 @echo off
-for /d %%i in ("C:\Users*") DO (
+for /d %%i in ("C:\Users\*") DO (
 echo Eliminando C:\Users\%%~nxi\AppData\Local\Temp
 rd "C:\Users\%%~nxi\AppData\Local\Temp" /s /q
 echo Eliminando C:\Users\%%~nxi\AppData\Local\Microsoft\Terminal Server Client\Cache
