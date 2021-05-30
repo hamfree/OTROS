@@ -5,6 +5,9 @@
 @rem *    - Contenedor de servlets/JSP TOMCAT (En C:\des\bin\tomcat)                    *
 @rem *    - Servidor J2EE TOMEE (En C:\des\bin\tomee)                                   *
 @rem *                                                                                  *
+@rem *    2021/05/26 - Actualmente no se usa este script porque solo está               *
+@rem *                 instalado el servidor de aplicaciones TOMEE                      *
+@rem *                                                                                  *
 @rem ************************************************************************************
 
 @echo off
@@ -15,12 +18,12 @@ if not %COMPUTERNAME%==FILEMON (
     goto EquipoNoValido
 )
 
-
+@rem El disco de desarrollo en FILEMON es la unidad C:
+set DRIVE=C:
 
 @rem Variables para herramientas del entorno de desarrollo
-set PATHDES=C:\des\bin
 
-@rem Variable necesaria para la ejecución de Tomcat
+set PATHDES=%DRIVE%\des\bin
 
 
 

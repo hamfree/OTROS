@@ -31,6 +31,8 @@
 @rem *    - 2020/10/28 - Se elimina la opcion del JDK 8 y se cambia JDK14 por JDK15     *
 @rem *    - 2021/01/23 - Se agrega de nuevo la opcion del JDK 8.                        *
 @rem *    - 2021/05/05 - Se cambia la version 15 de JDK por la 16.                      *
+@rem *    - 2021/05/26 - Se genera una nueva variable para la unidad donde se           *
+@rem *                   encuentra la instalación de desarrollo, DRIVE.                 * 
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -41,6 +43,9 @@ if not %COMPUTERNAME%==FILEMON (
     echo En este equipo de nombre '%COMPUTERNAME%' no se puede utilizar el script '%0'
     goto EquipoNoValido
 )
+
+@rem El disco de desarrollo en FILEMON es la unidad C:
+set DRIVE=C:
 
 :Menu
 cls
@@ -81,7 +86,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 8
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk8
+set JAVA_HOME=%DRIVE%\des\bin\jdk8
 echo Estableciendo PATH 
 echo Version de java que se activara:
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -94,7 +99,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 11
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk11
+set JAVA_HOME=%DRIVE%\des\bin\jdk11
 echo Estableciendo PATH 
 echo Version de java que se activara:
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -107,7 +112,7 @@ goto :Menu
 cls 
 set jdkactivado=JDK 16
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=C:\des\bin\jdk16
+set JAVA_HOME=%DRIVE%\des\bin\jdk16
 echo Estableciendo PATH 
 echo Version de java que se activara: 
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -119,7 +124,7 @@ goto :Menu
 :salida
 
 @rem Variables para herramientas del entorno de desarrollo
-set PATHDES=C:\des\bin
+set PATHDES=%DRIVE%\des\bin
 
 @rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
 set GIT=%PATHDES%\git\bin
@@ -132,7 +137,7 @@ set SCRIPT=%PATHDES%\scripts
 set UTIL=%PATHDES%\utiles
 
 @rem Variable necesaria para la ejecucion de Tomcat
-set CATALINA_HOME=C:\des\bin\tomcat
+set CATALINA_HOME=%DRIVE%\des\bin\tomcat
 
 @rem Componemos el path de las herramientas de desarrollo.
 set PATHDES=%PATHDES%;%GIT%;%MVN%;%OPENSSL%;%PYTHON%;%TOMCAT%;%TOMEE%;%SCRIPT%;%UTIL%
@@ -153,18 +158,11 @@ set PATHSYS=%PATHSYS%;%POWERSHELL%
 
 @rem El resto de rutas de otras aplicaciones incluidas en el path del sistema
 set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\DAL
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\Intel^(R^) Management Engine Components\IPT
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\iCLS Client\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Intel\WiFi\bin\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR
-@rem set PATHSYS=%PATHSYS%;C:\Program Files\Common Files\Intel\WirelessCommon\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engine Components\IPT
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\Intel^(R^) Management Engine Components\DAL
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\Intel\iCLS Client\
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\NVIDIA Corporation\PhysX\Common
-@rem set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
+
+echo.
+echo Pulse una tecla para componer el PATH del sistema...
+pause>Nul
 
 @rem Componemos la variable del sistema PATH
 set PATH=
@@ -180,6 +178,7 @@ echo.
 
 :EquipoNoValido
 @rem Eliminamos variables de entorno usadas internamente en el script
+set DRIVE=
 set WINDOWSAPPS=
 set POWERSHELL=
 set PATHSYS=

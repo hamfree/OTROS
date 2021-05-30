@@ -15,12 +15,10 @@
 @rem *    la ruta "D:\des\bin". Las aplicaciones cuyas rutas se agregan al path         *
 @rem *    son:                                                                          *
 @rem *    - Ant                                                                         *
-@rem *    - Code                                                                        *
 @rem *    - Git                                                                         *
 @rem *    - JDK's (versiones 8, 11 y 16)                                                *
 @rem *    - Maven                                                                       *
 @rem *    - OpenSSL                                                                     *
-@rem *    - Python                                                                      *
 @rem *    - Scripts de consola y powershell                                             *
 @rem *    - Utiles  de SysInternals y otras                                             *
 @rem *                                                                                  *
@@ -150,16 +148,15 @@ set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
 
 @rem Configurando variables de entorno para cada una de las herramientas de desarrollo
 set ANT_HOME=%PATHDES%\ant
-set CODE_HOME=%PATHDES%\code
 set GIT_HOME=%PATHDES%\git
 set GIT_SSH=C:\Program Files\PuTTY\plink.exe
 set MVN_HOME=%PATHDES%\mvn
 set MYSQL_HOME=%PATHDES%\mysql
 set OPENSSL_HOME=%PATHDES%\openssl
-set PYTHON_HOME=%PATHDES%\python
+@rem set PYTHON_HOME=%PATHDES%\python
 set SCRIPTS_HOME=%PATHDES%\scripts
 set SVN_SSH=C:\Program Files\PuTTY\plink.exe
-set TOMCAT=%PATHDES%\tomcat\bin
+@rem set TOMCAT=%PATHDES%\tomcat\bin
 set TOMEE=%PATHDES%\tomee\bin
 set UTILES_HOME=%PATHDES%\utiles
 
@@ -167,8 +164,6 @@ set UTILES_HOME=%PATHDES%\utiles
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
 echo Agregando ruta de Ant al PATH...
 set PATHDES=%PATHDES%;%ANT_HOME%\bin
-echo Agregando ruta de Microsoft Code al PATH...
-set PATHDES=%PATHDES%;%CODE_HOME%
 echo Agregando ruta de Git al PATH...
 set PATHDES=%PATHDES%;%GIT_HOME%\bin
 echo Agregando ruta del JDK (%jdkactivado%) al PATH...
@@ -179,12 +174,8 @@ echo Agregando ruta de MySQL al PATH...
 set PATHDES=%PATHDES%;%MYSQL_HOME%\bin
 echo Agregando ruta de OpenSSL al PATH...
 set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
-echo Agregando ruta de Python al PATH...
-set PATHDES=%PATHDES%;%PYTHON_HOME%
 echo Agregando rutas de scripts al PATH...
 set PATHDES=%PATHDES%;%SCRIPTS_HOME%
-echo Agregando ruta del servidor TOMCAT al PATH...
-set PATHDES=%PATHDES%;%TOMCAT%
 echo Agregando ruta del servidor TOMEE al PATH...
 set PATHDES=%PATHDES%;%TOMEE%
 echo Agregando ruta de utilidades al PATH...
@@ -213,14 +204,11 @@ set WPS=
 set PATHSYS=
 set PATHDES=
 set ANT_HOME=
-set CODE_HOME=
 set GIT_HOME=
 set MVN_HOME=
 set MYSQL_HOME=
 set OPENSSL_HOME=
-set PYTHON_HOME=
 set SCRIPTS_HOME=
-set TOMCAT=
 set TOMEE=
 set UTILES_HOME=
 set jdkactivado=
