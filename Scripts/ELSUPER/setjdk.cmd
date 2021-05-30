@@ -147,39 +147,37 @@ echo Agregando ZeroTier...
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\ZeroTier\One
 
 @rem Configurando variables de entorno para cada una de las herramientas de desarrollo
-set ANT_HOME=%PATHDES%\ant
-set GIT_HOME=%PATHDES%\git
+set ANT=%PATHDES%\ant\bin
+set GIT=%PATHDES%\git\bin
 set GIT_SSH=C:\Program Files\PuTTY\plink.exe
-set MVN_HOME=%PATHDES%\mvn
-set MYSQL_HOME=%PATHDES%\mysql
-set OPENSSL_HOME=%PATHDES%\openssl
-@rem set PYTHON_HOME=%PATHDES%\python
-set SCRIPTS_HOME=%PATHDES%\scripts
+set MVN=%PATHDES%\mvn\bin
+set MYSQL=%PATHDES%\mysql\bin
+set OPENSSL=%PATHDES%\openssl\bin
+set SCRIPTS=%PATHDES%\scripts
 set SVN_SSH=C:\Program Files\PuTTY\plink.exe
-@rem set TOMCAT=%PATHDES%\tomcat\bin
 set TOMEE=%PATHDES%\tomee\bin
-set UTILES_HOME=%PATHDES%\utiles
+set UTILES=%PATHDES%\utiles
 
 
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
-echo Agregando ruta de Ant al PATH...
-set PATHDES=%PATHDES%;%ANT_HOME%\bin
-echo Agregando ruta de Git al PATH...
-set PATHDES=%PATHDES%;%GIT_HOME%\bin
+echo Agregando %ANT% al PATH...
+set PATHDES=%PATHDES%;%ANT%
+echo Agregando %GIT% al PATH...
+set PATHDES=%PATHDES%;%GIT%
 echo Agregando ruta del JDK (%jdkactivado%) al PATH...
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin
-echo Agregando ruta de Maven al PATH...
-set PATHDES=%PATHDES%;%MVN_HOME%\bin
-echo Agregando ruta de MySQL al PATH...
-set PATHDES=%PATHDES%;%MYSQL_HOME%\bin
-echo Agregando ruta de OpenSSL al PATH...
-set PATHDES=%PATHDES%;%OPENSSL_HOME%\bin
-echo Agregando rutas de scripts al PATH...
-set PATHDES=%PATHDES%;%SCRIPTS_HOME%
-echo Agregando ruta del servidor TOMEE al PATH...
+echo Agregando %MVN% al PATH...
+set PATHDES=%PATHDES%;%MVN%
+echo Agregando %MYSQL% al PATH...
+set PATHDES=%PATHDES%;%MYSQL%
+echo Agregando %OPENSSL% al PATH...
+set PATHDES=%PATHDES%;%OPENSSL%
+echo Agregando %SCRIPTS% al PATH...
+set PATHDES=%PATHDES%;%SCRIPTS%
+echo Agregando %TOMEE% al PATH...
 set PATHDES=%PATHDES%;%TOMEE%
-echo Agregando ruta de utilidades al PATH...
-set PATHDES=%PATHDES%;%UTILES_HOME%
+echo Agregando %UTILES% al PATH...
+set PATHDES=%PATHDES%;%UTILES%
 
 echo.
 echo Pulse una tecla para componer el PATH del sistema...
@@ -203,14 +201,15 @@ set WNDAPPS=
 set WPS=
 set PATHSYS=
 set PATHDES=
-set ANT_HOME=
-set GIT_HOME=
-set MVN_HOME=
-set MYSQL_HOME=
-set OPENSSL_HOME=
-set SCRIPTS_HOME=
+set ANT=
+set CODE=
+set GIT=
+set MVN=
+set MYSQL=
+set OPENSSL=
+set SCRIPTS=
 set TOMEE=
-set UTILES_HOME=
+set UTILES=
 set jdkactivado=
 set var=
 echo.
