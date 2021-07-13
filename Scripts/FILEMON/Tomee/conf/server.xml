@@ -15,17 +15,18 @@
                   username="tomcat" url="jdbc:mysql://localhost:3306/tomcat?zeroDateTimeBehavior=CONVERT_TO_NULL" />
     </GlobalNamingResources>
     <Service name="tomee">
-        <Connector port="8080" protocol="org.apache.coyote.http11.Http11Nio2Protocol" 
+        <Connector address="localhost" port="8080" 
+                   redirectPort="8443" protocol="org.apache.coyote.http11.Http11Nio2Protocol" 
                    maxPostSize="-1" disableUploadTimeout="false" 
-                   connectionTimeout="20000" redirectPort="8443" 
-                   URIEncoding="UTF-8" />
+                   connectionTimeout="20000" URIEncoding="UTF-8" />
 
-        <Connector port="8443" protocol="org.apache.coyote.http11.Http11AprProtocol"
+        <Connector address="localhost" port="8443" 
+                   protocol="org.apache.coyote.http11.Http11AprProtocol"
                    maxThreads="150" SSLEnabled="true" >
             <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"  />
             <SSLHostConfig>
-                <Certificate certificateKeyFile="conf/ssl/CA.key"
-                             certificateFile="conf/ssl/CA.pem"
+                <Certificate certificateKeyFile="conf/ssl/tomcat.key"
+                             certificateFile="conf/ssl/tomcat.pem"
                              certificateChainFile="conf/ssl/tomcat.cer"
                              type="RSA" />
             </SSLHostConfig>
