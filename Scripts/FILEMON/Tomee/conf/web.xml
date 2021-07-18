@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
-  <!-- ==================== Servlets ====================== -->
   <servlet>
     <servlet-name>default</servlet-name>
     <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
@@ -36,7 +34,6 @@
     </init-param>
     <load-on-startup>3</load-on-startup>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>/</url-pattern>
@@ -50,44 +47,9 @@
     <servlet-name>jsp</servlet-name>
     <url-pattern>*.jspx</url-pattern>
   </servlet-mapping>
-
-  <!-- ==================== Filtros ====================== -->  
-  <filter>
-      <filter-name>defaultCharset</filter-name>
-      <filter-class>
-        org.apache.catalina.filters.AddDefaultCharsetFilter
-      </filter-class>
-      <init-param>
-        <param-name>encoding</param-name>
-        <param-value>UTF-8</param-value>
-      </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>defaultCharset</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-      <filter-name>Codificacion Caracteres</filter-name>
-      <filter-class>
-        org.apache.catalina.filters.SetCharacterEncodingFilter
-      </filter-class>
-      <init-param>
-        <param-name>encoding</param-name>
-        <param-value>UTF-8</param-value>
-      </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>Codificacion Caracteres</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-
-  <!-- ==================== Sesion ====================== -->  
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
-  
-  <!-- ==================== Tipos MIME ====================== -->
   <mime-mapping>
     <extension>abs</extension>
     <mime-type>audio/x-mpeg</mime-type>
@@ -776,8 +738,6 @@
     <extension>zip</extension>
     <mime-type>application/zip</mime-type>
   </mime-mapping>
-  
-  <!-- ==================== Ficheros bienvenida ====================== -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
