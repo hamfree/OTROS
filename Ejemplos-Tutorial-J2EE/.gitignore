@@ -1,0 +1,5 @@
+/archetypes/jaxrs-service-archetype/target/
+/persistence/address-book/target/
+/connectors/trading/trading-rar/target/
+/connectors/traffic/traffic-rar/target/
+/batch/webserverlog/target/
