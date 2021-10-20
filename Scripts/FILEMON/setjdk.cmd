@@ -23,6 +23,7 @@
 @rem *    - Directorio con utilidades                                                   *
 @rem *                                                                                  *
 @rem *    Historia:                                                                     *
+@rem *    - 2021/10/20 - Actualizacion seguridad Java. Se pasa de Java 16 a Java 17     *
 @rem *    - 2020/04/02 - Se agregan las rutas del software de Intel y Nvidia.           *
 @rem *      Se cambian las rutas de desarrollo.                                         *
 @rem *    - 2020/06/01 - Se agrega la ruta de la utilidad Maven.                        *
@@ -60,7 +61,7 @@ echo.
 echo.
 echo      1. JDK 8
 echo      2. JDK 11
-echo      3. JDK 16
+echo      3. JDK 17
 echo      0. SALIR
 echo.
 echo.
@@ -72,7 +73,7 @@ echo.
 set /p var=
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
-if %var%==3 goto :jdk16
+if %var%==3 goto :jdk17
 if %var%==0 goto :salida
 if %var% GTR 3 goto :Error
 goto :Menu
@@ -110,12 +111,12 @@ echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
-@rem Entorno de desarrollo JDK 16
-:jdk16
+@rem Entorno de desarrollo JDK 17
+:jdk17
 cls 
 set jdkactivado=JDK 16
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%DRIVE%\des\bin\jdk16
+set JAVA_HOME=%DRIVE%\des\bin\jdk17
 echo Estableciendo PATH 
 echo Version de java que se activara: 
 %JAVA_HOME%\bin\java -XshowSettings:vm -version

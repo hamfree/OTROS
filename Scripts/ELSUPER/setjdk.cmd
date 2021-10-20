@@ -12,11 +12,11 @@
 @rem *    Despues de agregar todas las rutas del sistema y aplicaciones antes           *
 @rem *    indicadas, se construyen las rutas para las herramientas de desarrollo        *
 @rem *    y servidores de aplicaciones, que se encuentran todos instalados bajo         *
-@rem *    la ruta "D:\des\bin". Las aplicaciones cuyas rutas se agregan al path         *
+@rem *    la ruta "E:\des\bin". Las aplicaciones cuyas rutas se agregan al path         *
 @rem *    son:                                                                          *
 @rem *    - Ant                                                                         *
 @rem *    - Git                                                                         *
-@rem *    - JDK's (versiones 8, 11 y 16)                                                *
+@rem *    - JDK's (versiones 8, 11 y 17)                                                *
 @rem *    - Maven                                                                       *
 @rem *    - OpenSSL                                                                     *
 @rem *    - Scripts de consola y powershell                                             *
@@ -61,7 +61,7 @@ echo   Seleccione una version de Java indicando su numero en el menu
 echo.
 echo      1. JDK 8
 echo      2. JDK 11
-echo      3. JDK 16
+echo      3. JDK 17
 echo      0. SALIR
 echo.
 echo      Equipo: %computername%
@@ -74,7 +74,7 @@ echo.
 set /p var=	
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
-if %var%==3 goto :jdk16
+if %var%==3 goto :jdk17
 if %var%==0 goto :salida
 if %var% GTR 3 echo Error
 goto :Menu
@@ -102,11 +102,11 @@ echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
 
-:jdk16
+:jdk17
 cls 
-set jdkactivado=JDK 16
+set jdkactivado=JDK 17
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%PATHDES%\jdk16
+set JAVA_HOME=%PATHDES%\jdk17
 echo Version de java que se activara
 %JAVA_HOME%\bin\java -version
 echo Presione una tecla para volver al menu
