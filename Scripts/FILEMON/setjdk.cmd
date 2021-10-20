@@ -23,6 +23,7 @@
 @rem *    - Directorio con utilidades                                                   *
 @rem *                                                                                  *
 @rem *    Historia:                                                                     *
+@rem *    - 2021/10/20 - Actualizacion seguridad Java. Se pasa de Java 16 a Java 17     *
 @rem *    - 2020/04/02 - Se agregan las rutas del software de Intel y Nvidia.           *
 @rem *      Se cambian las rutas de desarrollo.                                         *
 @rem *    - 2020/06/01 - Se agrega la ruta de la utilidad Maven.                        *
@@ -32,7 +33,10 @@
 @rem *    - 2021/01/23 - Se agrega de nuevo la opcion del JDK 8.                        *
 @rem *    - 2021/05/05 - Se cambia la version 15 de JDK por la 16.                      *
 @rem *    - 2021/05/26 - Se genera una nueva variable para la unidad donde se           *
-@rem *                   encuentra la instalación de desarrollo, DRIVE.                 * 
+@rem *                   encuentra la instalación de desarrollo, DRIVE.                * 
+@rem *    - 2021/08/07 - Se agregan las rutas para la base de datos Derby y los         *
+@rem *                   servidores de aplicaciones Glassfish 5 y Glassfish 6           *
+@rem *    - 2021/09/26 - Se agrega la ruta para Sysinternals.                           *
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -57,7 +61,7 @@ echo.
 echo.
 echo      1. JDK 8
 echo      2. JDK 11
-echo      3. JDK 16
+echo      3. JDK 17
 echo      0. SALIR
 echo.
 echo.
@@ -69,7 +73,7 @@ echo.
 set /p var=
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
-if %var%==3 goto :jdk16
+if %var%==3 goto :jdk17
 if %var%==0 goto :salida
 if %var% GTR 3 goto :Error
 goto :Menu
@@ -107,12 +111,12 @@ echo Presiona una tecla para volver al menu
 pause > Nul
 goto :Menu
 
-@rem Entorno de desarrollo JDK 16
-:jdk16
+@rem Entorno de desarrollo JDK 17
+:jdk17
 cls 
 set jdkactivado=JDK 16
 echo Estableciendo JAVA_HOME 
-set JAVA_HOME=%DRIVE%\des\bin\jdk16
+set JAVA_HOME=%DRIVE%\des\bin\jdk17
 echo Estableciendo PATH 
 echo Version de java que se activara: 
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
@@ -142,18 +146,21 @@ set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
 echo Agregando GnuPG...
 set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
 
-
 @rem Variables para herramientas del entorno de desarrollo
 set PATHDES=%DRIVE%\des\bin
 
 @rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
 set ANT=%PATHDES%\ant\bin
+set DERBY=%PATHDES%\derby\bin
 set GIT=%PATHDES%\git\bin
+set GLF5=%PATHDES%\glassfish\bin;%PATHDES%\glassfish\glassfish\bin
+set GLF6=%PATHDES%\glassfish6\bin;%PATHDES%\glassfish6\glassfish\bin
 set MVN=%PATHDES%\mvn\bin
 set MYSQL=%PATHDES%\mysql\bin
 set OPENSSL=%PATHDES%\openssl\bin
 set TOMEE=%PATHDES%\tomee\bin
 set SCRIPT=%PATHDES%\scripts
+set SYSINTERNALS=%PATHDES%\sysinternals
 set UTIL=%PATHDES%\utiles
 
 
@@ -163,26 +170,30 @@ set CATALINA_HOME=%DRIVE%\des\bin\tomcat
 @rem Agregamos la ruta a los ejecutables del entorno de Java elegido
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 
-
-@rem Componemos el path de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%GIT%;%MVN%;%OPENSSL%;%PYTHON%;%TOMCAT%;%TOMEE%;%SCRIPT%;%UTIL%
-
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
-echo Agregando %ANT% al PATH de desarrollo...
+echo Agregando Herramienta ANT al PATH de desarrollo...
 set PATHDES=%PATHDES%;%ANT%
-echo Agregando %GIT% al PATH de desarrollo...
+echo Agregando Gestor Base de Datos DERBY al PATH de desarrollo...
+set PATHDES=%PATHDES%;%DERBY%
+echo Agregando Herramienta Control de Versiones GIT al PATH de desarrollo...
+set PATHDES=%PATHDES%;%GLF5%
+echo Agregando Servidor de Aplicaciones GLASSFISH 5 (JAVAEE 8) al PATH de desarrollo...
+set PATHDES=%PATHDES%;%GLF6%
+echo Agregando Servidor de Aplicaciones GLASSFISH 6 (JAKARTA EE 9.1) al PATH de desarrollo...
 set PATHDES=%PATHDES%;%GIT%
-echo Agregando %MVN% al PATH de desarrollo...
+echo Agregando Herramienta MAVEN al PATH de desarrollo...
 set PATHDES=%PATHDES%;%MVN%
-echo Agregando %MYSQL% al PATH de desarrollo...
+echo Agregando Gestor Base de Datos MYSQL al PATH de desarrollo...
 set PATHDES=%PATHDES%;%MYSQL%
-echo Agregando %OPENSSL% al PATH de desarrollo...
+echo Agregando Herramienta cifrado OPENSSL al PATH de desarrollo...
 set PATHDES=%PATHDES%;%OPENSSL%
-echo Agregando %TOMEE% al PATH de desarrollo...
+echo Agregando Servidor de Aplicaciones TOMEE al PATH de desarrollo...
 set PATHDES=%PATHDES%;%TOMEE%
-echo Agregando %SCRIPT% al PATH de desarrollo...
+echo Agregando Sysinternals al PATH de desarrollo...
+set PATHDES=%PATHDES%;%SYSINTERNALS%
+echo Agregando Scripts al PATH de desarrollo...
 set PATHDES=%PATHDES%;%SCRIPT%
-echo Agregando %UTIL% al PATH de desarrollo...
+echo Agregando Utilidades varias al PATH de desarrollo...
 set PATHDES=%PATHDES%;%UTIL%
 
 echo.
@@ -204,15 +215,23 @@ echo.
 :EquipoNoValido
 @rem Eliminamos variables de entorno usadas internamente en el script
 set ANT=
+set DERBY=
 set DRIVE=
-set WINDOWSAPPS=
-set POWERSHELL=
+set GIT=
+set GLF5=
+set GLF6=
+set jdkactivado=
+set MVN=
+set MYSQL=
+set OPENSSL=
 set PATHSYS=
 set PATHDES=
-set OPENSSL=
-set GIT=
-set MVN=
+set POWERSHELL=
+set SCRIPT=
+set SYSINTERNALS=
 set TOMEE=
-set jdkactivado=
+set UTIL=
 set var=
+set WINDOWSAPPS=
+
 echo.
