@@ -38,6 +38,7 @@
 @rem *                   servidores de aplicaciones Glassfish 5 y Glassfish 6           *
 @rem *    - 2021/09/26 - Se agrega la ruta para Sysinternals.                           *
 @rem *    - 2022/02/14 - Se corrige la ruta de la variable de entorno CATALINA_HOME     *
+@rem *                   Se agrega la variable de entorno DERBY_HOME                    *
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -167,6 +168,9 @@ set UTIL=%PATHDES%\utiles
 
 @rem Variable necesaria para la ejecucion de Tomee
 set CATALINA_HOME=%DRIVE%\des\bin\tomee
+
+@rem Variable para la base de datos Derby
+set DERBY_HOME=%DRIVE%\des\bin\derby\lib
 
 @rem Agregamos la ruta a los ejecutables del entorno de Java elegido
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin
