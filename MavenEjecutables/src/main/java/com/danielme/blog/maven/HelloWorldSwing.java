@@ -50,11 +50,12 @@ import java.awt.Dimension;
  */
 import javax.swing.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HelloWorldSwing {
 
-  private static final Logger LOG = Logger.getLogger(HelloWorldSwing.class);
+  private static final Logger LOG = LogManager.getLogger(HelloWorldSwing.class);
 
   /**
    * Creamos el IGU y lo mostramos. Por seguridad del hilo, este método debe ser invocado desde el hilo de gestión de eventos.
