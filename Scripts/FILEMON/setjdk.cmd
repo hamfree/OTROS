@@ -33,10 +33,12 @@
 @rem *    - 2021/01/23 - Se agrega de nuevo la opcion del JDK 8.                        *
 @rem *    - 2021/05/05 - Se cambia la version 15 de JDK por la 16.                      *
 @rem *    - 2021/05/26 - Se genera una nueva variable para la unidad donde se           *
-@rem *                   encuentra la instalación de desarrollo, DRIVE.                * 
+@rem *                   encuentra la instalación de desarrollo, DRIVE.                 * 
 @rem *    - 2021/08/07 - Se agregan las rutas para la base de datos Derby y los         *
 @rem *                   servidores de aplicaciones Glassfish 5 y Glassfish 6           *
 @rem *    - 2021/09/26 - Se agrega la ruta para Sysinternals.                           *
+@rem *    - 2022/02/14 - Se corrige la ruta de la variable de entorno CATALINA_HOME     *
+@rem *                   Se agrega la variable de entorno DERBY_HOME                    *
 @rem *                                                                                  *
 @rem ************************************************************************************
 
@@ -164,8 +166,11 @@ set SYSINTERNALS=%PATHDES%\sysinternals
 set UTIL=%PATHDES%\utiles
 
 
-@rem Variable necesaria para la ejecucion de Tomcat
-set CATALINA_HOME=%DRIVE%\des\bin\tomcat
+@rem Variable necesaria para la ejecucion de Tomee
+set CATALINA_HOME=%DRIVE%\des\bin\tomee
+
+@rem Variable para la base de datos Derby
+set DERBY_HOME=%DRIVE%\des\bin\derby\lib
 
 @rem Agregamos la ruta a los ejecutables del entorno de Java elegido
 set PATHDES=%PATHDES%;%JAVA_HOME%\bin
