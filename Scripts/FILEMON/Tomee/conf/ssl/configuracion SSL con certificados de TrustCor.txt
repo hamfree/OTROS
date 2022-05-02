@@ -1,0 +1,92 @@
+Documento recogido de la dirección URL:
+https://trustcor.com/support/ssl-install/tomcat-ssl-installation.php
+
+A través de mi cuenta en No-IP adquirí de forma gratuita un certificado TLS para un servidor web, que puedo usar con Tomcat/TomEE. 
+Estas son las instrucciones de esa Autoridad de Certificación.
+
+How to Install a TLS/SSL Certificate in Tomcat
+==============================================
+
+
+
+The following instructions will guide you through the SSL Certificate installation process on Tomcat. If you have more than one 
+server or device, you will need to install the certificate on each server or device you need to secure.
+
+What You'll Need
+----------------
+
+    1. Your server certificate file
+       This is the TrustCor certificate you received for your domain.
+    2. Your intermediate certificate(s)
+       These files allow the devices connecting to your server to identify TrustCor as the issuing CA. There may be more than one 
+       of these certificates. If you downloaded the pem-chain file, it will also contain the Intermediate certificate(s) bundled 
+       with your domain's certificate.
+    3. Your private key
+       This file should be on your server, or in your possession if you generated your CSR from a free generator tool. On certain 
+       platforms, such as Microsoft IIS, the private key is not immediately visible to you but the server is keeping track of it.
+
+Installation Instructions
+-------------------------
+
+    1. Convert your certificate files
+       Convert your certificate files from .PEM (.cer or .crt) to PKCS#7 (.p7b) format. You can easily do this on your own system 
+       by running the OpenSSL command below.
+
+       openssl crl2pkcs7 -nocrl -certfile certificate.cer -out certificate.p7b -certfile CACert.cer
+
+
+       Save the certificate.p7b certificate file to the same directory as your keystore.
+    2. Access your Directory
+       Go to the same Directory where you previously saved the keystore and Certificate Signing Request (CSR). Note: You must 
+       install the certificate file on the same keystore and under the same "alias name" (e.g., "-alias server") that you used to 
+       generate your CSR. If not, you will encounter problems during installation and may have to start over.
+    3. Run the Install command
+       To install the certificate file in your keystore, run the following command:
+
+       keytool -import -trustcacerts -alias server -file your_file_name.p7b -keystore your_domain_name.jks
+
+
+       Note: Replace "your_domain_name" with the primary domain you will be securing and "your_file_name" with the PKCS#7 file 
+       name that you recently converted and saved.
+
+       You should get a confirmation that the "Certificate reply was installed in keystore". If you are prompted to trust the 
+       certificate, type y or yes.
+
+       Your keystore file (your_domain_name.jks) is now ready to be used on your Tomcat Server. Now, you are ready to configure your 
+       server to use your certificate.
+
+Configure Your SSL/TLS Connector
+--------------------------------
+
+Before your Tomcat server can accept secure connections, you need to configure an SSL Connector.
+
+    1. Open the .xml file
+       Open the .xml file from your server in a text editor such as Notepad.
+       Note: Typically, the server.xml file is in the conf folder in your Tomcat’s home directory.
+    2. Locate your connector
+       Locate the connector that you intend to use the new keystore to secure.
+       Usually, a connector with port 443 or 8443 is used.
+    3. Uncomment the connector
+       Uncomment the connector – if necessary – by removing the comment tags (< ! – and – >).
+    4. Enter the keystore filename and password
+       Enter the correct keystore filename and password. See example below:
+
+    <Connector port="443" maxHttpHeaderSize="8192" maxThreads="100"  
+        minSpareThreads="25" maxSpareThreads="75"  
+        enableLookups="false" disableUploadTimeout="true"  
+        acceptCount="100" scheme="https" secure="true" 
+        SSLEnabled="true" clientAuth="false" 
+        sslProtocol="TLS" keyAlias="server"  
+        keystoreFile="/home/user_name/your_domain_name.jks"  
+        keystorePass="your_keystore_password" />
+
+    Note: If you are using a version prior to Tomcat 7, please change the word "keystorePass" to "keypass".
+
+    5. Save your changes
+       Save all your changes made to the server.xml file.
+    6. Restart Tomcat
+       Restart the Tomcat service to complete the installation process.
+
+Your certificate is now installed. You can navigate to your site in a web browser and view the certificate/site information to verify 
+if HTTPS/SSL is working properly. Remember, you may need to restart your server for changes to take effect.
+

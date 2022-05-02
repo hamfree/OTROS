@@ -1,0 +1,31 @@
+C:\WINDOWS\system32
+C:\WINDOWS
+C:\WINDOWS\System32\Wbem
+C:\WINDOWS\System32\WindowsPowerShell\v1.0
+C:\WINDOWS\System32\OpenSSH
+C:\Program Files\dotnet\
+C:\Program Files\Microsoft SQL Server\130\Tools\Binn\
+C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common
+C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR
+C:\Program Files (x86)\ZeroTier\One\
+D:\Program Files (x86)\Bitvise SSH Client
+D:\Program Files\Nirsoft\Sysinternals
+D:\Program Files\OpenSSL\bin
+D:\Program Files\Kse
+D:\Program Files\FFmpeg
+D:\Program Files\Microsoft VS Code\bin
+E:\des\bin\jdk11\bin
+E:\des\bin\scripts
+E:\des\bin\utiles
+E:\des\bin\mvn\bin
+E:\des\bin\ant\bin
+E:\des\bin\GnuPG\bin
+E:\des\bin\tomee\bin
+E:\des\bin\mysql\bin
+E:\des\bin\node\
+E:\des\bin\derby\bin
+C:\Users\juanf\AppData\Local\Microsoft\WindowsApps
+C:\Users\juanf\.dotnet\tools
+D:\Program Files (x86)\Nmap
+C:\Users\juanf\AppData\Roaming\npm
+E:\des\bin\git\cmd 
