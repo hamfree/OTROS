@@ -113,20 +113,7 @@ set SCRIPTS=%PATHDES%\scripts
 set UTILES=%PATHDES%\utiles
 set NODE=%PATHDES%\node
 
-@rem Componemos el path PATHDES de las herramientas de desarrollo.
-set PATHDES=%PATHDES%;%JAVA_HOME%\bin
-set PATHDES=%PATHDES%;%MVN%
-set PATHDES=%PATHDES%;%GIT%
-set PATHDES=%PATHDES%;%GITCMD%
-set PATHDES=%PATHDES%;%GPG%
-set PATHDES=%PATHDES%;%ANT%
-set PATHDES=%PATHDES%;%TOMEE%
-set PATHDES=%PATHDES%;%DERBY%
-set PATHDES=%PATHDES%;%MYSQL%
-set PATHDES=%PATHDES%;%KSE%
-set PATHDES=%PATHDES%;%SCRIPTS%
-set PATHDES=%PATHDES%;%UTILES%
-set PATHDES=%PATHDES%;%NODE%
+
 
 :Menu
 cls
@@ -204,8 +191,26 @@ echo.
 echo Pulse una tecla para componer el PATH del sistema...
 pause>Nul
 
+
+@rem Componemos el path PATHDES de las herramientas de desarrollo.
+set PATHDES=%PATHDES%;%JAVA_HOME%\bin
+set PATHDES=%PATHDES%;%MVN%
+set PATHDES=%PATHDES%;%GIT%
+set PATHDES=%PATHDES%;%GITCMD%
+set PATHDES=%PATHDES%;%GPG%
+set PATHDES=%PATHDES%;%ANT%
+set PATHDES=%PATHDES%;%TOMEE%
+set PATHDES=%PATHDES%;%DERBY%
+set PATHDES=%PATHDES%;%MYSQL%
+set PATHDES=%PATHDES%;%KSE%
+set PATHDES=%PATHDES%;%SCRIPTS%
+set PATHDES=%PATHDES%;%UTILES%
+set PATHDES=%PATHDES%;%NODE%
+
 set PATH=
 set PATH=%PATHSYS%;%PATHDES%
+
+
 
 cls
 echo Equipo: %computername%

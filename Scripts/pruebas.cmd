@@ -33,13 +33,15 @@ echo Seleccione su opción tecleando el número respectivo.
 echo.
 echo 1. Primera Opción
 echo 2. Segunda Opción
-echo 3. Salir
+echo 3. Como borrar el directorio actual y todo lo que cuelga de el
+echo 4. Salir
 @rem Recogida del valor del usuario y envío a las distintas opciones
 set /p var=
 if %var%==1 goto :Primero
 if %var%==2 goto :Segundo
-if %var%==3 goto :Salida
-if %var% GTR 3 echo Error
+if %var%==3 goto :Tercero
+if %var%==4 goto :Salida
+if %var% GTR 4 echo Error
 goto :Menu
 
 @rem Aqui están las distintas opciones del menú
@@ -57,5 +59,17 @@ echo Esta es la Segunda Opción
 echo Presiona una tecla para volver al  menú
 pause>Nul
 goto :Menu
+:Tercero
+cls 
+color 80
+echo Para borrar el directorio actual y todo lo que cuelga de el
+echo ejecute el siguiente comando:
+echo.
+echo rd . /s/q 2>nul
+echo.
+echo Presiona una tecla para volver al  menú
+pause>Nul
+goto :Menu
 :Salida
-color 0F
+cls
+color
