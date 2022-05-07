@@ -28,6 +28,8 @@
 @rem                                                                               
 @rem                                                                               
 @rem Historia:                      
+@rem - 2022/05/07 - Dependiendo del JDK elegido se fijara la ruta de Glassfish 5 o 
+@rem                Glassfish 6.
 @rem - 2022/05/07 - Se agrega la ruta del directorio de utilidades.                                  
 @rem - 2022/04/02 - Copiado originalmente de la versión para FILEMON, y modificado 
 @rem                con las características y programas instalados en el nuevo     
@@ -83,7 +85,7 @@ goto :Menu
 @rem Entorno de desarrollo JDK 8
 :jdk8
 cls 
-set jdkactivado=JDK 8
+set jdkactivado=JDK_8
 echo Estableciendo JAVA_HOME 
 set JAVA_HOME=%DRIVE%\des\bin\jdk8
 echo Estableciendo PATH 
@@ -96,7 +98,7 @@ goto :Menu
 @rem Entorno de desarrollo JDK 11
 :jdk11
 cls 
-set jdkactivado=JDK 11
+set jdkactivado=JDK_11
 echo Estableciendo JAVA_HOME 
 set JAVA_HOME=%DRIVE%\des\bin\jdk11
 echo Estableciendo PATH 
@@ -109,7 +111,7 @@ goto :Menu
 @rem Entorno de desarrollo JDK 17
 :jdk17
 cls 
-set jdkactivado=JDK 17
+set jdkactivado=JDK_17
 echo Estableciendo JAVA_HOME 
 set JAVA_HOME=%DRIVE%\des\bin\jdk17
 echo Estableciendo PATH 
@@ -135,8 +137,13 @@ set PATHSYS=%PATHSYS%;%WINDOWSAPPS%
 set PATHSYS=%PATHSYS%;%POWERSHELL%
 
 @rem El resto de rutas de otras aplicaciones incluidas en el path del sistema
-set PATHSYS=%PATHSYS%;C:\Program Files\Calibre2
-set PATHSYS=%PATHSYS%;C:\Program Files ^(x86^)\gnupg\bin
+set PATHSYS=%PATHSYS%;%ProgramFiles%\Calibre2
+set PATHSYS=%PATHSYS%;%ProgramFiles(x86)%\gnupg\bin
+set PATHSYS=%PATHSYS%;%ProgramFiles(x86)%\Bitvise SSH Client
+set PATHSYS=%PATHSYS%;%ProgramFiles%\dotnet\
+set PATHSYS=%PATHSYS%;%ProgramFiles%\Docker\Docker\resources\bin
+set PATHSYS=%PATHSYS%;%ProgramData%\DockerDesktop\version-bin
+set PATHSYS=%PATHSYS%;%ProgramFiles%\NVIDIA Corporation\NVIDIA NvDLISR
 
 @rem Variables para herramientas del entorno de desarrollo
 set PATHDES=%DRIVE%\des\bin
@@ -145,8 +152,18 @@ set PATHDES=%DRIVE%\des\bin
 set ANT=%PATHDES%\ant\bin
 set DERBY=%PATHDES%\derby\bin
 set GIT=%PATHDES%\git\bin
-set GLF5=%PATHDES%\glassfish\bin;%PATHDES%\glassfish\glassfish\bin
-set GLF6=%PATHDES%\glassfish6\bin;%PATHDES%\glassfish6\glassfish\bin
+
+@rem Con el JDK8 usamos Glassfish 5 y con JDK 11 y 17 Glass
+if %jdkactivado%==JDK_8 (
+    echo Con el JDK 8 Glassfish se ejecutara en version 5
+    set GLASSFISH=%PATHDES%\glassfish5\bin;%PATHDES%\glassfish5\glassfish\bin
+) else (
+    echo Con el %jdkactivado% Glassfish se ejecutara en version 6
+    set GLASSFISH=%PATHDES%\glassfish6\bin;%PATHDES%\glassfish6\glassfish\bin
+)
+
+
+
 set MVN=%PATHDES%\mvn\bin
 set MYSQL=%PATHDES%\mysql\bin
 set OPENSSL=%PATHDES%\openssl\bin
@@ -167,8 +184,7 @@ set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
 set PATHDES=%PATHDES%;%ANT%
 set PATHDES=%PATHDES%;%DERBY%
-set PATHDES=%PATHDES%;%GLF5%
-set PATHDES=%PATHDES%;%GLF6%
+set PATHDES=%PATHDES%;%GLASSFISH%
 set PATHDES=%PATHDES%;%GIT%
 set PATHDES=%PATHDES%;%MVN%
 set PATHDES=%PATHDES%;%MYSQL%
@@ -199,8 +215,7 @@ set ANT=
 set DERBY=
 set DRIVE=
 set GIT=
-set GLF5=
-set GLF6=
+set GLASSFISH=
 set jdkactivado=
 set MVN=
 set MYSQL=
