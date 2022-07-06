@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
-	<!--
-	Configuración de toolchains para portátil OFELIA
-	-->
-	<toolchain>
-		<type>jdk</type>
-		<provides>
-			<version>1.8</version>
-			<vendor>oracle</vendor>
-		</provides>
-		<configuration>
-			<jdkHome>c:/des/bin/jdk8</jdkHome>
-		</configuration>
-	</toolchain>
-	<toolchain>
-		<type>jdk</type>
-		<provides>
-			<version>11</version>
-			<vendor>oracle</vendor>
-		</provides>
-		<configuration>
-			<jdkHome>c:/des/bin/jdk11</jdkHome>
-		</configuration>
-	</toolchain>
-	<toolchain>
-		<type>jdk</type>
-		<provides>
-			<version>17</version>
-			<vendor>oracle</vendor>
-		</provides>
-		<configuration>
-			<jdkHome>c:/des/bin/jdk17</jdkHome>
-		</configuration>
-	</toolchain>
+<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
+>>>>>>> 84080ee483c56620212bb671ec709c4d973bc2bd
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>1.8</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+      <jdkHome>e:\des\bin\jdk8</jdkHome>
+    </configuration>
+  </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>11</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+      <jdkHome>e:\des\bin\jdk11</jdkHome>
+    </configuration>
+  </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>16</version>
+      <vendor>oracle</vendor>
+    </provides>
+    <configuration>
+      <jdkHome>e:\des\bin\jdk16</jdkHome>
+    </configuration>
+  </toolchain>
 </toolchains>
