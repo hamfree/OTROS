@@ -1,25 +1,28 @@
 Configuración de Maven
 ======================
 
-* En el portátil FILEMON:
-  Para que Maven "haga caso" completamente de la configuración y luego no duplique el repositorio 
-  hay que copiar los ficheros de configuración:
-  - settings.xml
-  - toolchains.xml
+* En el portátil ELSUPER:
+  1. Instalar Maven en "C:\des\bin\mvn"
+  2. Agregar la ruta "C:\des\bin\mvn\bin" al PATH:
+     - Abrir un Terminal con privilegios de Administrador.
+     - Ejecutar el comando: SystemPropertiesAdvanced.exe
+     - Pestaña 'Opciones avanzadas' - Botón 'Variables de entorno...'
+     - En la tabla 'Variables del sistema' seleccionar la variable 'Path' y 
+       pulsar el botón 'Editar' de debajo.
+     - Pulsar el botón 'Nuevo' e introducir la ruta 'C:\des\bin\mvn\bin'.
+     - Con los botones 'Subir' y 'Bajar' podremos indicar su orden (siempre por debajo de 
+       ruta de la JVM).
+     - Pulsar 'Aceptar' en los tres cuadros de diálogo abiertos para confirmar los cambios.
+     - Si hay consolas o aplicaciones Terminal abiertas cerrarlas y volver a abrirlas para 
+       que lean la nueva configuración del PATH.
 
-  En los directorios:
-  - C:\des\bin\mvn\conf
-  - C:\des\data\m2 <- Aquí es donde quiero que se almacene el repositorio local de Maven
-  - C:\Users\hamfree\.m2\ <- Directorio donde, por defecto, Maven guarda el repositorio local.
+  3. Para que Maven "haga caso" completamente de la configuración y luego no duplique el repositorio 
+     hay que copiar los ficheros de configuración:
+     - settings.xml
+     - toolchains.xml
 
-* en el ordenador personal ELSUPER:
-  Copiar los ficheros de configuración:
-  - settings.xml
-  - toolchains.xml
-
-  En los directorios:
-  - E:\des\bin\mvn\conf
-  - E:\des\data\m2 <- Aquí es donde quiero que se almacene el repositorio local de Maven
-  - C:\Users\hamfree\.m2\ <- Directorio donde, por defecto, Maven guarda el repositorio local.
-
+     En los directorios:
+     - E:\des\bin\mvn\conf
+     - E:\des\data\m2 <- Aquí es donde quiero que se almacene el repositorio local de Maven
+     - C:\Users\juanf\.m2\ <- Directorio donde, por defecto, Maven guarda el repositorio local.  
 

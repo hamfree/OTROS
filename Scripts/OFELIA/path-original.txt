@@ -1,0 +1,24 @@
+C:\Windows\system32
+C:\Windows
+C:\Windows\System32\Wbem
+C:\Windows\System32\WindowsPowerShell\v1.0\
+C:\Windows\System32\OpenSSH\
+C:\des\bin\jdk11\bin
+C:\des\bin\python
+C:\des\bin\python\Scripts\
+C:\des\bin\mvn\bin
+C:\des\bin\tomee\bin
+C:\des\bin\git
+C:\des\bin\code\bin
+C:\des\bin\node\
+C:\des\bin\scripts
+C:\des\bin\utiles
+C:\Program Files (x86)\Gpg4win\..\GnuPG\bin
+C:\Program Files (x86)\Bitvise SSH Client
+C:\Program Files (x86)\ZeroTier\One\
+C:\Program Files\dotnet\
+C:\Program Files\Docker\Docker\resources\bin
+C:\ProgramData\DockerDesktop\version-bin
+C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR
+C:\Users\juanf\AppData\Local\Microsoft\WindowsApps
+C:\Users\juanf\AppData\Roaming\npm 
