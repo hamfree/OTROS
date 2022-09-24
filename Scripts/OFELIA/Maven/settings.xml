@@ -57,11 +57,11 @@
     <!--Repositorios de Package Cloud para el curso de Maven de Udemy -->
     <server>
       <id>packagecloud-hamfree.release</id>
-      <password>{Mb/n/QnL2wcHwZu4aVISuzt2Lh1XI60QXTAOPWRW5HAe3pXoO511QA4qbO9X2C0q}</password>
+      <password>{G+CeG/1piGEHd4neo4Ab6Wk68ub5LCXDDXf2HH6YXid+dqHHZaIEhflNC7Tse6a87M4Gy1nYJuk0x+kjntNS8BFG6H81gHQRVElQqnJKZMI=}</password>
     </server>
     <server>
       <id>packagecloud-hamfree.snapshot</id>
-      <password>{Mb/n/QnL2wcHwZu4aVISuzt2Lh1XI60QXTAOPWRW5HAe3pXoO511QA4qbO9X2C0q}</password>
+      <password>{G+CeG/1piGEHd4neo4Ab6Wk68ub5LCXDDXf2HH6YXid+dqHHZaIEhflNC7Tse6a87M4Gy1nYJuk0x+kjntNS8BFG6H81gHQRVElQqnJKZMI=}</password>
     </server>
   </servers>
   

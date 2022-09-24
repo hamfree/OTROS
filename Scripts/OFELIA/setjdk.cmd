@@ -150,6 +150,7 @@ set PATHDES=%DRIVE%\des\bin
 
 @rem Aqui van las rutas a los binarios de las herramientas de desarrollo.
 set ANT=%PATHDES%\ant\bin
+set CODE=%PATHDES%\code
 set DERBY=%PATHDES%\derby\bin
 set GIT=%PATHDES%\git\bin
 
@@ -166,6 +167,8 @@ if %jdkactivado%==JDK_8 (
 
 set MVN=%PATHDES%\mvn\bin
 set MYSQL=%PATHDES%\mysql\bin
+set NEXUS=%PATHDES%\nexus\bin
+set NODE=%PATHDES%\node
 set OPENSSL=%PATHDES%\openssl\bin
 set TOMEE=%PATHDES%\tomee\bin
 set SCRIPT=%PATHDES%\scripts
@@ -183,11 +186,14 @@ set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
 set PATHDES=%PATHDES%;%ANT%
+set PATHDES=%PATHDES%;%CODE%
 set PATHDES=%PATHDES%;%DERBY%
 set PATHDES=%PATHDES%;%GLASSFISH%
 set PATHDES=%PATHDES%;%GIT%
 set PATHDES=%PATHDES%;%MVN%
 set PATHDES=%PATHDES%;%MYSQL%
+set PATHDES=%PATHDES%;%NEXUS%
+set PATHDES=%PATHDES%;%NODE%
 set PATHDES=%PATHDES%;%OPENSSL%
 set PATHDES=%PATHDES%;%TOMEE%
 set PATHDES=%PATHDES%;%SCRIPT%
@@ -212,6 +218,7 @@ echo.
 :EquipoNoValido
 @rem Eliminamos variables de entorno usadas internamente en el script
 set ANT=
+set CODE=
 set DERBY=
 set DRIVE=
 set GIT=
@@ -219,6 +226,8 @@ set GLASSFISH=
 set jdkactivado=
 set MVN=
 set MYSQL=
+set NEXUS=
+set NODE=
 set OPENSSL=
 set PATHSYS=
 set PATHDES=
