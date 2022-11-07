@@ -105,7 +105,7 @@ set /p var=
 if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
 if %var%==3 goto :jdk17
-if %var%==3 goto :jdk19
+if %var%==4 goto :jdk19
 if %var%==0 goto :salida
 if %var% GTR 4 echo Error
 goto :Menu
