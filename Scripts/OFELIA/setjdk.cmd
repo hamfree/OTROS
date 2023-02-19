@@ -16,7 +16,6 @@
 @rem la ruta "C:\des\bin". Las aplicaciones cuyas rutas se agregan al path         
 @rem son:                                                                          
 @rem - Ant   
-@rem - Code                                                                      
 @rem - Derby                                                                       
 @rem - Directorio con scripts                                                      
 @rem - Directorio con utilidades                                                   
@@ -31,10 +30,15 @@
 @rem - SDK Java (versiones 1.8, 11, 17 y 19)                       
 @rem - Servidor J2EE Tomee                                                         
 @rem - Servidor J2EE Glassfish 5                                                        
-@rem - Servidor J2EE Glassfish 6                                                        
+@rem - Servidor J2EE Glassfish 6                    
+@rem - Servidor Wildfly                                    
 @rem                                                                               
 @rem                                                                               
 @rem Historia:
+@rem - 2023/02/19 - Se elimina del PATH la aplicación 'Visual Studio Code' porque 
+@rem                la desinstalé y ya no uso. Ahora uso Notepad++ que ocupa menos 
+@rem                espacio y para mí es suficiente. Se agrega el servidor de 
+@rem                aplicaciones Wildfly.
 @rem - 2022/11/04 - Se corrige la construcción del PATH después de una actualización
 @rem                de los SDKs de JAVA, el cambio de ruta de OpenSSL y la 
 @rem                instalación de otras utilidades.
@@ -216,7 +220,7 @@ set SCRIPT=%PATHDES%\scripts
 set SYSINT=%PATHDES%\sysint
 set TOMEE=%PATHDES%\tomee\bin
 set UTIL=%PATHDES%\utiles
-
+set WILDFLY=%PATHDES%\wildfly\bin
 
 
 @rem Variable necesaria para la ejecucion de Tomee
@@ -231,7 +235,6 @@ set PATHDES=%PATHDES%;%JAVA_HOME%\bin
 @rem Componemos el path PATHDES de las herramientas de desarrollo.
 @rem El orden de rutas sigue el orden alfabético de las variables de entorno.
 set PATHDES=%PATHDES%;%ANT%
-set PATHDES=%PATHDES%;%CODE%
 set PATHDES=%PATHDES%;%DERBY%
 set PATHDES=%PATHDES%;%GLASSFISH%
 set PATHDES=%PATHDES%;%GIT%
@@ -245,6 +248,7 @@ set PATHDES=%PATHDES%;%SCRIPT%
 set PATHDES=%PATHDES%;%SYSINT%
 set PATHDES=%PATHDES%;%TOMEE%
 set PATHDES=%PATHDES%;%UTIL%
+set PATHDES=%PATHDES%;%WILDFLY%
 
 echo.
 echo Pulse una tecla para componer el PATH del sistema...
@@ -288,5 +292,6 @@ set UTIL=
 set TOMEE=
 set var=
 set WINDOWSAPPS=
+set WILDFLY=
 
 echo.
