@@ -19,13 +19,69 @@ if not %COMPUTERNAME%==ELSUPER (
 @rem El disco de desarrollo en ELSUPER tiene la unidad E:
 set DRIVE=E:
 
+
+@rem En el path del sistema usamos PATHSYS para agregar las rutas mas 
+@rem importantes primero
+set PATHSYS=%SYSTEMROOT%\system32
+
 @rem Variables para herramientas del entorno de desarrollo
 set PATHDES=%DRIVE%\des\bin
 
-@rem Variable necesaria para la ejecución de Tomcat
+@rem Las apps de windows instaladas por el usuario y sus scripts de powershell
+set WNDAPPS=%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
+set WPS=%USERPROFILE%\Documents\WindowsPowerShell\Scripts
+
+@rem Las rutas estandar de Windows mas las aplicaciones universales del usuario 
+@rem y su carpeta de scripts de PowerShell
+set PATHSYS=%PATHSYS%;%SYSTEMROOT%
+set PATHSYS=%PATHSYS%;%SYSTEMROOT%\System32\Wbem
+set PATHSYS=%PATHSYS%;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0
+set PATHSYS=%PATHSYS%;%SYSTEMROOT%\System32\OpenSSH
+set PATHSYS=%PATHSYS%;%WNDAPPS%
+set PATHSYS=%PATHSYS%;%WPS%
+
+@rem Las aplicaciones instaladas por mi en ELSUPER en la unidad C 
+set PATHSYS=%PATHSYS%;%ProgramFiles%\dotnet\
+set PATHSYS=%PATHSYS%;%ProgramFiles%\Microsoft SQL Server\130\Tools\Binn\
+set PATHSYS=%PATHSYS%;%ProgramFiles%\NVIDIA Corporation\NVIDIA NvDLISR
+set PATHSYS=%PATHSYS%;%ProgramFiles(x86)%\NVIDIA Corporation\PhysX\Common
+set PATHSYS=%PATHSYS%;%ProgramFiles(x86)%\ZeroTier\One
+set PATHSYS=%PATHSYS%;%ProgramFiles(x86)%\dotnet\
+
+@rem Rutas para el perfil del usuario actual
+set PATHSYS=%PATHSYS%;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
+set PATHSYS=%PATHSYS%;%USERPROFILE%\.dotnet\tools
+
+@rem Las aplicaciones instaladas por mi en ELSUPER en la unidad D
+@rem Ruta de archivos de programa de 64 bit en la unidad D:
+set PRF=D:\Program Files
+
+@rem Ruta de archivos de programa de 32 bit en la unidad D:
+set PRF86=D:\Program Files ^(x86^)
+set PATHSYS=%PATHSYS%;%PRF%\Nirsoft
+set PATHSYS=%PATHSYS%;%PRF%\FFmpeg
+set PATHSYS=%PATHSYS%;%PRF%\Microsoft VS Code\bin
+set PATHSYS=%PATHSYS%;%PRF86%\Bitvise SSH Client
+
+@rem Variables de entorno para cada una de las herramientas de desarrollo
+set ANT=%PATHDES%\ant\bin
+set DERBY=%PATHDES%\derby\bin
+set GIT=%PATHDES%\git\bin
+set GITCMD=%PATHDES%\git\cmd
+set GPG=%PATHDES%\GnuPG\bin
+set KSE=%PATHDES%\kse
+set MVN=%PATHDES%\mvn\bin
+set MYSQL=%PATHDES%\mysql\bin
+set NODE=%PATHDES%\node
+set OPENSSL=%PATHDES%\openssl\bin
+set SCRIPTS=%PATHDES%\scripts
+set UTILES=%PATHDES%\utiles
+
+@rem Aquí fijamos como JDK la versión 17.
+set JAVA_HOME=%PATHDES%\jdk17
 
 
-
+@rem Menú para seleccionar el servidor de aplicaciones por defecto
 :Menu
 cls
 echo.
@@ -77,6 +133,32 @@ goto :Menu
 :salida
 
 cls
+@rem Componemos el path PATHDES de las herramientas de desarrollo.
+set PATHDES=%PATHDES%;%ANT%
+set PATHDES=%PATHDES%;%DERBY%
+set PATHDES=%PATHDES%;%GIT%
+set PATHDES=%PATHDES%;%GITCMD%
+set PATHDES=%PATHDES%;%GPG%
+set PATHDES=%PATHDES%;%JAVA_HOME%\bin
+set PATHDES=%PATHDES%;%KSE%
+set PATHDES=%PATHDES%;%MVN%
+set PATHDES=%PATHDES%;%MYSQL%
+set PATHDES=%PATHDES%;%NODE%
+set PATHDES=%PATHDES%;%OPENSSL%
+set PATHDES=%PATHDES%;%SCRIPTS%
+
+@rem La ruta de los binarios de tomcat/tomee dependerá del CATALINA_HOME elegido
+set PATHDES=%PATHDES%;%CATALINA_HOME%\bin
+
+set PATHDES=%PATHDES%;%UTILES%
+
+
+set PATH=
+set PATH=%PATHSYS%;%PATHDES%
+echo PATH actual:
+echo %PATH%
+echo JAVA_HOME actual:
+echo %JAVA_HOME%
 echo CATALINA_HOME actual: 
 echo %CATALINA_HOME%
 echo.
@@ -86,4 +168,23 @@ echo.
 set var=
 set PATHDES=
 set DRIVE=
+set DRIVE=
+set WNDAPPS=
+set WPS=
+set PATHSYS=
+set PATHDES=
+set PRF=
+set PRF86=
+set ANT=
+set CODE=
+set GIT=
+set GITCMD=
+set GPG=
+set KSE=
+set MVN=
+set MYSQL=
+set OPENSSL=
+set SCRIPTS=
+set TOMEE=
+set UTILES=
 echo.
