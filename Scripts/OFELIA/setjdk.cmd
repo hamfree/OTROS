@@ -223,8 +223,9 @@ set UTIL=%PATHDES%\utiles
 set WILDFLY=%PATHDES%\wildfly\bin
 
 
-@rem Variable necesaria para la ejecucion de Tomee
-set CATALINA_HOME=%DRIVE%\des\bin\tomee
+@rem Borramos el valor de CATALINA_HOME. Este valor se fija mediante el 
+@rem script 'setserver.cmd' para poder elegir entre Tomcat o TomEE.
+set CATALINA_HOME=
 
 @rem Variable para la base de datos Derby
 set DERBY_HOME=%DRIVE%\des\bin\derby\lib
