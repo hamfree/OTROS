@@ -1,4 +1,7 @@
-﻿# 2023/01/16 - jfr, se agrega el dominio elbacterio.myqnapcloud.com, para 
+﻿# 2023/03/06 - jfr, modifico la entrada de latia.sytes.net, porque es el
+#              nombre del dominio configurado en el certificado del servidor
+#              TomEE en su conexión segura.
+# 2023/01/16 - jfr, se agrega el dominio elbacterio.myqnapcloud.com, para 
 #              la red local. Este dominio está asociado al servicio 
 #              MyQNAPCloud de QNAP para acceder al NAS desde Internet.
 # 2022/12/14 - jfr, se agrega el dominio latia.sytes.net, para la red local. 
@@ -19,6 +22,7 @@
 
 192.168.100.253	elsuper
 192.168.100.253	elsuper.juanfranciscoruiz.nom.es
+192.168.100.253 latia.sytes.net 
 
 192.168.100.254	bacterio
 192.168.100.254	bacterio.juanfranciscoruiz.nom.es
@@ -28,4 +32,3 @@
 192.168.100.1	router
 192.168.100.1	fritz
 192.168.100.1	fritz.box
-192.168.100.1   latia.sytes.net 
