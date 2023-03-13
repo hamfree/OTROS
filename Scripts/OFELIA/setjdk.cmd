@@ -28,13 +28,13 @@
 @rem - OpenSSL                              
 @rem - Python                                       
 @rem - SDK Java (versiones 1.8, 11, 17 y 19)                       
-@rem - Servidor J2EE Tomee                                                         
-@rem - Servidor J2EE Glassfish 5                                                        
-@rem - Servidor J2EE Glassfish 6                    
+@rem - Servidor J2EE Tomee                                                                                                       
+@rem - Servidor Jakarta EE Glassfish 7
 @rem - Servidor Wildfly                                    
 @rem                                                                               
 @rem                                                                               
 @rem Historia:
+@rem - 2023/03/13 - Ahora solo se usa el servidor Jakarta EE Glassfish 7.0.2
 @rem - 2023/02/19 - Se elimina del PATH la aplicación 'Visual Studio Code' porque 
 @rem                la desinstalé y ya no uso. Ahora uso Notepad++ que ocupa menos 
 @rem                espacio y para mí es suficiente. Se agrega el servidor de 
@@ -200,16 +200,7 @@ set ANT=%PATHDES%\ant\bin
 set CODE=%PATHDES%\code
 set DERBY=%PATHDES%\derby\bin
 set GIT=%PATHDES%\git\bin;%PATHDES%\git\cmd
-
-@rem Con el JDK8 usamos Glassfish 5 y con los JDKs 11, 17 y 19 Glassfish 6
-if %jdkactivado%==JDK_8 (
-    echo Con el JDK 8 Glassfish se ejecutara en version 5
-    set GLASSFISH=%PATHDES%\glassfish5\bin;%PATHDES%\glassfish5\glassfish\bin
-) else (
-    echo Con el %jdkactivado% Glassfish se ejecutara en version 6
-    set GLASSFISH=%PATHDES%\glassfish6\bin;%PATHDES%\glassfish6\glassfish\bin
-)
-
+set GLASSFISH=%PATHDES%\glassfish\bin;%PATHDES%\glassfish\glassfish\bin
 set MVN=%PATHDES%\mvn\bin
 set MYSQL=%PATHDES%\mysql\bin
 set NODE=%PATHDES%\node
@@ -223,9 +214,8 @@ set UTIL=%PATHDES%\utiles
 set WILDFLY=%PATHDES%\wildfly\bin
 
 
-@rem Borramos el valor de CATALINA_HOME. Este valor se fija mediante el 
-@rem script 'setserver.cmd' para poder elegir entre Tomcat o TomEE.
-set CATALINA_HOME=
+@rem Fijamos el valor de CATALINA_HOME para el servidor TOMEE.
+set CATALINA_HOME=%DRIVE%\des\bin\tomee
 
 @rem Variable para la base de datos Derby
 set DERBY_HOME=%DRIVE%\des\bin\derby\lib
@@ -263,6 +253,7 @@ cls
 echo Equipo: %computername%
 echo Version de Java activada:
 java -XshowSettings:vm -version
+echo CATALINA_HOME: %CATALINA_HOME%
 echo PATH actual: 
 echo %PATH%
 echo.

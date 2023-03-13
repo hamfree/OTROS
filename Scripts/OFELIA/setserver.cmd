@@ -5,6 +5,9 @@
 @rem *    - Contenedor de servlets/JSP TOMCAT (En C:\des\bin\tomcat)                    *
 @rem *    - Servidor J2EE TOMEE (En C:\des\bin\tomee)                                   *
 @rem *                                                                                  *
+@rem *    2022/03/13 - Como ya solo uso Glassfish en su última versión, la 7.0.2        *
+@rem *                 elimino la parte del código que se refiere a Glassfish y         *
+@rem *                 dejo la ruta de GLASSFISH apuntando a c:\des\bin\glassfish       *
 @rem *    2022/02/19 - Modifico el script para que, aparte de seleccionar el            *
 @rem *                 el servidor de aplicaciones que arrancarán los comandos          *
 @rem *                 'catalina.bat' y 'startup.bat' modifique la ruta del PATH        *
@@ -124,18 +127,7 @@ set PATHDES=%DRIVE%\des\bin
 set ANT=%PATHDES%\ant\bin
 set DERBY=%PATHDES%\derby\bin
 set GIT=%PATHDES%\git\bin;%PATHDES%\git\cmd
-
-@rem Con el JDK8 usamos Glassfish 5 y con los JDKs 11, 17 y 19 Glassfish 6
-if %JAVA_HOME%==C:\des\bin\jdk8 (
-    echo Con el JDK 8 Glassfish se ejecutara en version 5
-	set MSGGLASSFISH=Glassfish 5 activado
-    set GLASSFISH=%PATHDES%\glassfish5\bin;%PATHDES%\glassfish5\glassfish\bin
-) else (
-    echo Con versiones superiores del JDK Glassfish se ejecutara en version 6
-	set MSGGLASSFISH=Glassfish 6 activado
-    set GLASSFISH=%PATHDES%\glassfish6\bin;%PATHDES%\glassfish6\glassfish\bin
-)
-
+set GLASSFISH=%PATHDES%\glassfish\bin;%PATHDES%\glassfish\glassfish\bin
 set MVN=%PATHDES%\mvn\bin
 set MYSQL=%PATHDES%\mysql\bin
 set NODE=%PATHDES%\node
@@ -185,9 +177,9 @@ echo PATH actual:
 echo %PATH%
 echo JAVA SDK:
 java --version
-echo "Servidor Tomcat | TomEE.:" %CATALINA_HOME%
-echo "Servidor Glassfish......:" %MSGGLASSFISH%
-echo "Servidor WildFly........:" %WILDFLY%
+echo Servidor Tomcat-TomEE : %CATALINA_HOME%
+echo Servidor Glassfish : %GLASSFISH%
+echo Servidor Wildfly : %WILDFLY%
 echo.
 
 :EquipoNoValido

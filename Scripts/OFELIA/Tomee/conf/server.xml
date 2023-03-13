@@ -21,7 +21,7 @@
                    connectionTimeout="20000" URIEncoding="UTF-8" />
 
         <Connector address="localhost" port="8443" 
-                   protocol="org.apache.coyote.http11.Http11AprProtocol"
+                   protocol="org.apache.coyote.http11.Http11Nio2Protocol"
                    maxThreads="150" SSLEnabled="true" >
             <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"  />
             <SSLHostConfig>
@@ -33,12 +33,15 @@
         </Connector>
         <Engine defaultHost="localhost" name="localhost">
             <Realm className="org.apache.catalina.realm.LockOutRealm">
-                <Realm className="org.apache.catalina.realm.DataSourceRealm" dataSourceName="jdbc/seguridad" 
-                       roleNameCol="role_name" userCredCol="user_pass" 
-                       userNameCol="user_name" userRoleTable="user_roles" 
-                       userTable="users">
+	<Realm className="org.apache.catalina.realm.DataSourceRealm"
+	       dataSourceName="jdbc/seguridad"
+	       roleNameCol="role_name"
+	       userCredCol="user_pass"
+	       userNameCol="user_name"
+	       userRoleTable="user_roles"
+	       userTable="users">
                 </Realm>
-            </Realm>
+</Realm>
             <Host name="localhost" appBase="webapps" 
                   autoDeploy="true" unpackWARs="true">
                 <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" 
