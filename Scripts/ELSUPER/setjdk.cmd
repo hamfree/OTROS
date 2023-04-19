@@ -92,6 +92,7 @@ echo      1. JDK 8
 echo      2. JDK 11
 echo      3. JDK 17
 echo      4. JDK 19
+echo      5. JDK 20
 echo      0. SALIR
 echo.
 echo      Equipo: %computername%
@@ -106,8 +107,9 @@ if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
 if %var%==3 goto :jdk17
 if %var%==4 goto :jdk19
+if %var%==5 goto :jdk20
 if %var%==0 goto :salida
-if %var% GTR 4 echo Error
+if %var% GTR 5 echo Error
 goto :Menu
 
 @rem Aqui estan las distintas opciones del menu
@@ -154,6 +156,18 @@ echo Version de java que se activara
 echo Presione una tecla para volver al menu
 pause>Nul
 goto :Menu
+
+:jdk20
+cls 
+set jdkactivado=JDK 20
+echo Estableciendo JAVA_HOME 
+set JAVA_HOME=%PATHDES%\jdk20
+echo Version de java que se activara
+%JAVA_HOME%\bin\java -version
+echo Presione una tecla para volver al menu
+pause>Nul
+goto :Menu
+
 
 :Error
 echo * ERROR - Ha elegido una opcion incorrecta *
