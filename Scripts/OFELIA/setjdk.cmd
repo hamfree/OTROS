@@ -34,6 +34,7 @@
 @rem                                                                               
 @rem                                                                               
 @rem Historia:
+@rem - 2023/04/20 - Se agrega la versión 20 del JDK.
 @rem - 2023/03/13 - Ahora solo se usa el servidor Jakarta EE Glassfish 7.0.2
 @rem - 2023/02/19 - Se elimina del PATH la aplicación 'Visual Studio Code' porque 
 @rem                la desinstalé y ya no uso. Ahora uso Notepad++ que ocupa menos 
@@ -77,6 +78,7 @@ echo      1. JDK 8
 echo      2. JDK 11
 echo      3. JDK 17
 echo      4. JDK 19
+echo      5. JDK 20
 echo      0. SALIR
 echo.
 echo.
@@ -90,8 +92,9 @@ if %var%==1 goto :jdk8
 if %var%==2 goto :jdk11
 if %var%==3 goto :jdk17
 if %var%==4 goto :jdk19
+if %var%==5 goto :jdk20
 if %var%==0 goto :salida
-if %var% GTR 4 goto :Error
+if %var% GTR 5 goto :Error
 goto :Menu
 
 :Error
@@ -146,6 +149,19 @@ cls
 set jdkactivado=JDK_19
 echo Estableciendo JAVA_HOME 
 set JAVA_HOME=%DRIVE%\des\bin\jdk19
+echo Estableciendo PATH 
+echo Version de java que se activara: 
+%JAVA_HOME%\bin\java -XshowSettings:vm -version
+echo Presiona una tecla para volver al menu
+pause > Nul
+goto :Menu
+
+@rem Entorno de desarrollo JDK 20
+:jdk20
+cls 
+set jdkactivado=JDK_20
+echo Estableciendo JAVA_HOME 
+set JAVA_HOME=%DRIVE%\des\bin\jdk20
 echo Estableciendo PATH 
 echo Version de java que se activara: 
 %JAVA_HOME%\bin\java -XshowSettings:vm -version
