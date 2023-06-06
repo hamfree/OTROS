@@ -2,8 +2,8 @@
 <Server port="8005"
         shutdown="SHUTDOWN">
 	<Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
-	<Listener className="org.apache.catalina.core.AprLifecycleListener"
-	          SSLEngine="on"/>
+	<Listener SSLEngine="on"
+	          className="org.apache.catalina.core.AprLifecycleListener"/>
 	<Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
 	<Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
 	<Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
@@ -16,33 +16,32 @@
 		          name="jdbc/seguridad"
 		          password="DauyxaDeGydYVhSyKx9t"
 		          type="javax.sql.DataSource"
-		          username="tomcat"
-		          url="jdbc:mysql://localhost:3306/tomcat?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+		          url="jdbc:mysql://localhost:3306/tomcat?zeroDateTimeBehavior=CONVERT_TO_NULL"
+		          username="tomcat"/>
 	</GlobalNamingResources>
-	<Service name="localhost">
-		<Connector address="localhost"
-		           port="8080"
-		           redirectPort="8443"
-		           protocol="org.apache.coyote.http11.Http11Nio2Protocol"
-		           maxPostSize="-1"
-		           disableUploadTimeout="false"
+	<Service name="192.168.100.252">
+		<Connector URIEncoding="UTF-8"
+		           address="192.168.100.252"
 		           connectionTimeout="20000"
-		           URIEncoding="UTF-8"/>
-		<Connector address="localhost"
-		           port="8443"
+		           disableUploadTimeout="false"
+		           maxPostSize="-1"
+		           port="8080"
 		           protocol="org.apache.coyote.http11.Http11Nio2Protocol"
+		           redirectPort="8443"/>
+		<Connector SSLEnabled="true"
 		           maxThreads="150"
-		           SSLEnabled="true">
+		           port="8443"
+		           protocol="org.apache.coyote.http11.Http11Nio2Protocol">
 			<UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
 			<SSLHostConfig>
-				<Certificate certificateKeyFile="conf/ssl/tomcat.key"
-				             certificateFile="conf/ssl/tomcat.pem"
-				             certificateChainFile="conf/ssl/tomcat.cer"
+				<Certificate certificateKeystoreFile="conf/ssl/tomcat.jks"
+				             certificateKeystoreType="JKS"
+				             certificateKeystorePassword="tomcat"
 				             type="RSA"/>
 			</SSLHostConfig>
 		</Connector>
-		<Engine name="localhost"
-		        defaultHost="localhost">
+		<Engine defaultHost="192.168.100.252"
+		        name="192.168.100.252">
 			<Realm className="org.apache.catalina.realm.LockOutRealm">
 				<Realm className="org.apache.catalina.realm.DataSourceRealm"
 				       dataSourceName="jdbc/seguridad"
@@ -53,15 +52,15 @@
 				       userTable="users">
                 </Realm>
 			</Realm>
-			<Host name="localhost"
-			      appBase="webapps"
-			      unpackWARs="true"
-			      autoDeploy="true">
+			<Host appBase="webapps"
+			      autoDeploy="true"
+			      name="192.168.100.252"
+			      unpackWARs="true">
 				<Valve className="org.apache.catalina.valves.AccessLogValve"
 				       directory="logs"
-				       prefix="localhost_access_log"
-				       suffix=".txt"
-				       pattern="%h %l %u %t &quot;%r&quot; %s %b"/>
+				       pattern="%h %l %u %t &quot;%r&quot; %s %b"
+				       prefix="access_log"
+				       suffix=".log"/>
 			</Host>
 		</Engine>
 	</Service>
