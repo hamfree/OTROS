@@ -15,7 +15,7 @@
 		          factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
 		          pathname="conf/tomcat-users.xml"/>
 	</GlobalNamingResources>
-	<Service name="Tomcat">
+	<Service name="localhost">
 		<Connector address="127.0.0.1"
 		           port="8080"
 		           maxPostSize="-1"
@@ -39,7 +39,7 @@
 				             type="RSA"/>
 			</SSLHostConfig>
 		</Connector>
-		<Engine name="Tomcat"
+		<Engine name="localhost"
 		        defaultHost="localhost">
 			<Realm className="org.apache.catalina.realm.LockOutRealm">
 				<Realm className="org.apache.catalina.realm.UserDatabaseRealm"
