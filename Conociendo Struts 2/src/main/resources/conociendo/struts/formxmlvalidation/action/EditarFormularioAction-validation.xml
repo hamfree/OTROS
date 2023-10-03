@@ -1,0 +1,46 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<validator type="requiredstring">
+		<param name="fieldName">personaBean.nombre</param>
+		<message>Se requiere el primer nombre.</message>
+	</validator>
+	<validator type="requiredstring">
+		<param name="fieldName">personaBean.apellidos</param>
+		<message>Se requieren los apellidos.</message>
+	</validator>
+	<validator type="requiredstring">
+		<param name="fieldName">personaBean.correo</param>
+		<message>Se requiere la dirección de correo.</message>
+	</validator>
+	<validator type="email">
+		<param name="fieldName">personaBean.correo</param>
+		<message>Dirección de correo no válida.</message>
+	</validator>
+	<validator type="requiredstring">
+		<param name="fieldName">personaBean.telefono</param>
+		<message>Se requiere el numero de teléfono.</message>
+	</validator>
+	<validator type="regex">
+		<param name="fieldName">personaBean.telefono</param>
+		<param name="regex"><![CDATA[\d{3}-\d{3}-\d{4}]]></param>
+		<message>El número de teléfono debe tener el formato 999-999-9999.
+		</message>
+	</validator>
+	<validator type="fieldexpression">
+		<param name="fieldName">personaBean.modelosCoche</param>
+		<param name="expression"><![CDATA[personaBean.modelosCoche.length > 0]]></param>
+		<message>Debe seleccionar al menos un modelo de coche.</message>
+	</validator>
+	<field name="personaBean.edad">
+		<field-validator type="required">
+			<message>${getText(fieldName)} es obligatorio.</message>
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">1</param>
+			<param name="max">120</param>
+			<message key="age.error">${getText(fieldName)} debe estar entre ${min} y
+				${max}</message>
+		</field-validator>
+	</field>
+</validators>

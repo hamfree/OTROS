@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+
+	<package name="conociendo.struts" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="appDefaultStack">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref
+			name="appDefaultStack" />
+
+		<global-results>
+			<result name="securityerror">/securityerror.jsp</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+
+		<action name="hello"
+			class="conociendo.struts.helloworld.action.HelloWorldAction"
+			method="execute">
+			<result name="success">/helloworld.jsp</result>
+		</action>
+
+		<action name="register"
+			class="conociendo.struts.register.action.Register" method="execute">
+			<result name="success">/thankyou.jsp</result> <!-- Si todo va bien, redirige a la pagina final -->
+			<result name="input">/register.jsp</result>  <!-- En caso de error en la entrada -->
+		</action>
+
+		<action name="registerInput"
+			class="conociendo.struts.register.action.Register" method="input">
+			<result name="input">/register.jsp</result>
+		</action>
+
+		<action name="inicio">
+			<result>/formtags/index.jsp</result>
+		</action>
+
+		<action name="editar"
+			class="conociendo.struts.edit.action.EditarAction" method="input">
+			<result name="input">/formtags/edit.jsp</result>
+		</action>
+
+		<action name="salvar"
+			class="conociendo.struts.edit.action.EditarAction" method="execute">
+			<result name="success">/formtags/thankyou.jsp</result>
+		</action>
+
+		<action name="indiceFormXmlValidation">
+			<result>/form-xml-validation/indice.jsp</result>
+		</action>
+
+		<action name="editarFormulario"
+			class="conociendo.struts.formxmlvalidation.action.EditarFormularioAction"
+			method="input">
+			<result name="input">/form-xml-validation/editar.jsp</result>
+		</action>
+
+		<action name="salvarFormulario"
+			class="conociendo.struts.formxmlvalidation.action.EditarFormularioAction"
+			method="execute">
+			<result name="input">/form-xml-validation/editar.jsp</result>
+			<result name="success">/form-xml-validation/gracias.jsp</result>
+		</action>
+
+	</package>
+</struts>
